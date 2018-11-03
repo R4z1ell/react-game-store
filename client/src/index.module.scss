@@ -1,6 +1,13 @@
-body {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
-  font-family: 'Black Ops One', sans-serif;
+  box-sizing: inherit;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
   background-color: #e4e7ed;
 }

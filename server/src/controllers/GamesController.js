@@ -11,5 +11,11 @@ module.exports = {
         game: doc
       });
     });
+  },
+  getGames(req, res) {
+    Game.find({}, (err, games) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).send(games);
+    });
   }
 };
