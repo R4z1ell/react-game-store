@@ -1,0 +1,21 @@
+.header {
+  &__bck {
+    position: fixed;
+    background-color: #1a1a1a;
+    opacity: 0.9;
+    height: 50px;
+    width: 100vw;
+  }
+
+  &__container {
+    display: flex;
+    font-family: 'Lato';
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+
+    & div {
+      margin-right: 35px;
+    }
+  }
+}

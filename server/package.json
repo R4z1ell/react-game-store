@@ -1,0 +1,25 @@
+{
+  "name": "jetdeals",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/app.js",
+    "server": "nodemon src/app.js",
+    "client": "cd ../client && npm run start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "cookie-parser": "^1.4.3",
+    "crypto-js": "^3.1.9-1",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.3.7",
+    "nodemailer": "^4.6.8"
+  }
+}
