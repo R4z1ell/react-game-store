@@ -8,6 +8,31 @@
   margin-left: auto;
 }
 
+.game__above {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  bottom: 135px;
+
+  img {
+    width: 10px;
+    height: 9px;
+  }
+
+  span {
+    color: $color-gray;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+
+  svg {
+    color: $color-gray;
+    width: 8px;
+    height: 7px;
+    margin-left: 10px;
+  }
+}
+
 .game__title {
   position: absolute;
   top: 370px;
