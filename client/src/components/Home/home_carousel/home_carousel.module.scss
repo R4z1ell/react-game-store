@@ -44,6 +44,27 @@
   border-top: 1px solid hsla(0, 0%, 100%, 0.5);
 }
 
+.game__action {
+  position: absolute;
+  display: flex;
+  right: 0;
+  bottom: 65px;
+}
+
+.game__price {
+  font-size: 40px;
+  color: $color-white;
+  margin-right: 30px;
+
+  & svg {
+    color: $color-white;
+    font-size: 25px;
+    margin-right: 8px;
+    margin-bottom: 2px;
+  }
+}
+
 .logo__container {
+  width: 50%;
   padding-top: 71px;
 }

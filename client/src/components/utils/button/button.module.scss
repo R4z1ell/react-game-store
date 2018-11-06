@@ -1,0 +1,32 @@
+.add_to_cart_link {
+  display: inline-block;
+  border-radius: 3px;
+  width: 179px;
+  height: 50px;
+  cursor: pointer;
+  background: linear-gradient(-180deg, #c1ec51, #80b02a);
+  box-shadow: 0 0 28px 8px rgba(0, 0, 0, 0.19), 0 1px 5px 0 rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-align: center;
+  user-select: none;
+
+  &:hover {
+    background: linear-gradient(-180deg, #c9ef68, #8fc52f);
+  }
+}
+
+.button__text {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.button__content {
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button__icon {
+  margin-right: 15px;
+}

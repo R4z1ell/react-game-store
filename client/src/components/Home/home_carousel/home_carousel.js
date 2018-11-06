@@ -5,7 +5,9 @@ import style from './home_carousel.module.scss';
 import './slider.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faEuroSign } from '@fortawesome/free-solid-svg-icons';
+
+import MyButton from '../../../components/utils/button/button';
 
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
@@ -52,7 +54,7 @@ const HomeCarousel = props => {
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 3000,
     customPaging: i => (
       <div
@@ -92,6 +94,13 @@ const HomeCarousel = props => {
                   <span>Now available</span>
                 </div>
                 <div className={style.game__title}>{game.title}</div>
+                <div className={style.game__action}>
+                  <div className={style.game__price}>
+                    <FontAwesomeIcon icon={faEuroSign} />
+                    {game.prices.basePrice / 100}
+                  </div>
+                  <MyButton type="add_to_cart_link" />
+                </div>
               </div>
             </div>
           </div>
