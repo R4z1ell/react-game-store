@@ -13,9 +13,20 @@ module.exports = {
     });
   },
   getGames(req, res) {
-    Game.find({}, (err, games) => {
-      if (err) return res.status(400).send(err);
-      res.status(200).send(games);
-    });
+    let limit = parseInt(req.query.limit);
+
+    if (limit) {
+      Game.find()
+        .limit(limit)
+        .exec((err, games) => {
+          if (err) return res.status(400).send(err);
+          res.send(games);
+        });
+    } else {
+      Game.find({}, (err, games) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).send(games);
+      });
+    }
   }
 };

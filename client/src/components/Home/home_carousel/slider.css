@@ -39,6 +39,32 @@
   font-size: 0px;
 }
 
+.slick-dots {
+  bottom: 22px;
+  z-index: 20;
+}
+
 .slick-dots li {
-  margin: 0 15px;
+  width: 41px;
+  height: 11px;
+}
+
+.slick-dots li div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #da8bf0;
+  transform: translateX(-100%);
+}
+
+.slick-dots .slick-active div::before {
+  transform: translateX(0);
+  transition: 3s linear;
+}
+
+.slick-dots .slick-active div {
+  /* height: 3px !important; */
 }

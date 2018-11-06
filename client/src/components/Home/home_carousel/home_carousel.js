@@ -46,9 +46,8 @@ function SampleNextArrow(props) {
 const HomeCarousel = props => {
   const settings = {
     dots: true,
-    dotsClass: 'slick-dots',
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
@@ -58,10 +57,12 @@ const HomeCarousel = props => {
     customPaging: i => (
       <div
         style={{
+          position: 'relative',
+          display: 'block',
+          overflow: 'hidden',
           width: '41px',
-          height: '2px',
-          padding: '1px',
-          backgroundColor: 'blue'
+          height: '3px',
+          backgroundColor: 'hsla(0,0%,100%,.2)'
         }}
       />
     )
