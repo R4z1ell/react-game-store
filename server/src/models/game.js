@@ -41,6 +41,7 @@ const gameSchema = mongoose.Schema(
     },
     images: {
       background: { type: String, required: true },
+      mobile: { type: String, required: true },
       logo: { type: String },
       card: { type: String }
     },

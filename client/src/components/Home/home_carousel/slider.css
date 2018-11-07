@@ -64,7 +64,3 @@
   transform: translateX(0);
   transition: 3s linear;
 }
-
-.slick-dots .slick-active div {
-  /* height: 3px !important; */
-}
