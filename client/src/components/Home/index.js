@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import HomeCarousel from './home_carousel/home_carousel';
-import FeaturedSlider from './featured_slider/featured_slider';
+import HomeSliders from './home_sliders/home_sliders';
 import { getGames } from '../../store/actions/games_actions';
 
 class Home extends Component {
@@ -14,7 +14,7 @@ class Home extends Component {
     return (
       <div>
         <HomeCarousel games={this.props.games.allGames} />
-        <FeaturedSlider games={this.props.games.allGames} />
+        <HomeSliders games={this.props.games.allGames} />
       </div>
     );
   }
