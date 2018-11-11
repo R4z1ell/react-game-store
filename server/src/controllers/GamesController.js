@@ -17,6 +17,7 @@ module.exports = {
 
     if (limit) {
       Game.find()
+        .populate({ path: 'genres', model: 'Genre' })
         .limit(limit)
         .exec((err, games) => {
           if (err) return res.status(400).send(err);

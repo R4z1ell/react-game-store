@@ -1,12 +1,14 @@
+@import '../../../Resources/scss/variables';
+
 .page-section {
   max-width: 1100px;
-  margin: 30px auto;
+  margin: 40px auto;
   display: flex;
 
   &__title {
     font-size: 15px;
     font-weight: 900;
-    color: #3b3e48;
+    color: $color-dark;
     margin-bottom: 12px;
     text-transform: uppercase;
   }
@@ -24,6 +26,10 @@
 .featured__container {
   max-width: 722px;
   max-height: 353px;
+
+  .slick-list {
+    box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
+  }
 }
 
 .featured-detail {
@@ -32,7 +38,7 @@
   align-items: center;
   width: 722px;
   height: 47px;
-  background-color: #fff;
+  background-color: rgba(#fafafa, 0.6);
 
   &__image {
     width: 10px;
@@ -43,7 +49,7 @@
   &__title {
     font-size: 15px;
     font-weight: 900;
-    color: #3b3e48;
+    color: $color-dark;
   }
 
   &__price {
@@ -53,7 +59,7 @@
     font-weight: 700;
 
     svg {
-      color: #3b3e48;
+      color: $color-dark;
       font-size: 13px;
       margin-right: 2px;
       margin-bottom: 1px;
@@ -89,6 +95,7 @@
 
   .slick-list {
     height: 400px;
+    box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
   }
 }
 
@@ -99,7 +106,7 @@
   width: 340px;
   height: 105px;
   bottom: 105px;
-  background-color: #fff;
+  background-color: rgba(#fafafa, 0.6);
 
   &__up {
     margin: 10px 0 0 10px;
@@ -120,7 +127,7 @@
       font-weight: 700;
 
       svg {
-        color: #3b3e48;
+        color: $color-dark;
         font-size: 13px;
         margin-right: 2px;
         margin-bottom: 1px;
@@ -131,7 +138,7 @@
   &__title {
     font-size: 16px;
     font-weight: 900;
-    color: #3b3e48;
+    color: $color-dark;
     white-space: nowrap;
     text-transform: uppercase;
   }
@@ -146,7 +153,7 @@
   }
 
   &__counter {
-    color: #17a1e5;
+    color: $color-blue;
     font-size: 20px;
     font-weight: 700;
   }
@@ -160,5 +167,5 @@
 /// Slider ///
 
 .slick-active button {
-  background-color: #3b3e48 !important;
+  background-color: $color-dark !important;
 }

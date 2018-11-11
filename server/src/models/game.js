@@ -34,7 +34,7 @@ const gameSchema = mongoose.Schema(
       type: String,
       maxlength: 100
     },
-    genres: [{ type: Schema.Types.ObjectId, ref: 'Genres', required: true }],
+    genres: [{ type: Schema.Types.ObjectId, ref: 'genres', required: true }],
     prices: {
       basePrice: { type: Number, required: true },
       discount: { type: String, default: null }

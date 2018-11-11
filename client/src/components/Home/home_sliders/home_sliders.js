@@ -56,6 +56,7 @@ const HomeSliders = props => {
   const settingOne = {
     dots: true,
     infinite: true,
+    fade: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -77,6 +78,7 @@ const HomeSliders = props => {
   const settingTwo = {
     dots: true,
     infinite: true,
+    fade: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -106,9 +108,7 @@ const HomeSliders = props => {
                 height: '353px',
                 width: '722px'
               }}
-            >
-              <div className="container" />
-            </div>
+            />
             <div className="featured-detail">
               <img
                 src="/images/windows.png"
@@ -133,13 +133,11 @@ const HomeSliders = props => {
               style={{
                 background: `url(${game.images.mobile}) no-repeat`,
                 backgroundPosition: 'top',
-                backgroundSize: '340px 295px',
+                backgroundSize: '120% 74%',
                 height: '400px',
                 width: '340px'
               }}
-            >
-              <div className="" />
-            </div>
+            />
             <div className="purchase-detail">
               <div className="purchase-detail__up">
                 <div className="purchase-detail__title">{game.title}</div>
