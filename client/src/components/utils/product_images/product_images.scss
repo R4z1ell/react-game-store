@@ -1,0 +1,18 @@
+@import '../../../Resources/scss/variables';
+
+.product-images {
+  &__container {
+    width: 340px;
+    height: 874px;
+    background: #ececec;
+    transform: translateX(12%);
+    box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
+  }
+
+  &__title {
+    font-size: 17px;
+    font-weight: 900;
+    color: $color-dark;
+    padding: 15px 0 15px 15px;
+  }
+}

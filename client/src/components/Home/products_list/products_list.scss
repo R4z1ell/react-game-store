@@ -1,0 +1,18 @@
+@import '../../../Resources/scss/variables';
+
+.products-list {
+  &__container {
+    display: flex;
+    max-width: 1100px;
+    margin: 110px auto;
+    transform: translateX(-1%);
+  }
+
+  //   &__images-container {
+  //     width: 340px;
+  //     height: 874px;
+  //     background: #ececec;
+  //     transform: translateX(12%);
+  //     box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
+  //   }
+}

@@ -14,20 +14,27 @@ class ProductCard extends Component {
     this.setState({ isHovered: !this.state.isHovered });
   };
 
+  someFn = () => {
+    this.props.callbackFromParent(this.props.title);
+  };
+
   render() {
     const productClass = this.state.isHovered
-      ? 'product-card__title-content product-card--active'
-      : 'product-card__title-content';
+      ? 'product-card product-card--active'
+      : 'product-card';
     return (
       <div
-        className="product-card"
-        onMouseEnter={this.handleHover}
+        className={productClass}
+        onMouseEnter={() => {
+          this.handleHover();
+          this.someFn();
+        }}
         onMouseLeave={this.handleHover}
       >
         <div className="product-card__cover">
           <img src={this.props.images.card} alt="cover" />
         </div>
-        <div className={productClass}>
+        <div className="product-card__title-content">
           <div className="product-card__title">
             <span>{this.props.title}</span>
             <div className="product-card__genres">
@@ -40,7 +47,20 @@ class ProductCard extends Component {
                   ))
                 : null}
             </div>
-            <img src="/images/windows.png" alt="window-logo" />
+            <svg
+              aria-hidden="true"
+              data-prefix="fab"
+              data-icon="windows"
+              className="svg-inline--fa fa-windows fa-w-14"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                fill="#b4b6ba"
+                d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z"
+              />
+            </svg>
           </div>
           <div className="product-card__price">
             <FontAwesomeIcon icon={faEuroSign} />

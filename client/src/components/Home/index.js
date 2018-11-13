@@ -9,7 +9,7 @@ import { getGames } from '../../store/actions/games_actions';
 
 class Home extends Component {
   componentDidMount() {
-    this.props.dispatch(getGames(4));
+    this.props.dispatch(getGames(9));
   }
 
   render() {
