@@ -29,5 +29,31 @@ module.exports = {
         res.status(200).send(games);
       });
     }
+  },
+  // getGameById(req, res) {
+  //   let gameId = req.query.id;
+
+  //   Game.find({ _id: { $in: gameId } })
+  //     .populate({
+  //       path: 'genres',
+  //       model: 'Genre'
+  //     })
+  //     .exec((err, game) => {
+  //       if (err) return res.status(400).send(err);
+  //       res.status(200).send(game);
+  //     });
+  // },
+  getGameByTitle(req, res) {
+    let gameTitle = req.params.title;
+
+    Game.find({ title: { $in: gameTitle } })
+      .populate({
+        path: 'genres',
+        model: 'Genre'
+      })
+      .exec((err, game) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).send(game);
+      });
   }
 };

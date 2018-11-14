@@ -1,3 +1,5 @@
+@import './Resources/scss/variables';
+
 *,
 *::after,
 *::before {
@@ -9,7 +11,7 @@
 body {
   box-sizing: border-box;
   font-family: 'Lato', sans-serif;
-  background-color: #d8d8d8;
+  background-color: $bck-color;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }

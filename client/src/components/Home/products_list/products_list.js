@@ -7,11 +7,13 @@ import ProductImages from '../../utils/product_images/product_images';
 
 class ProductsList extends Component {
   state = {
-    gameInfo: null
+    gameTitle: null,
+    gameGenres: null,
+    gameImages: null
   };
 
-  myCallback = dataFromChild => {
-    this.setState({ gameInfo: dataFromChild });
+  updateState = (title, genres, images) => {
+    this.setState({ gameTitle: title, gameGenres: genres, gameImages: images });
   };
 
   renderCards = () =>
@@ -20,20 +22,36 @@ class ProductsList extends Component {
           <ProductCard
             key={card.title}
             {...card}
-            callbackFromParent={this.myCallback}
+            callbackFromParent={this.updateState}
           />
         ))
       : null;
 
   render() {
-    console.log(this.props.list);
     return (
-      <div className="products-list__container">
-        <div>{this.renderCards(this.props.list)}</div>
-        <div>
-          <ProductImages
-            title={this.state.gameInfo !== null ? this.state.gameInfo : ''}
-          />
+      <div className="products-list">
+        <div className="products-list__tabs">
+          <div className="products-list__tabs-wrapper">
+            <div className="products-list__tabs-wrapper__popular">Popular</div>
+            <div className="products-list__tabs-wrapper__new">New</div>
+            <div className="products-list__tabs-wrapper__upcoming">
+              Upcoming
+            </div>
+          </div>
+        </div>
+        <div className="products-list__container">
+          <div>{this.renderCards(this.props.list)}</div>
+          <div>
+            <ProductImages
+              title={this.state.gameTitle !== null ? this.state.gameTitle : ''}
+              genres={
+                this.state.gameGenres !== null ? this.state.gameGenres : ''
+              }
+              images={
+                this.state.gameImages !== null ? this.state.gameImages : ''
+              }
+            />
+          </div>
         </div>
       </div>
     );

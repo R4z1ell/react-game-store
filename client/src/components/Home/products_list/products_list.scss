@@ -1,18 +1,36 @@
 @import '../../../Resources/scss/variables';
 
 .products-list {
+  margin-bottom: 140px;
+
   &__container {
     display: flex;
     max-width: 1100px;
-    margin: 110px auto;
+    margin: 0px auto;
     transform: translateX(-1%);
   }
 
-  //   &__images-container {
-  //     width: 340px;
-  //     height: 874px;
-  //     background: #ececec;
-  //     transform: translateX(12%);
-  //     box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
-  //   }
+  &__tabs {
+    width: 1100px;
+    margin: 90px auto 21px auto;
+
+    &-wrapper {
+      display: flex;
+      width: 722px;
+      padding-bottom: 21px;
+      border-bottom: 1px solid $color-gray;
+
+      &__new {
+        border-bottom: 3px solid #707070;
+        margin-bottom: -24px;
+      }
+
+      div {
+        margin-right: 40px;
+        color: $color-dark;
+        font-size: 17px;
+        font-weight: 700;
+      }
+    }
+  }
 }

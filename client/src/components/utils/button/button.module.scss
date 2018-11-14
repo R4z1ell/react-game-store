@@ -1,3 +1,5 @@
+@import '../../../Resources/scss/variables';
+
 .add_to_cart_link {
   display: inline-block;
   border-radius: 3px;
@@ -5,7 +7,8 @@
   height: 50px;
   cursor: pointer;
   background: linear-gradient(-180deg, #c1ec51, #80b02a);
-  box-shadow: 0 0 28px 8px rgba(0, 0, 0, 0.19), 0 1px 5px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 28px 8px rgba($color-black, 0.19),
+    0 1px 5px 0 rgba($color-black, 0.5);
   color: #fff;
   text-align: center;
   user-select: none;

@@ -64,7 +64,7 @@
 
 .product-card--active {
   position: relative;
-  background: #ececec;
+  background: $color-white-dark;
   box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
   cursor: pointer;
 }
@@ -78,7 +78,7 @@
 
 .product-card--active::before {
   left: 100%;
-  border-left: 40px solid #ececec;
+  border-left: 40px solid $color-white-dark;
 }
 
 .fa-windows {

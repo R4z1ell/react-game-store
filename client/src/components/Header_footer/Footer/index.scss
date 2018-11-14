@@ -1,0 +1,16 @@
+@import '../../../Resources/scss/variables';
+
+.footer {
+  width: 100%;
+
+  &__top,
+  &__bottom {
+    height: 58px;
+    background: $footer-primary;
+  }
+
+  &__middle {
+    height: 94px;
+    background: $footer-secondary;
+  }
+}

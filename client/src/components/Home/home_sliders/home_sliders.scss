@@ -38,7 +38,7 @@
   align-items: center;
   width: 722px;
   height: 47px;
-  background-color: rgba(#fafafa, 0.6);
+  background-color: rgba($color-white-light, 0.6);
 
   &__image {
     width: 10px;
@@ -79,7 +79,7 @@
     button {
       height: 12px;
       width: 12px;
-      background-color: #b4b6ba;
+      background-color: $color-gray-dark;
       border-radius: 50%;
 
       &::before {
@@ -106,7 +106,7 @@
   width: 340px;
   height: 105px;
   bottom: 105px;
-  background-color: rgba(#fafafa, 0.6);
+  background-color: rgba($color-white-light, 0.6);
 
   &__up {
     margin: 10px 0 0 10px;

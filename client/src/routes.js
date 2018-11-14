@@ -9,6 +9,7 @@ const Routes = () => {
   return (
     <Layout>
       <Switch>
+        <Route path="/game/:title" exact component={''} />
         <Route path="/" exact component={Home} />
       </Switch>
     </Layout>

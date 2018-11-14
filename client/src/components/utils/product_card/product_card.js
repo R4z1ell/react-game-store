@@ -14,8 +14,12 @@ class ProductCard extends Component {
     this.setState({ isHovered: !this.state.isHovered });
   };
 
-  someFn = () => {
-    this.props.callbackFromParent(this.props.title);
+  sendPropsToParent = () => {
+    this.props.callbackFromParent(
+      this.props.title,
+      this.props.genres,
+      this.props.screenshots
+    );
   };
 
   render() {
@@ -27,7 +31,7 @@ class ProductCard extends Component {
         className={productClass}
         onMouseEnter={() => {
           this.handleHover();
-          this.someFn();
+          this.sendPropsToParent();
         }}
         onMouseLeave={this.handleHover}
       >

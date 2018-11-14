@@ -4,15 +4,65 @@
   &__container {
     width: 340px;
     height: 874px;
-    background: #ececec;
+    background: $color-white-dark;
     transform: translateX(12%);
     box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
+  }
+
+  &__genres-container {
+    margin-left: 15px;
+  }
+
+  &__genre {
+    display: inline-block;
+    background: $color-gray-dark;
+    color: $color-white;
+    padding: 5px;
+    margin-right: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 3px;
+  }
+
+  &__reviews {
+    padding: 7px;
+    background: $color-gray-dark;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 3px;
+    margin: 0 15px 10px 15px;
+
+    h4 {
+      color: $color-white;
+      margin-bottom: 2px;
+    }
+
+    p {
+      color: $color-blue;
+    }
+
+    span {
+      color: $color-white;
+      font-size: 10px;
+      margin-left: 3px;
+    }
   }
 
   &__title {
     font-size: 17px;
     font-weight: 900;
     color: $color-dark;
-    padding: 15px 0 15px 15px;
+    padding: 15px 0 15px 16px;
+  }
+
+  &__screenshots-container {
+    margin: 5px 15px 0 15px;
+
+    img {
+      width: 308px;
+      height: 176px;
+      margin-top: 5px;
+      box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
+    }
   }
 }
