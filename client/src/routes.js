@@ -4,12 +4,13 @@ import { Switch, Route } from 'react-router-dom';
 
 import Layout from './hoc/layout';
 import Home from './components/Home';
+import GamePage from './components/Game';
 
 const Routes = () => {
   return (
     <Layout>
       <Switch>
-        <Route path="/game/:title" exact component={''} />
+        <Route path="/game/:title" exact component={GamePage} />
         <Route path="/" exact component={Home} />
       </Switch>
     </Layout>

@@ -26,7 +26,6 @@ const ProductImages = props => {
         )
       : null;
 
-  console.log(props);
   return (
     <div className="product-images__container">
       <div className="product-images__title">{props.title}</div>
