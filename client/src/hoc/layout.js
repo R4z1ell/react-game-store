@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from './layout.module.scss';
+import './layout.scss';
 
 import Header from '../components/Header_footer/Header';
 import Footer from '../components/Header_footer/Footer';
@@ -9,7 +9,7 @@ class Layout extends Component {
     return (
       <div>
         <Header />
-        <div className={style.page_container}>{this.props.children}</div>
+        {this.props.children}
         <Footer />
       </div>
     );
