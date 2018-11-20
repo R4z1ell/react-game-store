@@ -1,32 +1,124 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import Lightbox from 'react-images';
+import Lightbox from 'react-images';
+import Slider from 'react-slick';
+import Iframe from 'react-iframe';
 
 import './index.scss';
 
 import { getGameDetail } from '../../store/actions/games_actions';
 
+function SamplePrevArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="prev-arrow" onClick={onClick}>
+      <svg viewBox="0 0 15 24" width="100%" height="100%" fill="#fff">
+        <path d="M0 21.16L9.16 12 0 2.82 2.82 0l12 12-12 12z" />
+      </svg>
+    </div>
+  );
+}
+
+function SampleNextArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="next-arrow" onClick={onClick}>
+      <svg viewBox="0 0 15 24" width="100%" height="100%" fill="#fff">
+        <path d="M0 21.16L9.16 12 0 2.82 2.82 0l12 12-12 12z" />
+      </svg>
+    </div>
+  );
+}
+
 class GamePage extends Component {
   state = {
-    lightboxIsOpen: true
+    lightboxIsOpen: false,
+    imagePos: 0,
+    lightboxImages: []
+  };
+
+  settingOne = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    autoplay: false,
+    autoplaySpeed: 3000,
+    appendDots: dots => (
+      <div
+        style={{
+          bottom: '-30px'
+        }}
+      >
+        <ul className="game-page__slider-dots">{dots}</ul>
+      </div>
+    )
   };
 
   componentDidMount() {
     const gameTitle = this.props.match.params.title;
     this.props.dispatch(getGameDetail(gameTitle));
+    if (gameTitle) {
+      let lightboxImages = [];
+
+      setTimeout(() => {
+        this.props.gameInfo.gameDetail.screenshots.forEach(item => {
+          lightboxImages.push({
+            src: item.formatted_images[1].image_url
+          });
+        });
+
+        this.setState({
+          lightboxImages
+        });
+      }, 2000);
+    }
   }
 
-  // handleLightBox = () => {
-  //   this.setState({
-  //     lightboxIsOpen: true
-  //   });
-  // };
+  handleLightBox = pos => {
+    if (this.state.lightboxImages.length > 0) {
+      this.setState({
+        lightboxIsOpen: true,
+        imagePos: pos
+      });
+    }
+  };
 
-  // handleLightBoxClose = () => {
-  //   this.setState({
-  //     lightboxIsOpen: false
-  //   });
-  // };
+  handleLightBoxClose = () => {
+    this.setState({
+      lightboxIsOpen: false
+    });
+  };
+
+  gotoPrevious = () => {
+    this.setState({
+      imagePos: this.state.imagePos - 1
+    });
+  };
+
+  gotoNext = () => {
+    this.setState({
+      imagePos: this.state.imagePos + 1
+    });
+  };
+
+  generateImagesSlides = () =>
+    this.props.gameInfo.gameDetail
+      ? this.props.gameInfo.gameDetail.screenshots.map((game, i) => (
+          <div key={i}>
+            <img
+              src={game.formatted_images[0].image_url}
+              alt="screen"
+              className="slider-images"
+              onClick={() => this.handleLightBox(i)}
+              style={{ cursor: 'pointer' }}
+            />
+          </div>
+        ))
+      : null;
 
   render() {
     const game = this.props.gameInfo.gameDetail;
@@ -76,22 +168,25 @@ class GamePage extends Component {
               <div className="game-page__languages">English & 6 more</div>
             </div>
           </div>
-          {/* <Lightbox
-            images={[
-              {
-                src:
-                  'https://images-1.gog.com/d2ef2d05c4082ff76817576a2c2de0a8a49c92a6f35118ef54c413022757be20_ggvgm.jpg'
-              },
-              {
-                src:
-                  'https://images-2.gog.com/64d92ea59812e00539291e2c97533e7092c27776e500978484eb40a789972229_ggvgm.jpg'
-              }
-            ]}
-            isOpen={this.state.lightboxIsOpen}
-            // onClickPrev={this.gotoPrevious}
-            // onClickNext={this.gotoNext}
-            onClose={this.handleLightBoxClose}
-          /> */}
+          <Slider {...this.settingOne} className="game-page__slider-container">
+            <Iframe
+              url={game.videos[0].video_url}
+              width="271px"
+              height="152px"
+              allowFullScreen
+            />
+            {this.generateImagesSlides()}
+          </Slider>
+          {this.state.lightboxIsOpen ? (
+            <Lightbox
+              currentImage={this.state.imagePos}
+              images={this.state.lightboxImages}
+              isOpen={this.state.lightboxIsOpen}
+              onClickPrev={() => this.gotoPrevious()}
+              onClickNext={() => this.gotoNext()}
+              onClose={() => this.handleLightBoxClose()}
+            />
+          ) : null}
           <div className="game-page__description-tag">
             <p>Description</p>
           </div>
