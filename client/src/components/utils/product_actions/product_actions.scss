@@ -1,0 +1,106 @@
+@import '../../../Resources/scss/variables';
+
+.product-actions {
+  position: absolute;
+  right: 4px;
+  bottom: 0;
+  z-index: 50;
+  width: 39.5%;
+  min-width: 380px;
+  height: 192px;
+  padding: 16px 20px 0px 20px;
+  background-color: $color-gray-light;
+  box-shadow: 0 0 6px 0 rgba($color-black, 0.25);
+
+  &__cart-button {
+    margin-top: 5px;
+    height: 64px;
+
+    .add_to_cart_link {
+      width: 100%;
+      background-image: linear-gradient(-180deg, #9fbf00, #80ab00 91%);
+      border-radius: 5px;
+      border: 1px solid #96bd27;
+      border-bottom-color: #69941b;
+      border-left-color: #7fa721;
+      border-right-color: #7fa721;
+      margin-bottom: 16px;
+      color: #fff;
+      box-shadow: 0 1px 3px 0 rgba($color-black, 0.25);
+      font-weight: 700;
+
+      &:hover {
+        background: linear-gradient(180deg, #a7c900, #88b500);
+      }
+
+      .button__text {
+        font-size: 16px;
+        margin-left: 23px;
+        margin-bottom: 4px;
+      }
+
+      .button__icon {
+        position: absolute;
+        left: 159px;
+        top: 104px;
+        font-size: 15px;
+      }
+    }
+  }
+
+  &__wishlist-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      font-size: 14px;
+      margin-left: 9px;
+    }
+  }
+
+  &-price {
+    display: inline-block;
+    margin-left: 138px;
+    margin-bottom: 10px;
+    text-align: right;
+
+    &__base-amount {
+      display: block;
+      color: #404040;
+      font-size: 16px;
+      line-height: 16px;
+      margin-bottom: 2px;
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+
+    &__final-amount {
+      display: block;
+      font-size: 32px;
+      letter-spacing: 0;
+      line-height: 32px;
+      height: 32px;
+      color: #404040;
+    }
+
+    &__discount {
+      position: absolute;
+      left: 0;
+      top: 13px;
+      width: 128px;
+      height: 55px;
+      background: $color-violet-light;
+      color: $color-white;
+      line-height: 55px;
+      font-size: 32px;
+      text-align: center;
+      border-radius: 0 5px 5px 0;
+    }
+  }
+}
+
+#heart-empty {
+  width: 16px;
+  height: 16px;
+}

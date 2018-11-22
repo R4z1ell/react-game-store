@@ -6,6 +6,7 @@ import Iframe from 'react-iframe';
 
 import './index.scss';
 
+import ProductActions from '../utils/product_actions/product_actions';
 import { getGameDetail } from '../../store/actions/games_actions';
 
 function SamplePrevArrow(props) {
@@ -167,6 +168,7 @@ class GamePage extends Component {
               <div className="game-page__separator" />
               <div className="game-page__languages">English & 6 more</div>
             </div>
+            <ProductActions {...this.props} />
           </div>
           <Slider {...this.settingOne} className="game-page__slider-container">
             <Iframe
