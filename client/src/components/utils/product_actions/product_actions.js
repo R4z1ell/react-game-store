@@ -4,21 +4,48 @@ import './product_actions.scss';
 
 import MyButton from '../button/button';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 class ProductActions extends Component {
   render() {
-    return (
+    const game = this.props.gameInfo.gameDetail;
+    const discountedPrice = Number(
+      game.prices.basePrice / 100 - (game.prices.basePrice / 10000) * 33
+    ).toFixed(2);
+
+    return game ? (
       <div className="product-actions">
         <div className="product-actions-price">
-          <span className="product-actions-price__discount">-33%</span>
-          <span className="product-actions-price__base-amount">€ 29.99</span>
-          <span className="product-actions-price__final-amount">€ 20.09</span>
+          {game.prices.discount ? (
+            <React.Fragment>
+              <span className="product-actions-price__discount">
+                -{game.prices.discount}%
+              </span>
+              <span className="product-actions-price__base-amount">
+                € {game.prices.basePrice / 100}
+              </span>
+            </React.Fragment>
+          ) : null}
+          {game.prices.discount === null ? (
+            <span className="product-actions-price__base-price">
+              € {game.prices.basePrice / 100}
+            </span>
+          ) : (
+            <span className="product-actions-price__final-amount">
+              € {discountedPrice}
+            </span>
+          )}
         </div>
-        <div className="product-actions__cart-button">
-          <MyButton type="add_to_cart_link" />
-        </div>
+        {game.prices.discount ? (
+          <div className="product-actions__cart-button">
+            <MyButton type="add_to_cart_link" />
+          </div>
+        ) : (
+          <div className="product-actions__cart-button base-price">
+            <MyButton type="add_to_cart_link" />
+          </div>
+        )}
         <div className="product-actions__wishlist-button">
           {/* <FontAwesomeIcon icon={faHeart} /> */}
           <svg
@@ -35,7 +62,7 @@ class ProductActions extends Component {
           <p>Wishlist it</p>
         </div>
       </div>
-    );
+    ) : null;
   }
 }
 

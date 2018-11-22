@@ -75,6 +75,13 @@
       opacity: 0.5;
     }
 
+    &__base-price {
+      position: absolute;
+      left: 22px;
+      top: 13px;
+      color: #404040;
+    }
+
     &__final-amount {
       display: block;
       font-size: 32px;
@@ -98,6 +105,15 @@
       border-radius: 0 5px 5px 0;
     }
   }
+}
+
+.base-price {
+  height: 72px;
+  margin-top: 8px;
+}
+
+.product-actions__cart-button.base-price .add_to_cart_link .button__icon {
+  top: 87px;
 }
 
 #heart-empty {
