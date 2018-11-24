@@ -3,8 +3,17 @@ import { connect } from 'react-redux';
 import Lightbox from 'react-images';
 import Slider from 'react-slick';
 import Iframe from 'react-iframe';
+import moment from 'moment';
 
 import './index.scss';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCheckCircle,
+  faTimesCircle,
+  faAngleDoubleDown,
+  faAngleDoubleUp
+} from '@fortawesome/free-solid-svg-icons';
 
 import ProductActions from '../utils/product_actions/product_actions';
 import { getGameDetail } from '../../store/actions/games_actions';
@@ -143,10 +152,11 @@ class GamePage extends Component {
         </div>
 
         <div className="game-page__layout">
-          <img
-            src={game.images.background}
-            alt="bck"
+          <div
             className="game-page__background"
+            style={{
+              background: `url(${game.images.background})`
+            }}
           />
           <div className="game-page__title">
             {game.title}
@@ -166,7 +176,7 @@ class GamePage extends Component {
                 />
               </svg>
               <div className="game-page__separator" />
-              <div className="game-page__languages">English & 6 more</div>
+              <div className="game-page__Languages">English & 7 more</div>
             </div>
             <ProductActions {...this.props} />
           </div>
@@ -189,13 +199,233 @@ class GamePage extends Component {
               onClose={() => this.handleLightBoxClose()}
             />
           ) : null}
-          <div className="game-page__description-tag">
-            <p>Description</p>
+          <div className="game-page__layout flex">
+            <div className="game-page__main-col">
+              <div className="game-page__description-tag">
+                <p>Description</p>
+              </div>
+              <div
+                className="game-page__description"
+                dangerouslySetInnerHTML={{ __html: game.description.full }}
+              />
+              {game.description.whats_cool_about_it.length > 0 ? (
+                <div
+                  className="game-page__about-it"
+                  dangerouslySetInnerHTML={{
+                    __html: game.description.whats_cool_about_it
+                  }}
+                />
+              ) : null}
+              <div className="game-page__system-requirements">
+                <div className="game-page__system-tag">
+                  <div className="game-page__underline-text">
+                    System requirements
+                  </div>
+                </div>
+                <div className="system-requirements table">
+                  <div className="table-header">
+                    <div className="system-requirements__minimum-header">
+                      Minimum system requirements:
+                    </div>
+                  </div>
+                  {game.system_requirements
+                    ? Object.keys(game.system_requirements[0]).map((key, i) => {
+                        const item = game.system_requirements[0][key];
+                        return i > 0 ? (
+                          <div key={i} className="table__row">
+                            <div className="table__row-label system-requirements__label">
+                              {key.charAt(0).toUpperCase() + key.slice(1)}:
+                            </div>
+                            <div className="table__row-content system-requirements__minimum">
+                              {item}
+                            </div>
+                          </div>
+                        ) : null;
+                      })
+                    : null}
+                </div>
+              </div>
+            </div>
+            <div className="game-page__side-col">
+              <div className="game-page__game-details">
+                <div className="game-page__game-details-title">
+                  <p>Game details</p>
+                </div>
+                <div className="details table">
+                  <div className="table__row">
+                    <div className="details__category table__row-label">
+                      Genre:
+                    </div>
+                    <div className="details__content table__row-content">
+                      {game.genres
+                        ? game.genres.map((genre, i) => (
+                            <React.Fragment key={i}>
+                              <div style={{ marginRight: '5px' }}>
+                                {genre.name}
+                              </div>
+                              <span style={{ marginRight: '5px' }}>
+                                {i === game.genres.length - 1 ? '' : '-'}
+                              </span>
+                            </React.Fragment>
+                          ))
+                        : null}
+                    </div>
+                  </div>
+                  <div className="table__row">
+                    <div className="details__category table__row-label">
+                      Works on:
+                    </div>
+                    <div className="details__content table__row-content">
+                      Windows (7, 8, 10)
+                    </div>
+                  </div>
+                  <div className="table__row">
+                    <div className="details__category table__row-label">
+                      Released:
+                    </div>
+                    <div className="details__content table__row-content">
+                      {moment(game.release_date).format('ll')}
+                    </div>
+                  </div>
+                  <div className="table__row">
+                    <div className="details__category table__row-label">
+                      Company:
+                    </div>
+                    <div className="details__content table__row-content">
+                      <div style={{ marginRight: '5px' }}>{game.developer}</div>
+                      {game.publisher ? '/' : null}
+                      <div style={{ marginLeft: '5px' }}>
+                        {game.publisher ? game.publisher : null}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="table__row">
+                    <div className="details__category table__row-label">
+                      Size:
+                    </div>
+                    <div className="details__content table__row-content">
+                      {parseInt((game.total_size / 1000000000).toFixed(2), 10) >
+                      0
+                        ? `${Number(game.total_size / 1000000000).toFixed(
+                            1
+                          )} GB`
+                        : `${Number(game.total_size / 1000000).toFixed(0)} MB`}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="game-page__languages">
+                <div className="game-page__languages-title">Languages</div>
+              </div>
+              <div className="languages">
+                <div className="languages__row languages__row--labels">
+                  <div className="languages__row--cell languages__row--language-name" />
+                  <div className="languages__row--cell languages__row--audio-support">
+                    Audio
+                  </div>
+                  <div className="languages__row--cell languages__row--text-support">
+                    Text
+                  </div>
+                </div>
+                <div className="languages__row">
+                  <div className="languages__row--cell languages__row--language-name">
+                    English
+                  </div>
+                  <div className="languages__row--cell languages__row--audio-support">
+                    <FontAwesomeIcon icon={faTimesCircle} />
+                  </div>
+                  <div className="languages__row--cell languages__row--text-support">
+                    <FontAwesomeIcon icon={faCheckCircle} />
+                  </div>
+                </div>
+                <div className="languages__more-languages">
+                  <div className="languages__more-languages--content">
+                    <div className="languages__row">
+                      <div className="languages__row--cell languages__row--language-name">
+                        Dutch
+                      </div>
+                      <div className="languages__row--cell languages__row--audio-support">
+                        <FontAwesomeIcon icon={faTimesCircle} />
+                      </div>
+                      <div className="languages__row--cell languages__row--text-support">
+                        <FontAwesomeIcon icon={faCheckCircle} />
+                      </div>
+                    </div>
+                    <div className="languages__row">
+                      <div className="languages__row--cell languages__row--language-name">
+                        French
+                      </div>
+                      <div className="languages__row--cell languages__row--audio-support">
+                        <FontAwesomeIcon icon={faTimesCircle} />
+                      </div>
+                      <div className="languages__row--cell languages__row--text-support">
+                        <FontAwesomeIcon icon={faCheckCircle} />
+                      </div>
+                    </div>
+                    <div className="languages__row">
+                      <div className="languages__row--cell languages__row--language-name">
+                        Spanish
+                      </div>
+                      <div className="languages__row--cell languages__row--audio-support">
+                        <FontAwesomeIcon icon={faTimesCircle} />
+                      </div>
+                      <div className="languages__row--cell languages__row--text-support">
+                        <FontAwesomeIcon icon={faCheckCircle} />
+                      </div>
+                    </div>
+                    <div className="languages__row">
+                      <div className="languages__row--cell languages__row--language-name">
+                        Italian
+                      </div>
+                      <div className="languages__row--cell languages__row--audio-support">
+                        <FontAwesomeIcon icon={faTimesCircle} />
+                      </div>
+                      <div className="languages__row--cell languages__row--text-support">
+                        <FontAwesomeIcon icon={faCheckCircle} />
+                      </div>
+                    </div>
+                    <div className="languages__row">
+                      <div className="languages__row--cell languages__row--language-name">
+                        Czech
+                      </div>
+                      <div className="languages__row--cell languages__row--audio-support">
+                        <FontAwesomeIcon icon={faTimesCircle} />
+                      </div>
+                      <div className="languages__row--cell languages__row--text-support">
+                        <FontAwesomeIcon icon={faCheckCircle} />
+                      </div>
+                    </div>
+                    <div className="languages__row">
+                      <div className="languages__row--cell languages__row--language-name">
+                        Polish
+                      </div>
+                      <div className="languages__row--cell languages__row--audio-support">
+                        <FontAwesomeIcon icon={faTimesCircle} />
+                      </div>
+                      <div className="languages__row--cell languages__row--text-support">
+                        <FontAwesomeIcon icon={faCheckCircle} />
+                      </div>
+                    </div>
+                    <div className="languages__row">
+                      <div className="languages__row--cell languages__row--language-name">
+                        Russian
+                      </div>
+                      <div className="languages__row--cell languages__row--audio-support">
+                        <FontAwesomeIcon icon={faTimesCircle} />
+                      </div>
+                      <div className="languages__row--cell languages__row--text-support">
+                        <FontAwesomeIcon icon={faCheckCircle} />
+                      </div>
+                    </div>
+                  </div>
+                  <span className="languages__more-languages--button">
+                    Show 7 more languages
+                    <FontAwesomeIcon icon={faAngleDoubleDown} />
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div
-            className="game-page__description"
-            dangerouslySetInnerHTML={{ __html: game.description.full }}
-          />
         </div>
       </React.Fragment>
     ) : null;
