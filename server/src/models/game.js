@@ -9,16 +9,18 @@ const gameSchema = mongoose.Schema(
       unique: 1,
       maxlength: 100
     },
-    languages: {
-      cz: { type: String, default: 'Czech' },
-      de: { type: String, default: 'Dutch' },
-      en: { type: String, default: 'English' },
-      es: { type: String, default: 'Spanish' },
-      fr: { type: String, default: 'French' },
-      it: { type: String, default: 'Italian' },
-      pl: { type: String, default: 'Polish' },
-      ru: { type: String, default: 'Russian' }
-    },
+    languages: [
+      {
+        language_name: {
+          type: String,
+          required: true,
+          unique: 1,
+          maxlength: 30
+        },
+        audio: { type: Boolean, required: true },
+        text: { type: Boolean, required: true }
+      }
+    ],
     release_date: {
       required: true,
       type: String,

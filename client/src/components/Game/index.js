@@ -234,10 +234,12 @@ class GamePage extends Component {
                         return i > 0 ? (
                           <div key={i} className="table__row">
                             <div className="table__row-label system-requirements__label">
-                              {key.charAt(0).toUpperCase() + key.slice(1)}:
+                              {key === 'directX' && item === ''
+                                ? null
+                                : key.charAt(0).toUpperCase() + key.slice(1)}
                             </div>
                             <div className="table__row-content system-requirements__minimum">
-                              {item}
+                              {item !== '' ? item : null}
                             </div>
                           </div>
                         ) : null;
