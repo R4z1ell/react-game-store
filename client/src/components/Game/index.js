@@ -179,7 +179,9 @@ class GamePage extends Component {
               </svg>
               <div className="game-page__separator" />
               <div className="game-page__Languages">
-                English & {game.languages.length - 1} more
+                {game.languages.length === 1
+                  ? 'English'
+                  : `English & ${game.languages.length - 1} more`}
               </div>
             </div>
             <ProductActions {...this.props} />
@@ -416,39 +418,41 @@ class GamePage extends Component {
                       ) : null
                     )}
                   </div>
-                  {this.state.showLanguages ? (
-                    <span
-                      className={
-                        this.state.showLanguages
-                          ? 'languages__more-languages--button is-open'
-                          : 'languages__more-languages--button '
-                      }
-                      onClick={() =>
-                        this.setState({
-                          showLanguages: !this.state.showLanguages
-                        })
-                      }
-                    >
-                      Hide {game.languages.length - 1} languages
-                      <FontAwesomeIcon icon={faAngleDoubleDown} />
-                    </span>
-                  ) : (
-                    <span
-                      className={
-                        this.state.showLanguages
-                          ? 'languages__more-languages--button is-open'
-                          : 'languages__more-languages--button '
-                      }
-                      onClick={() =>
-                        this.setState({
-                          showLanguages: !this.state.showLanguages
-                        })
-                      }
-                    >
-                      Show {game.languages.length - 1} more languages
-                      <FontAwesomeIcon icon={faAngleDoubleDown} />
-                    </span>
-                  )}
+                  {game.languages.length > 1 ? (
+                    this.state.showLanguages ? (
+                      <span
+                        className={
+                          this.state.showLanguages
+                            ? 'languages__more-languages--button is-open'
+                            : 'languages__more-languages--button '
+                        }
+                        onClick={() =>
+                          this.setState({
+                            showLanguages: !this.state.showLanguages
+                          })
+                        }
+                      >
+                        Hide {game.languages.length - 1} languages
+                        <FontAwesomeIcon icon={faAngleDoubleDown} />
+                      </span>
+                    ) : (
+                      <span
+                        className={
+                          this.state.showLanguages
+                            ? 'languages__more-languages--button is-open'
+                            : 'languages__more-languages--button '
+                        }
+                        onClick={() =>
+                          this.setState({
+                            showLanguages: !this.state.showLanguages
+                          })
+                        }
+                      >
+                        Show {game.languages.length - 1} more languages
+                        <FontAwesomeIcon icon={faAngleDoubleDown} />
+                      </span>
+                    )
+                  ) : null}
                 </div>
               </div>
             </div>
