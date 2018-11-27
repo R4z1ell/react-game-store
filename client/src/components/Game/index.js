@@ -11,8 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCheckCircle,
   faTimesCircle,
-  faAngleDoubleDown,
-  faAngleDoubleUp
+  faAngleDoubleDown
 } from '@fortawesome/free-solid-svg-icons';
 
 import ProductActions from '../utils/product_actions/product_actions';
@@ -44,7 +43,8 @@ class GamePage extends Component {
   state = {
     lightboxIsOpen: false,
     imagePos: 0,
-    lightboxImages: []
+    lightboxImages: [],
+    showLanguages: false
   };
 
   settingOne = {
@@ -143,11 +143,13 @@ class GamePage extends Component {
           }}
         >
           <div className="game-page__container">
-            <img
-              src={game.images.logo}
-              alt="logo"
-              className="game-page__logo"
-            />
+            {game.images.logo ? (
+              <img
+                src={game.images.logo}
+                alt="logo"
+                className="game-page__logo"
+              />
+            ) : null}
           </div>
         </div>
 
@@ -176,17 +178,21 @@ class GamePage extends Component {
                 />
               </svg>
               <div className="game-page__separator" />
-              <div className="game-page__Languages">English & 7 more</div>
+              <div className="game-page__Languages">
+                English & {game.languages.length - 1} more
+              </div>
             </div>
             <ProductActions {...this.props} />
           </div>
           <Slider {...this.settingOne} className="game-page__slider-container">
-            <Iframe
-              url={game.videos[0].video_url}
-              width="271px"
-              height="152px"
-              allowFullScreen
-            />
+            {game.videos[0].video_url ? (
+              <Iframe
+                url={game.videos[0].video_url}
+                width="271px"
+                height="152px"
+                allowFullScreen
+              />
+            ) : null}
             {this.generateImagesSlides()}
           </Slider>
           {this.state.lightboxIsOpen ? (
@@ -231,17 +237,17 @@ class GamePage extends Component {
                   {game.system_requirements
                     ? Object.keys(game.system_requirements[0]).map((key, i) => {
                         const item = game.system_requirements[0][key];
-                        return i > 0 ? (
-                          <div key={i} className="table__row">
-                            <div className="table__row-label system-requirements__label">
-                              {key === 'directX' && item === ''
-                                ? null
-                                : key.charAt(0).toUpperCase() + key.slice(1)}
+                        return i > 0 && key !== '_id' ? (
+                          key === 'directX' && item === '' ? null : (
+                            <div key={i} className="table__row">
+                              <div className="table__row-label system-requirements__label">
+                                {key.charAt(0).toUpperCase() + key.slice(1)}
+                              </div>
+                              <div className="table__row-content system-requirements__minimum">
+                                {item}
+                              </div>
                             </div>
-                            <div className="table__row-content system-requirements__minimum">
-                              {item !== '' ? item : null}
-                            </div>
-                          </div>
+                          )
                         ) : null;
                       })
                     : null}
@@ -329,101 +335,120 @@ class GamePage extends Component {
                     Text
                   </div>
                 </div>
-                <div className="languages__row">
-                  <div className="languages__row--cell languages__row--language-name">
-                    English
-                  </div>
-                  <div className="languages__row--cell languages__row--audio-support">
-                    <FontAwesomeIcon icon={faTimesCircle} />
-                  </div>
-                  <div className="languages__row--cell languages__row--text-support">
-                    <FontAwesomeIcon icon={faCheckCircle} />
-                  </div>
-                </div>
+                {game.languages.map((item, i) =>
+                  item.language_name === 'English' ? (
+                    <div className="languages__row" key={i}>
+                      <div className="languages__row--cell languages__row--language-name">
+                        {item.language_name}
+                      </div>
+                      <div className="languages__row--cell languages__row--audio-support">
+                        {item.audio ? (
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            style={{ opacity: '1' }}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            icon={faTimesCircle}
+                            style={{ opacity: '0.2' }}
+                          />
+                        )}
+                      </div>
+                      <div className="languages__row--cell languages__row--text-support">
+                        {item.text ? (
+                          <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            style={{ opacity: '1' }}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            icon={faTimesCircle}
+                            style={{ opacity: '0.2' }}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  ) : null
+                )}
                 <div className="languages__more-languages">
-                  <div className="languages__more-languages--content">
-                    <div className="languages__row">
-                      <div className="languages__row--cell languages__row--language-name">
-                        Dutch
-                      </div>
-                      <div className="languages__row--cell languages__row--audio-support">
-                        <FontAwesomeIcon icon={faTimesCircle} />
-                      </div>
-                      <div className="languages__row--cell languages__row--text-support">
-                        <FontAwesomeIcon icon={faCheckCircle} />
-                      </div>
-                    </div>
-                    <div className="languages__row">
-                      <div className="languages__row--cell languages__row--language-name">
-                        French
-                      </div>
-                      <div className="languages__row--cell languages__row--audio-support">
-                        <FontAwesomeIcon icon={faTimesCircle} />
-                      </div>
-                      <div className="languages__row--cell languages__row--text-support">
-                        <FontAwesomeIcon icon={faCheckCircle} />
-                      </div>
-                    </div>
-                    <div className="languages__row">
-                      <div className="languages__row--cell languages__row--language-name">
-                        Spanish
-                      </div>
-                      <div className="languages__row--cell languages__row--audio-support">
-                        <FontAwesomeIcon icon={faTimesCircle} />
-                      </div>
-                      <div className="languages__row--cell languages__row--text-support">
-                        <FontAwesomeIcon icon={faCheckCircle} />
-                      </div>
-                    </div>
-                    <div className="languages__row">
-                      <div className="languages__row--cell languages__row--language-name">
-                        Italian
-                      </div>
-                      <div className="languages__row--cell languages__row--audio-support">
-                        <FontAwesomeIcon icon={faTimesCircle} />
-                      </div>
-                      <div className="languages__row--cell languages__row--text-support">
-                        <FontAwesomeIcon icon={faCheckCircle} />
-                      </div>
-                    </div>
-                    <div className="languages__row">
-                      <div className="languages__row--cell languages__row--language-name">
-                        Czech
-                      </div>
-                      <div className="languages__row--cell languages__row--audio-support">
-                        <FontAwesomeIcon icon={faTimesCircle} />
-                      </div>
-                      <div className="languages__row--cell languages__row--text-support">
-                        <FontAwesomeIcon icon={faCheckCircle} />
-                      </div>
-                    </div>
-                    <div className="languages__row">
-                      <div className="languages__row--cell languages__row--language-name">
-                        Polish
-                      </div>
-                      <div className="languages__row--cell languages__row--audio-support">
-                        <FontAwesomeIcon icon={faTimesCircle} />
-                      </div>
-                      <div className="languages__row--cell languages__row--text-support">
-                        <FontAwesomeIcon icon={faCheckCircle} />
-                      </div>
-                    </div>
-                    <div className="languages__row">
-                      <div className="languages__row--cell languages__row--language-name">
-                        Russian
-                      </div>
-                      <div className="languages__row--cell languages__row--audio-support">
-                        <FontAwesomeIcon icon={faTimesCircle} />
-                      </div>
-                      <div className="languages__row--cell languages__row--text-support">
-                        <FontAwesomeIcon icon={faCheckCircle} />
-                      </div>
-                    </div>
+                  <div
+                    className={
+                      this.state.showLanguages
+                        ? 'languages__more-languages--content is-open'
+                        : 'languages__more-languages--content '
+                    }
+                  >
+                    {game.languages.map((item, i) =>
+                      i > 0 ? (
+                        this.state.showLanguages === false ? null : (
+                          <div className="languages__row" key={i}>
+                            <div className="languages__row--cell languages__row--language-name">
+                              {item.language_name}
+                            </div>
+                            <div className="languages__row--cell languages__row--audio-support">
+                              {item.audio ? (
+                                <FontAwesomeIcon
+                                  icon={faCheckCircle}
+                                  style={{ opacity: '1' }}
+                                />
+                              ) : (
+                                <FontAwesomeIcon
+                                  icon={faTimesCircle}
+                                  style={{ opacity: '0.2' }}
+                                />
+                              )}
+                            </div>
+                            <div className="languages__row--cell languages__row--text-support">
+                              {item.text ? (
+                                <FontAwesomeIcon
+                                  icon={faCheckCircle}
+                                  style={{ opacity: '1' }}
+                                />
+                              ) : (
+                                <FontAwesomeIcon
+                                  icon={faTimesCircle}
+                                  style={{ opacity: '0.2' }}
+                                />
+                              )}
+                            </div>
+                          </div>
+                        )
+                      ) : null
+                    )}
                   </div>
-                  <span className="languages__more-languages--button">
-                    Show 7 more languages
-                    <FontAwesomeIcon icon={faAngleDoubleDown} />
-                  </span>
+                  {this.state.showLanguages ? (
+                    <span
+                      className={
+                        this.state.showLanguages
+                          ? 'languages__more-languages--button is-open'
+                          : 'languages__more-languages--button '
+                      }
+                      onClick={() =>
+                        this.setState({
+                          showLanguages: !this.state.showLanguages
+                        })
+                      }
+                    >
+                      Hide {game.languages.length - 1} languages
+                      <FontAwesomeIcon icon={faAngleDoubleDown} />
+                    </span>
+                  ) : (
+                    <span
+                      className={
+                        this.state.showLanguages
+                          ? 'languages__more-languages--button is-open'
+                          : 'languages__more-languages--button '
+                      }
+                      onClick={() =>
+                        this.setState({
+                          showLanguages: !this.state.showLanguages
+                        })
+                      }
+                    >
+                      Show {game.languages.length - 1} more languages
+                      <FontAwesomeIcon icon={faAngleDoubleDown} />
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
