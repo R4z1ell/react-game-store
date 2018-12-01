@@ -10,6 +10,7 @@ import { getGames } from '../../store/actions/games_actions';
 class Home extends Component {
   componentDidMount() {
     this.props.dispatch(getGames(9));
+    window.scrollTo(0, 0);
   }
 
   render() {

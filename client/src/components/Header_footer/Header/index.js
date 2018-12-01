@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import style from './index.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -37,7 +38,9 @@ class Header extends Component {
             </div>
           </div>
           <div className={style.logo__container}>
-            <div className={style.logo__name}>JetDeals</div>
+            <Link to="/">
+              <div className={style.logo__name}>JetDeals</div>
+            </Link>
           </div>
         </div>
       </header>

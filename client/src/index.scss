@@ -15,3 +15,11 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}

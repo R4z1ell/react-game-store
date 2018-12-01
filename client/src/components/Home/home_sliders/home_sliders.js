@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 
 import './home_sliders.scss';
@@ -56,7 +57,6 @@ const HomeSliders = props => {
   const settingOne = {
     dots: true,
     infinite: true,
-    fade: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -78,7 +78,6 @@ const HomeSliders = props => {
   const settingTwo = {
     dots: true,
     infinite: true,
-    fade: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -99,7 +98,7 @@ const HomeSliders = props => {
   const generateFeaturedSlides = () =>
     props.games
       ? props.games.map((game, i) => (
-          <div key={i}>
+          <Link to={`/game/${game.title}`} key={i}>
             <div
               style={{
                 background: `url(${game.images.mobile}) no-repeat`,
@@ -121,19 +120,19 @@ const HomeSliders = props => {
                 {game.prices.basePrice / 100}
               </div>
             </div>
-          </div>
+          </Link>
         ))
       : null;
 
   const generateDealsSlides = () =>
     props.games
       ? props.games.map((game, i) => (
-          <div key={i}>
+          <Link to={`/game/${game.title}`} key={i}>
             <div
               style={{
                 background: `url(${game.images.mobile}) no-repeat`,
                 backgroundPosition: 'top',
-                backgroundSize: '120% 74%',
+                backgroundSize: '125% 74%',
                 height: '400px',
                 width: '340px'
               }}
@@ -156,7 +155,7 @@ const HomeSliders = props => {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))
       : null;
 

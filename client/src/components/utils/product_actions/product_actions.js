@@ -9,7 +9,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 class ProductActions extends Component {
   state = {
-    wishlist: true
+    wishlist: false
   };
 
   render() {

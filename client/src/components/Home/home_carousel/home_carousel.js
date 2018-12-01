@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 
 import style from './home_carousel.module.scss';
@@ -73,7 +74,7 @@ const HomeCarousel = props => {
   const generateGameSlides = () =>
     props.games
       ? props.games.map((game, i) => (
-          <div key={i}>
+          <Link to={`/game/${game.title}`} key={i}>
             <div
               style={{
                 background: `linear-gradient(180deg,transparent 0,rgba(0,0,0,.6)),url(${
@@ -103,7 +104,7 @@ const HomeCarousel = props => {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))
       : null;
   return (

@@ -69,6 +69,8 @@ class GamePage extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     const gameTitle = this.props.match.params.title;
     this.props.dispatch(getGameDetail(gameTitle));
     if (gameTitle) {

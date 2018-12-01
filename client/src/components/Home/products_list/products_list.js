@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import './products_list.scss';
 
@@ -19,11 +20,9 @@ class ProductsList extends Component {
   renderCards = () =>
     this.props.list
       ? this.props.list.map(card => (
-          <ProductCard
-            key={card.title}
-            {...card}
-            callbackFromParent={this.updateState}
-          />
+          <Link to={`/game/${card.title}`} key={card.title}>
+            <ProductCard {...card} callbackFromParent={this.updateState} />
+          </Link>
         ))
       : null;
 
