@@ -17,7 +17,9 @@ class Header extends Component {
         <div className={style.header__container}>
           <div className={style.header__menu}>
             <div className={style.header__item}>
-              STORE <FontAwesomeIcon icon={faAngleDown} />
+              <Link to="/games">
+                STORE <FontAwesomeIcon icon={faAngleDown} />
+              </Link>
             </div>
             <div className={style.header__item}>
               BROWSE <FontAwesomeIcon icon={faAngleDown} />
