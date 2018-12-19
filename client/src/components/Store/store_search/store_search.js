@@ -3,11 +3,38 @@ import React, { Component } from 'react';
 import './store_search.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSearch,
+  faAngleDown,
+  faTimesCircle
+} from '@fortawesome/free-solid-svg-icons';
 
 class StoreSearch extends Component {
   state = {
-    dropdown: false
+    dropdown: false,
+    inputDefault: '',
+    inputStatus: false
+  };
+
+  handleInput = event => {
+    if (event.target.value) {
+      this.setState({
+        inputDefault: event.target.value,
+        inputStatus: true
+      });
+    } else {
+      this.setState({
+        inputDefault: '',
+        inputStatus: false
+      });
+    }
+  };
+
+  resetInputValue = () => {
+    this.setState({
+      inputDefault: '',
+      inputStatus: false
+    });
   };
 
   render() {
@@ -219,18 +246,30 @@ class StoreSearch extends Component {
             </div>
           </div>
           <div className="search-input-container">
-            <FontAwesomeIcon icon={faSearch} className="search-input-icon" />
+            {this.state.inputDefault === '' ? (
+              <FontAwesomeIcon icon={faSearch} className="search-input-icon" />
+            ) : (
+              <FontAwesomeIcon
+                icon={faSearch}
+                className="search-input-icon--with-content"
+              />
+            )}
             <input
               type="text"
               placeholder="Search for..."
+              value={this.state.inputDefault}
               className="search-input"
+              onChange={event => this.handleInput(event)}
             />
-            {/* <div className="search-button-wrapper">
-              <FontAwesomeIcon
-                icon={faCheckCircle}
-                className="search-button-clear"
-              />
-            </div> */}
+            {this.state.inputStatus ? (
+              <div className="search-button-wrapper">
+                <FontAwesomeIcon
+                  icon={faTimesCircle}
+                  className="search-button-clear"
+                  onClick={() => this.resetInputValue()}
+                />
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
