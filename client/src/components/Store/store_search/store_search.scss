@@ -23,6 +23,7 @@
       margin-left: auto;
       margin-right: auto;
       padding-top: 120px;
+      padding-bottom: 45px;
     }
   }
 }
@@ -204,6 +205,71 @@ input[type='checkbox'],
 input[type='radio'] {
   box-sizing: border-box;
   padding: 0;
+}
+
+/// Filters
+
+.filters__toggle {
+  font-size: 12px;
+
+  &-icon {
+    width: 13px;
+    height: 11px;
+    fill: #404040;
+
+    &--opened {
+      transform: scaleX(-1);
+      width: 13px;
+      height: 11px;
+      fill: #404040;
+    }
+  }
+}
+
+.filters-status {
+  cursor: pointer;
+  user-select: none;
+}
+
+.filters-applied-label {
+  margin-left: 10px;
+}
+
+.store-search__tabs-wrapper--row {
+  position: absolute;
+  top: 225px;
+  right: 35%;
+}
+
+.store-search__filters-sorting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  margin-top: -2px;
+  position: relative;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+.tabs-row-option {
+  display: inline-block;
+  height: 100%;
+  margin-right: 30px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.view-switch-btn {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  fill: #595959;
+  cursor: pointer;
+
+  &-grid {
+    margin-right: 16px;
+  }
 }
 
 /// Keyframes

@@ -13,7 +13,8 @@ class StoreSearch extends Component {
   state = {
     dropdown: false,
     inputDefault: '',
-    inputStatus: false
+    inputStatus: false,
+    filterStatus: false
   };
 
   handleInput = event => {
@@ -34,6 +35,12 @@ class StoreSearch extends Component {
     this.setState({
       inputDefault: '',
       inputStatus: false
+    });
+  };
+
+  filterToggle = () => {
+    this.setState({
+      filterStatus: !this.state.filterStatus
     });
   };
 
@@ -270,6 +277,62 @@ class StoreSearch extends Component {
                 />
               </div>
             ) : null}
+          </div>
+        </div>
+        <div className="store-search__tabs-wrapper--row">
+          <div className="tabs-row-option">Everything</div>
+          <div className="tabs-row-option">Upcoming</div>
+          <div className="tabs-row-option">On sale</div>
+        </div>
+        <div className="store-search__filters-sorting">
+          <div className="filters__toggle" onClick={() => this.filterToggle()}>
+            <div className="filters-status">
+              {this.state.filterStatus ? (
+                <svg
+                  preserveAspectRatio="xMidYMax meet"
+                  viewBox="0 0 13 11"
+                  id="icon-toggle-filters"
+                  width="100%"
+                  height="100%"
+                  className="filters__toggle-icon--opened"
+                >
+                  <path d="M7 5H1V0H0v11h1V6h6v3l6-3.5L7 2z" />
+                </svg>
+              ) : (
+                <svg
+                  preserveAspectRatio="xMidYMax meet"
+                  viewBox="0 0 13 11"
+                  id="icon-toggle-filters"
+                  width="100%"
+                  height="100%"
+                  className="filters__toggle-icon"
+                >
+                  <path d="M7 5H1V0H0v11h1V6h6v3l6-3.5L7 2z" />
+                </svg>
+              )}
+
+              <span className="filters-applied-label">Filters</span>
+            </div>
+          </div>
+          <div className="view-switch">
+            <svg
+              preserveAspectRatio="xMidYMax meet"
+              id="icon-grid"
+              width="100%"
+              height="100%"
+              className="view-switch-btn view-switch-btn-grid"
+            >
+              <path d="M11 10h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm-5 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm-5 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm10-5h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM6 5h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM1 5h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm10-5h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM6 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM1 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1z" />
+            </svg>
+            <svg
+              preserveAspectRatio="xMidYMax meet"
+              id="icon-list"
+              width="100%"
+              height="100%"
+              className="view-switch-btn view-switch-btn-list"
+            >
+              <path d="M5 11h9v2H5v-2zm-4-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm4-4h9v2H5V6zM1 5h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm4-4h9v2H5V1zM1 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1z" />
+            </svg>
           </div>
         </div>
       </div>
