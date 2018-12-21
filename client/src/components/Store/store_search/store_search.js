@@ -8,6 +8,7 @@ import {
   faAngleDown,
   faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
+import CardBlock from '../../utils/card_block';
 
 class StoreSearch extends Component {
   state = {
@@ -811,7 +812,9 @@ class StoreSearch extends Component {
                 </div>
               </div>
             </div>
-            <div className="catalog__games-list" />
+            <div className="catalog__games-list">
+              {this.props.games ? <CardBlock list={this.props.games} /> : null}
+            </div>
           </div>
         </div>
       </React.Fragment>
