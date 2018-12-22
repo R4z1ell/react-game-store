@@ -3,7 +3,6 @@
 .store-search {
   position: relative;
   margin: 0 auto;
-  padding: 0 16px;
   width: auto;
   max-width: 1100px;
 
@@ -291,7 +290,6 @@ input[type='radio'] {
 .container--catalog {
   position: relative;
   margin: 0 auto;
-  padding: 0 16px;
   width: auto;
   max-width: 1100px;
   height: 858px;
@@ -311,14 +309,35 @@ input[type='radio'] {
   }
 
   &__sidebar {
-    width: 280px;
+    width: 0px;
     transition: 0.3s ease-in-out;
+    flex-shrink: 0;
+    float: left;
+    overflow: hidden;
   }
+}
+
+.catalog__body--slide .catalog__sidebar {
+  width: 280px;
 }
 
 .catalog__sidebar > .filter__item ~ .filter__item {
   padding-top: 15px;
   border-top: 1px solid #bfbfbf;
+}
+
+.catalog__games-list .card_block {
+  margin-top: 0px !important;
+}
+
+.catalog__games-list .card_block .card_wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 25px;
+}
+
+.catalog__games-list .card_block .card_wrapper--slide {
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .filter {

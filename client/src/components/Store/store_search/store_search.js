@@ -18,6 +18,7 @@ class StoreSearch extends Component {
     filterStatus: false,
     switchBtnGrid: false,
     switchBtnList: false,
+    slideSidebar: true,
     everything: false,
     upcoming: false,
     onSale: false,
@@ -50,7 +51,8 @@ class StoreSearch extends Component {
 
   filterToggle = () => {
     this.setState({
-      filterStatus: !this.state.filterStatus
+      filterStatus: !this.state.filterStatus,
+      slideSidebar: !this.state.slideSidebar
     });
   };
 
@@ -114,6 +116,7 @@ class StoreSearch extends Component {
   render() {
     let switchBtnGridStatus = this.state.switchBtnGrid ? '--active' : '';
     let switchBtnListStatus = this.state.switchBtnList ? '--active' : '';
+    let slideSidebar = this.state.slideSidebar ? '--slide' : '';
     let everything = this.state.everything ? '--selected' : '';
     let upcoming = this.state.upcoming ? '--selected' : '';
     let onSale = this.state.onSale ? '--selected' : '';
@@ -392,7 +395,7 @@ class StoreSearch extends Component {
                     id="icon-toggle-filters"
                     width="100%"
                     height="100%"
-                    className="filters__toggle-icon--opened"
+                    className="filters__toggle-icon"
                   >
                     <path d="M7 5H1V0H0v11h1V6h6v3l6-3.5L7 2z" />
                   </svg>
@@ -403,12 +406,11 @@ class StoreSearch extends Component {
                     id="icon-toggle-filters"
                     width="100%"
                     height="100%"
-                    className="filters__toggle-icon"
+                    className="filters__toggle-icon--opened"
                   >
                     <path d="M7 5H1V0H0v11h1V6h6v3l6-3.5L7 2z" />
                   </svg>
                 )}
-
                 <span className="filters-applied-label">Filters</span>
               </div>
             </div>
@@ -437,7 +439,7 @@ class StoreSearch extends Component {
           </div>
         </div>
         <div className="container--catalog">
-          <div className="catalog__body">
+          <div className={`catalog__body catalog__body${slideSidebar}`}>
             <div className="catalog__sidebar">
               <div className={`filter__item filter__item${collapsedPrice}`}>
                 <div
@@ -813,7 +815,12 @@ class StoreSearch extends Component {
               </div>
             </div>
             <div className="catalog__games-list">
-              {this.props.games ? <CardBlock list={this.props.games} /> : null}
+              {this.props.games ? (
+                <CardBlock
+                  list={this.props.games}
+                  slide={this.state.slideSidebar}
+                />
+              ) : null}
             </div>
           </div>
         </div>
