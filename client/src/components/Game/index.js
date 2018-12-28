@@ -15,7 +15,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import ProductActions from '../utils/product_actions/product_actions';
-import { getGameDetail } from '../../store/actions/games_actions';
+import {
+  getGameDetail,
+  clearGameDetail
+} from '../../store/actions/games_actions';
 
 function SamplePrevArrow(props) {
   const { onClick } = props;
@@ -88,6 +91,10 @@ class GamePage extends Component {
         });
       }, 2000);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearGameDetail());
   }
 
   handleLightBox = pos => {

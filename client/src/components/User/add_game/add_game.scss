@@ -1,0 +1,24 @@
+@import '../../../Resources/scss/variables';
+
+.add_game {
+  margin-top: 46px;
+  padding-left: 50px;
+
+  &__title {
+    font-size: 22px;
+  }
+}
+
+.formBlock .label_inputs {
+  padding: 7px;
+  background: $color-black-text;
+  opacity: 0.4;
+  color: $color-white;
+  margin: 10px 0;
+  width: fit-content;
+}
+
+.formBlock input {
+  width: 100%;
+  margin-bottom: 15px;
+}
