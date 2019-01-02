@@ -1,7 +1,12 @@
 import axios from 'axios';
 
 import { GAMES_SERVER } from '../../components/utils/misc';
-import { GET_GAMES, GET_GAME_DETAIL, CLEAR_GAME_DETAIL } from './types';
+import {
+  GET_GAMES,
+  GET_GAME_DETAIL,
+  CLEAR_GAME_DETAIL,
+  GET_GENRES
+} from './types';
 
 export const getGames = limit => {
   const request = axios
@@ -31,3 +36,18 @@ export function clearGameDetail() {
     payload: ''
   };
 }
+
+//==============================
+//           GENRES
+//==============================
+
+export const getGenres = () => {
+  const request = axios
+    .get(`${GAMES_SERVER}/get_genres`)
+    .then(response => response.data);
+
+  return {
+    type: GET_GENRES,
+    payload: request
+  };
+};

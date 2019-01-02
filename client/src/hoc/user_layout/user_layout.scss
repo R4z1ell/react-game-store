@@ -3,7 +3,6 @@
 .user-layout {
   &__container {
     display: flex;
-    height: 100vh;
     max-width: 1100px;
     margin: 0 auto;
     padding-top: 70px;
@@ -29,5 +28,6 @@
 
   &__right {
     flex-grow: 1;
+    margin-bottom: 100px;
   }
 }
