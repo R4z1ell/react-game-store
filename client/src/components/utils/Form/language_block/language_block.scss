@@ -1,0 +1,33 @@
+.languages-block {
+  display: flex;
+  align-items: baseline;
+
+  &__container {
+    display: flex;
+    height: fit-content;
+    margin-left: 30px;
+  }
+
+  .formBlock input {
+    margin-bottom: 0px !important;
+  }
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  width: 90px;
+
+  span {
+    margin-right: 15px;
+  }
+}
+
+.languages-block > div:first-of-type {
+  flex-grow: 1;
+  height: fit-content;
+}
+
+.languages-block .error_label {
+  margin: 10px 0;
+}

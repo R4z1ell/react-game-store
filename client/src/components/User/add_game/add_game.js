@@ -5,16 +5,17 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import './add_game.scss';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
 import { update, populateOptionFields } from '../../utils/Form/form_actions';
 import { getGenres } from '../../../store/actions/games_actions';
 import FormField from '../../utils/Form/form_field';
+import ScreenshotBlock from '../../utils/Form/screenshot_block/screenshot_block';
+import LanguageBlock from '../../utils/Form/language_block/language_block';
 import UserLayout from '../../../hoc/user_layout/user_layout';
 
 class AddGame extends Component {
   state = {
+    images: [],
+    languages: [],
     startDate: new Date(),
     formError: false,
     formSuccess: false,
@@ -381,7 +382,7 @@ class AddGame extends Component {
         config: {
           name: 'screenshot_ggvgm_input',
           type: 'text',
-          placeholder: 'Enter ggvgm url'
+          placeholder: 'Enter regular size image url'
         },
         validation: {
           required: true
@@ -397,7 +398,7 @@ class AddGame extends Component {
         config: {
           name: 'screenshot_ggvgm_2x_input',
           type: 'text',
-          placeholder: 'Enter ggvgm_2x url'
+          placeholder: 'Enter 2x size image url'
         },
         validation: {
           required: true
@@ -408,6 +409,38 @@ class AddGame extends Component {
         showlabel: false
       }
     }
+  };
+
+  addScreenshot = () => {
+    let images = this.state.images;
+    images.push('added');
+    this.setState({ images });
+  };
+
+  removeScreenshot = () => {
+    let images = this.state.images;
+    images.splice(-1, 1);
+    this.setState({
+      images
+    });
+  };
+
+  addLanguage = () => {
+    let languages = this.state.languages;
+    languages.push('added');
+    this.setState({ languages });
+  };
+
+  removeLanguage = () => {
+    let languages = this.state.languages;
+    languages.splice(-1, 1);
+    this.setState({
+      languages
+    });
+  };
+
+  submitForm = event => {
+    event.preventDefault();
   };
 
   handleChange = date => {
@@ -448,7 +481,7 @@ class AddGame extends Component {
       <UserLayout>
         <div className="add_game">
           <h1 className="add_game__title">Add Product</h1>
-          <form>
+          <form onSubmit={event => this.submitForm(event)}>
             <FormField
               id={'name'}
               formdata={this.state.formdata.name}
@@ -572,32 +605,47 @@ class AddGame extends Component {
             />
             <div className="form_divider" />
             <div className="formBlock">
+              <div className="label_inputs">Languages</div>
+            </div>
+            <div className="add_game__languages">
+              <LanguageBlock />
+              {this.state.languages.map((item, i) => (
+                <LanguageBlock key={i} />
+              ))}
+              <button
+                className="add_game__button-add"
+                onClick={this.addLanguage}
+              >
+                Add
+              </button>
+              <button
+                className="add_game__button-remove"
+                onClick={this.removeLanguage}
+              >
+                Remove
+              </button>
+            </div>
+            <div className="form_divider" />
+            <div className="formBlock">
               <div className="label_inputs">Screenshots</div>
             </div>
             <div className="add_game__screenshots">
-              <div className="add_game__screenshots--wrapper">
-                <div className="add_game__screenshots--container">
-                  <FormField
-                    id={'screenshot_ggvgm'}
-                    formdata={this.state.formdata.screenshot_ggvgm}
-                    change={element => this.updateForm(element)}
-                  />
-                  <FontAwesomeIcon icon={faTrashAlt} className="trash-icon" />
-                </div>
-                <div className="add_game__screenshots--container">
-                  <FormField
-                    id={'screenshot_ggvgm_2x'}
-                    formdata={this.state.formdata.screenshot_ggvgm_2x}
-                    change={element => this.updateForm(element)}
-                  />
-                  <FontAwesomeIcon icon={faTrashAlt} className="trash-icon" />
-                </div>
-              </div>
+              <ScreenshotBlock />
+              {this.state.images.map((item, i) => (
+                <ScreenshotBlock key={i} />
+              ))}
               <button
                 className="add_game__button-add"
-                onClick={() => this.addNew()}
+                onClick={this.addScreenshot}
               >
-                Add new
+                Add
+              </button>
+              <button
+                className="add_game__button-remove"
+                onClick={this.removeScreenshot}
+                disabled={this.state.images.length === 0}
+              >
+                Remove
               </button>
             </div>
             <div className="form_divider" />
@@ -610,7 +658,7 @@ class AddGame extends Component {
             {/* <button onClick={event => this.submitForm(event)}>
               Add Game
             </button> */}
-            <button>Add Game</button>
+            <button className="add_game__button-submit">Submit Game</button>
           </form>
         </div>
       </UserLayout>

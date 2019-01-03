@@ -1,0 +1,15 @@
+.add_game__screenshots {
+  &--wrapper {
+    background: #eee;
+    height: 100%;
+    padding: 10px 10px 0 10px;
+  }
+
+  input {
+    margin-bottom: 0px !important;
+  }
+
+  .error_label {
+    margin: 10px 0;
+  }
+}

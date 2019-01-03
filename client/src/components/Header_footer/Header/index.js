@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import style from './index.module.scss';
+import './index.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -13,35 +13,35 @@ import {
 class Header extends Component {
   render() {
     return (
-      <header className={style.header__bck}>
-        <div className={style.header__container}>
-          <div className={style.header__menu}>
-            <div className={style.header__item}>
+      <header className="header__bck">
+        <div className="header__container">
+          <div className="header__menu">
+            <div className="header__item">
               <Link to="/games">
                 STORE <FontAwesomeIcon icon={faAngleDown} />
               </Link>
             </div>
-            <div className={style.header__item}>
+            <div className="header__item">
               BROWSE <FontAwesomeIcon icon={faAngleDown} />
             </div>
-            <div className={style.header__item}>ON SALE</div>
+            <div className="header__item">ON SALE</div>
           </div>
-          <div className={style.header__tray}>
-            <div className={style.header__item}>
+          <div className="header__tray">
+            <div className="header__item">
               <FontAwesomeIcon icon={faBell} />
               <span>0</span>
             </div>
-            <div className={style.header__item}>
+            <div className="header__item">
               <FontAwesomeIcon icon={faShoppingCart} />
               <span>0</span>
             </div>
-            <div className={style.header__item}>
+            <div className="header__item header__search">
               <FontAwesomeIcon icon={faSearch} />
             </div>
           </div>
-          <div className={style.logo__container}>
+          <div className="logo__container">
             <Link to="/">
-              <div className={style.logo__name}>JetDeals</div>
+              <div className="logo__name">JetDeals</div>
             </Link>
           </div>
         </div>

@@ -4,7 +4,9 @@
   margin-top: 46px;
   padding-left: 50px;
 
-  &__button-add {
+  &__button-add,
+  &__button-remove,
+  &__button-submit {
     border-radius: 5px;
     margin-top: 10px;
     padding: 8px;
@@ -16,6 +18,21 @@
     font-family: 'Black Ops One';
   }
 
+  &__button-submit {
+    margin-top: 0px !important;
+  }
+
+  &__button-remove {
+    margin-left: 5px;
+  }
+
+  &__languages {
+    .add_game__button-add,
+    .add_game__button-remove {
+      margin-top: 0px !important;
+    }
+  }
+
   &__title {
     font-size: 22px;
     font-family: 'Black Ops One';
@@ -25,40 +42,6 @@
 
   &__price input {
     width: 24% !important;
-  }
-
-  &__screenshots {
-    &--wrapper {
-      background: #eee;
-      border-radius: 5px;
-      height: 100%;
-      padding: 10px 10px 0 10px;
-    }
-
-    &--container {
-      display: flex;
-      position: relative;
-
-      svg {
-        position: absolute;
-        cursor: pointer;
-        top: 14px;
-        right: 0px;
-      }
-
-      div {
-        flex-grow: 1;
-      }
-    }
-
-    input {
-      margin-bottom: 0px !important;
-      width: 97% !important;
-    }
-
-    .error_label {
-      margin: 10px 0;
-    }
   }
 }
 
