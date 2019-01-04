@@ -45,6 +45,83 @@ export const update = (element, formdata, formName) => {
   return newFormData;
 };
 
+export const generateData = (formdata, formName) => {
+  let dataToSubmit = {};
+
+  for (let key in formdata) {
+    if (key !== 'confirmPassword' && key !== 'prices') {
+      dataToSubmit[key] = formdata[key].value;
+    }
+    if (key === 'release_date') {
+      dataToSubmit.release_date = formdata['release_date'];
+    }
+    if (key === 'lead' || key === 'full' || key === 'whats_cool_about_it') {
+      dataToSubmit.description = {
+        lead: formdata['lead'].value,
+        full: formdata['full'].value,
+        whats_cool_about_it: formdata['whats_cool_about_it'].value
+      };
+    }
+    if (
+      key === 'background' ||
+      key === 'mobile' ||
+      key === 'logo' ||
+      key === 'card'
+    ) {
+      dataToSubmit.images = {
+        background: formdata['background'].value,
+        mobile: formdata['mobile'].value,
+        logo: formdata['logo'].value,
+        card: formdata['card'].value
+      };
+    }
+    if (key === 'prices') {
+      dataToSubmit[key] = {
+        basePrice: formdata[key].value
+      };
+    }
+    if (key === 'video_url' || key === 'thumbnail_url') {
+      dataToSubmit.videos = [
+        {
+          video_url: formdata['video_url'].value,
+          thumbnail_url: formdata['thumbnail_url'].value
+        }
+      ];
+    }
+    if (
+      key === 'directX' ||
+      key === 'system' ||
+      key === 'processor' ||
+      key === 'memory' ||
+      key === 'graphics' ||
+      key === 'storage'
+    ) {
+      dataToSubmit.system_requirements = [
+        {
+          system: formdata['system'].value,
+          processor: formdata['processor'].value,
+          memory: formdata['memory'].value,
+          graphics: formdata['graphics'].value,
+          storage: formdata['storage'].value,
+          directX: formdata['directX'].value
+        }
+      ];
+    }
+  }
+
+  return dataToSubmit;
+};
+
+export const isFormValid = (formdata, formName) => {
+  let formIsValid = true;
+
+  for (let key in formdata) {
+    formIsValid = formdata[key].valid && formIsValid;
+  }
+
+  return formIsValid;
+};
+
 export const populateOptionFields = (formdata, arrayData = [], field) => {
   const newArray = [];
   const newFormdata = { ...formdata };

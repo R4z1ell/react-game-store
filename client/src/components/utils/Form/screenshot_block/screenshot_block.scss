@@ -2,7 +2,7 @@
   &--wrapper {
     background: #eee;
     height: 100%;
-    padding: 10px 10px 0 10px;
+    padding: 10px;
   }
 
   input {
@@ -12,4 +12,12 @@
   .error_label {
     margin: 10px 0;
   }
+}
+
+.add_game__screenshots--wrapper > div:first-of-type {
+  margin-bottom: 10px;
+}
+
+.add_game__screenshots--wrapper > div:nth-of-type(2) .error_label {
+  margin: 10px 0 0 0;
 }

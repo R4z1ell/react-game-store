@@ -20,7 +20,7 @@ class LanguageBlock extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
         validationMessage: '',
         showlabel: false

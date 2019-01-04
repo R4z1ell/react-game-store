@@ -4,6 +4,7 @@ import { GAMES_SERVER } from '../../components/utils/misc';
 import {
   GET_GAMES,
   GET_GAME_DETAIL,
+  ADD_GAME,
   CLEAR_GAME_DETAIL,
   GET_GENRES
 } from './types';
@@ -29,6 +30,17 @@ export function getGameDetail(gameTitle) {
     payload: request
   };
 }
+
+export const addGame = dataToSubmit => {
+  const request = axios
+    .post(`${GAMES_SERVER}/add_game`, dataToSubmit)
+    .then(response => response.data);
+
+  return {
+    type: ADD_GAME,
+    payload: request
+  };
+};
 
 export function clearGameDetail() {
   return {

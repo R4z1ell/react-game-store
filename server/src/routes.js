@@ -13,7 +13,8 @@ module.exports = app => {
   app.post('/api/games/genre', auth, admin, GenresController.addGenre);
   app.get('/api/games/get_genres', GenresController.getGenres);
 
-  app.post('/api/games/add_game', auth, admin, GameController.addGame);
+  //app.post('/api/games/add_game', auth, admin, GameController.addGame);
+  app.post('/api/games/add_game', GameController.addGame);
   app.get('/api/games/get_games', GameController.getGames);
   // app.get('/api/games/get_game_by_id', GameController.getGameById);
   app.get('/api/games/get_game_by_title/:title', GameController.getGameByTitle);

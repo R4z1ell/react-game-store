@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 
 import './screenshot_block.scss';
 
-import FormField from '../form_field';
-import { update } from '../../../utils/Form/form_actions';
-
 class ScreenshotBlock extends Component {
   state = {
     formError: false,
@@ -20,7 +17,7 @@ class ScreenshotBlock extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
         validationMessage: '',
         showlabel: false
@@ -36,7 +33,7 @@ class ScreenshotBlock extends Component {
         validation: {
           required: true
         },
-        valid: false,
+        valid: true,
         touched: false,
         validationMessage: '',
         showlabel: false
@@ -44,12 +41,32 @@ class ScreenshotBlock extends Component {
     }
   };
 
-  updateForm = element => {
-    const newFormData = update(element, this.state.formdata, 'products');
+  handleChangeOne = event => {
+    const newFormData = { ...this.state.formdata };
+    newFormData.screenshot_ggvgm.value = event.target.value;
     this.setState({
-      formError: false,
       formdata: newFormData
     });
+    if (
+      this.state.formdata.screenshot_ggvgm.value &&
+      this.state.formdata.screenshot_ggvgm_2x.value
+    ) {
+      this.props.data(this.state.formdata);
+    }
+  };
+
+  handleChangeTwo = event => {
+    const newFormData = { ...this.state.formdata };
+    newFormData.screenshot_ggvgm_2x.value = event.target.value;
+    this.setState({
+      formdata: newFormData
+    });
+    if (
+      this.state.formdata.screenshot_ggvgm.value &&
+      this.state.formdata.screenshot_ggvgm_2x.value
+    ) {
+      this.props.data(this.state.formdata);
+    }
   };
 
   render() {
@@ -59,17 +76,17 @@ class ScreenshotBlock extends Component {
         style={{ marginTop: '12px' }}
       >
         <div>
-          <FormField
+          <input
             id={'screenshot_ggvgm'}
-            formdata={this.state.formdata.screenshot_ggvgm}
-            change={element => this.updateForm(element)}
+            onBlur={this.handleChangeOne}
+            placeholder="Enter regular image url"
           />
         </div>
         <div>
-          <FormField
-            id={'screenshot_ggvgm_2x'}
-            formdata={this.state.formdata.screenshot_ggvgm_2x}
-            change={element => this.updateForm(element)}
+          <input
+            id={'screenshot_ggvgm'}
+            onBlur={this.handleChangeTwo}
+            placeholder="Enter 2x image url"
           />
         </div>
       </div>
