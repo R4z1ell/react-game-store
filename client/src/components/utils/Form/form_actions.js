@@ -49,7 +49,16 @@ export const generateData = (formdata, formName) => {
   let dataToSubmit = {};
 
   for (let key in formdata) {
-    if (key !== 'confirmPassword' && key !== 'prices') {
+    // if (key !== 'confirmPassword' && key !== 'prices') {
+    //   dataToSubmit[key] = formdata[key].value;
+    // }
+    if (
+      key === 'genres' ||
+      key === 'title' ||
+      key === 'developer' ||
+      key === 'publisher' ||
+      key === 'total_size'
+    ) {
       dataToSubmit[key] = formdata[key].value;
     }
     if (key === 'release_date') {
@@ -106,6 +115,10 @@ export const generateData = (formdata, formName) => {
           directX: formdata['directX'].value
         }
       ];
+    }
+    if (key === 'screenshots') {
+      dataToSubmit.screenshots = [...formdata['screenshots']];
+      console.log(formdata['screenshots']);
     }
   }
 

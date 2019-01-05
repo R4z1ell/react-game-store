@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
+import Select from 'react-select';
+
 import 'react-datepicker/dist/react-datepicker.css';
 
 import './add_game.scss';
@@ -385,27 +387,39 @@ class AddGame extends Component {
     }
   };
 
-  addScreenshot = () => {
+  addScreenshot = event => {
+    event.preventDefault();
     let images = this.state.images;
     images.push('added');
     this.setState({ images });
+    console.log(this.state.images);
   };
 
-  removeScreenshot = () => {
+  removeScreenshot = event => {
+    event.preventDefault();
     let images = this.state.images;
+    let screenshots = this.state.formdata.screenshots;
     images.splice(-1, 1);
     this.setState({
       images
     });
+    screenshots.pop();
+    this.setState({
+      screenshots
+    });
+    console.log(this.state.images);
+    console.log(this.state.formdata.screenshots);
   };
 
-  addLanguage = () => {
+  addLanguage = event => {
+    event.preventDefault();
     let languages = this.state.languages;
     languages.push('added');
     this.setState({ languages });
   };
 
-  removeLanguage = () => {
+  removeLanguage = event => {
+    event.preventDefault();
     let languages = this.state.languages;
     languages.splice(-1, 1);
     this.setState({
@@ -467,6 +481,10 @@ class AddGame extends Component {
     });
   };
 
+  handleChangeSelect = selectedOption => {
+    console.log(`Option selected:`, selectedOption);
+  };
+
   updateFields = newFormData => {
     this.setState({
       formdata: newFormData
@@ -481,13 +499,21 @@ class AddGame extends Component {
     });
   };
 
-  handleDate = data => {
+  handleData = data => {
     const newFormData = { ...this.state.formdata };
-    const regularImage = data.screenshot_ggvgm.value;
-    const image_2x = data.screenshot_ggvgm_2x.value;
+    const regularImage = data.screenshot_ggvgm;
+    const image_2x = data.screenshot_ggvgm_2x;
     const images = {
-      image_url: regularImage,
-      image_2x_url: image_2x
+      formatted_images: [
+        {
+          formatter_name: 'ggvgm',
+          image_url: regularImage
+        },
+        {
+          formatter_name: 'ggvgm_2x',
+          image_url: image_2x
+        }
+      ]
     };
     newFormData.screenshots.push(images);
     this.setState({
@@ -508,6 +534,12 @@ class AddGame extends Component {
       this.updateFields(newFormData);
     });
   }
+
+  options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ];
 
   render() {
     return (
@@ -536,10 +568,18 @@ class AddGame extends Component {
                 change={element => this.updateForm(element)}
               />
             </div>
-            <FormField
+            {/* <FormField
               id={'genres'}
               formdata={this.state.formdata.genres}
               change={element => this.updateForm(element)}
+            /> */}
+            <div className="formBlock">
+              <div className="label_inputs">Genres</div>
+            </div>
+            <Select
+              options={this.state.formdata.genres.config.options}
+              onChange={this.handleChangeSelect}
+              isMulti
             />
             <div className="form_divider" />
             <FormField
@@ -664,9 +704,9 @@ class AddGame extends Component {
               <div className="label_inputs">Screenshots</div>
             </div>
             <div className="add_game__screenshots">
-              <ScreenshotBlock data={this.handleDate} />
+              <ScreenshotBlock data={this.handleData} />
               {this.state.images.map((item, i) => (
-                <ScreenshotBlock key={i} data={this.handleDate} />
+                <ScreenshotBlock key={i} data={this.handleData} />
               ))}
               <button
                 className="add_game__button-add"
