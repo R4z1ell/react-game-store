@@ -165,7 +165,7 @@ class AddGame extends Component {
       },
       genres: {
         element: 'select',
-        value: '',
+        value: [],
         config: {
           label: 'Game genres',
           name: 'genres_input',
@@ -407,8 +407,6 @@ class AddGame extends Component {
     this.setState({
       screenshots
     });
-    console.log(this.state.images);
-    console.log(this.state.formdata.screenshots);
   };
 
   addLanguage = event => {
@@ -457,7 +455,7 @@ class AddGame extends Component {
     // if (formIsValid) {
     //   this.props.dispatch(addGame(dataToSubmit)).then(() => {
     //     if (this.props.games.addGame.success) {
-    //       //this.resetFieldHandler();
+    //       this.resetFieldHandler();
     //       console.log('Submitted!!');
     //     } else {
     //       this.setState({
@@ -473,6 +471,19 @@ class AddGame extends Component {
     console.log(dataToSubmit);
   };
 
+  populateGenres = () => {
+    let newGenres = [];
+    for (let key in this.state.formdata.genres.config.options) {
+      newGenres.push({
+        value: this.state.formdata.genres.config.options[key].value,
+        label: this.state.formdata.genres.config.options[key].value,
+        key: this.state.formdata.genres.config.options[key].key
+      });
+    }
+
+    return newGenres;
+  };
+
   handleChange = date => {
     const newFormData = { ...this.state.formdata };
     newFormData.release_date = date;
@@ -482,7 +493,18 @@ class AddGame extends Component {
   };
 
   handleChangeSelect = selectedOption => {
-    console.log(`Option selected:`, selectedOption);
+    const newFormData = {
+      ...this.state.formdata
+    };
+    const newElement = {
+      ...newFormData['genres']
+    };
+    newElement.value = selectedOption;
+    newFormData['genres'] = newElement;
+
+    this.setState({
+      formdata: newFormData
+    });
   };
 
   updateFields = newFormData => {
@@ -535,12 +557,6 @@ class AddGame extends Component {
     });
   }
 
-  options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ];
-
   render() {
     return (
       <UserLayout>
@@ -568,16 +584,11 @@ class AddGame extends Component {
                 change={element => this.updateForm(element)}
               />
             </div>
-            {/* <FormField
-              id={'genres'}
-              formdata={this.state.formdata.genres}
-              change={element => this.updateForm(element)}
-            /> */}
             <div className="formBlock">
               <div className="label_inputs">Genres</div>
             </div>
             <Select
-              options={this.state.formdata.genres.config.options}
+              options={this.populateGenres()}
               onChange={this.handleChangeSelect}
               isMulti
             />

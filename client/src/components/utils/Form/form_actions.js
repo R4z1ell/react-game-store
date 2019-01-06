@@ -53,13 +53,19 @@ export const generateData = (formdata, formName) => {
     //   dataToSubmit[key] = formdata[key].value;
     // }
     if (
-      key === 'genres' ||
       key === 'title' ||
       key === 'developer' ||
       key === 'publisher' ||
       key === 'total_size'
     ) {
       dataToSubmit[key] = formdata[key].value;
+    }
+    if (key === 'genres') {
+      let newGenresArray = [];
+      for (const key in formdata.genres.value) {
+        newGenresArray.push(formdata.genres.value[key].key);
+      }
+      dataToSubmit['genres'] = newGenresArray;
     }
     if (key === 'release_date') {
       dataToSubmit.release_date = formdata['release_date'];
