@@ -383,7 +383,8 @@ class AddGame extends Component {
         validationMessage: '',
         showlabel: true
       },
-      screenshots: []
+      screenshots: [],
+      newLanguages: []
     }
   };
 
@@ -392,7 +393,6 @@ class AddGame extends Component {
     let images = this.state.images;
     images.push('added');
     this.setState({ images });
-    console.log(this.state.images);
   };
 
   removeScreenshot = event => {
@@ -419,10 +419,16 @@ class AddGame extends Component {
   removeLanguage = event => {
     event.preventDefault();
     let languages = this.state.languages;
+    let newLanguages = this.state.formdata.newLanguages;
     languages.splice(-1, 1);
     this.setState({
       languages
     });
+    newLanguages.pop();
+    this.setState({
+      newLanguages
+    });
+    console.log(this.state.formdata.newLanguages);
   };
 
   // resetFieldHandler = () => {
@@ -544,6 +550,20 @@ class AddGame extends Component {
     console.log(this.state.formdata.screenshots);
   };
 
+  handleLanguage = data => {
+    const newFormData = { ...this.state.formdata };
+    const languages = {
+      language_name: data.formdata.language.value,
+      audio: !data.inputOne,
+      text: !data.inputTwo
+    };
+    newFormData.newLanguages.push(languages);
+    this.setState({
+      formdata: newFormData
+    });
+    console.log(this.state.formdata.newLanguages);
+  };
+
   componentDidMount() {
     const formdata = this.state.formdata;
 
@@ -592,6 +612,29 @@ class AddGame extends Component {
               onChange={this.handleChangeSelect}
               isMulti
             />
+            <div className="form_divider" />
+            <div className="formBlock">
+              <div className="label_inputs">Languages</div>
+            </div>
+            <div className="add_game__languages">
+              <LanguageBlock data={this.handleLanguage} />
+              {this.state.languages.map((item, i) => (
+                <LanguageBlock key={i} data={this.handleLanguage} />
+              ))}
+              <button
+                className="add_game__button-add"
+                onClick={this.addLanguage}
+              >
+                Add
+              </button>
+              <button
+                className="add_game__button-remove"
+                onClick={this.removeLanguage}
+                disabled={this.state.languages.length === 0}
+              >
+                Remove
+              </button>
+            </div>
             <div className="form_divider" />
             <FormField
               id={'lead'}
@@ -687,29 +730,6 @@ class AddGame extends Component {
               formdata={this.state.formdata.storage}
               change={element => this.updateForm(element)}
             />
-            {/* <div className="form_divider" />
-            <div className="formBlock">
-              <div className="label_inputs">Languages</div>
-            </div>
-            <div className="add_game__languages">
-              <LanguageBlock />
-              {this.state.languages.map((item, i) => (
-                <LanguageBlock key={i} />
-              ))}
-              <button
-                className="add_game__button-add"
-                onClick={this.addLanguage}
-              >
-                Add
-              </button>
-              <button
-                className="add_game__button-remove"
-                onClick={this.removeLanguage}
-                disabled={this.state.images.languages === 0}
-              >
-                Remove
-              </button>
-            </div> */}
             <div className="form_divider" />
             <div className="formBlock">
               <div className="label_inputs">Screenshots</div>

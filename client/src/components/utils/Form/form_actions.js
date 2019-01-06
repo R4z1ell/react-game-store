@@ -126,6 +126,10 @@ export const generateData = (formdata, formName) => {
       dataToSubmit.screenshots = [...formdata['screenshots']];
       console.log(formdata['screenshots']);
     }
+    if (key === 'newLanguages') {
+      dataToSubmit.languages = [...formdata['newLanguages']];
+      console.log(formdata['newLanguages']);
+    }
   }
 
   return dataToSubmit;

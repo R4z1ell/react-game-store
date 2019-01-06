@@ -10,41 +10,13 @@ class ScreenshotBlock extends Component {
     screenshot_ggvgm_2x: ''
   };
 
-  // handleChangeOne = event => {
-  //   const newFormData = { ...this.state.formdata };
-  //   newFormData.screenshot_ggvgm.value = event.target.value;
-  //   this.setState({
-  //     formdata: newFormData
-  //   });
-  //   if (
-  //     this.state.formdata.screenshot_ggvgm.value &&
-  //     this.state.formdata.screenshot_ggvgm_2x.value
-  //   ) {
-  //     this.props.data(this.state.formdata);
-  //   }
-  // };
-
-  // handleChangeTwo = event => {
-  //   const newFormData = { ...this.state.formdata };
-  //   newFormData.screenshot_ggvgm_2x.value = event.target.value;
-  //   this.setState({
-  //     formdata: newFormData
-  //   });
-  //   if (
-  //     this.state.formdata.screenshot_ggvgm.value &&
-  //     this.state.formdata.screenshot_ggvgm_2x.value
-  //   ) {
-  //     this.props.data(this.state.formdata);
-  //   }
-  // };
-
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
   };
 
-  showValue = event => {
+  submitValue = event => {
     event.preventDefault();
     if (
       this.state.screenshot_ggvgm !== '' &&
@@ -124,7 +96,7 @@ class ScreenshotBlock extends Component {
           className="input-submit"
           type="submit"
           value="+"
-          onClick={this.showValue}
+          onClick={this.submitValue}
           disabled={
             this.state.screenshot_ggvgm === '' ||
             this.state.screenshot_ggvgm_2x === ''
