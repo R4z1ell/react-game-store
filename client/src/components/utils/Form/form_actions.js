@@ -156,3 +156,28 @@ export const populateOptionFields = (formdata, arrayData = [], field) => {
   newFormdata[field].config.options = newArray;
   return newFormdata;
 };
+
+export const resetFields = (formdata, formName) => {
+  const newFormdata = { ...formdata };
+
+  for (let key in newFormdata) {
+    if (key === 'release_date') {
+      newFormdata[key] = new Date();
+    }
+    if (key === 'genres') {
+      newFormdata[key].value = [];
+      newFormdata[key].touched = false;
+      newFormdata[key].validationMessage = '';
+    }
+    if (key === 'screenshots' || key === 'newLanguages') {
+      newFormdata[key] = [];
+    } else {
+      newFormdata[key].value = '';
+      newFormdata[key].touched = false;
+      newFormdata[key].validationMessage = '';
+    }
+
+    //newFormdata[key].valid = false;
+  }
+  return newFormdata;
+};

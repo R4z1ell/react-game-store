@@ -5,6 +5,7 @@ import {
   GET_GAMES,
   GET_GAME_DETAIL,
   ADD_GAME,
+  CLEAR_GAME,
   CLEAR_GAME_DETAIL,
   GET_GENRES
 } from './types';
@@ -39,6 +40,13 @@ export const addGame = dataToSubmit => {
   return {
     type: ADD_GAME,
     payload: request
+  };
+};
+
+export const clearGame = () => {
+  return {
+    type: CLEAR_GAME,
+    payload: ''
   };
 };
 

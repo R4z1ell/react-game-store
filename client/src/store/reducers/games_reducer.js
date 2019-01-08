@@ -2,6 +2,7 @@ import {
   GET_GAMES,
   GET_GAME_DETAIL,
   ADD_GAME,
+  CLEAR_GAME,
   CLEAR_GAME_DETAIL,
   GET_GENRES
 } from '../actions/types';
@@ -13,6 +14,8 @@ export default function(state = {}, action) {
     case GET_GAME_DETAIL:
       return { ...state, gameDetail: action.payload };
     case ADD_GAME:
+      return { ...state, addGame: action.payload };
+    case CLEAR_GAME:
       return { ...state, addGame: action.payload };
     case CLEAR_GAME_DETAIL:
       return { ...state, gameDetail: action.payload };

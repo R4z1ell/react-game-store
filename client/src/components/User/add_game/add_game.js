@@ -11,9 +11,13 @@ import {
   update,
   populateOptionFields,
   generateData,
-  isFormValid
+  resetFields
 } from '../../utils/Form/form_actions';
-import { getGenres, addGame } from '../../../store/actions/games_actions';
+import {
+  getGenres,
+  addGame,
+  clearGame
+} from '../../../store/actions/games_actions';
 import FormField from '../../utils/Form/form_field';
 import ScreenshotBlock from '../../utils/Form/screenshot_block/screenshot_block';
 import LanguageBlock from '../../utils/Form/language_block/language_block';
@@ -432,49 +436,38 @@ class AddGame extends Component {
     console.log(this.state.formdata.newLanguages);
   };
 
-  // resetFieldHandler = () => {
-  //   const newFormData = resetFields(this.state.formdata, 'products');
+  resetFieldHandler = () => {
+    const newFormData = resetFields(this.state.formdata, 'products');
 
-  //   this.setState({
-  //     formdata: newFormData,
-  //     formSuccess: true
-  //   });
-  //   setTimeout(() => {
-  //     this.setState(
-  //       {
-  //         formSuccess: false
-  //       },
-  //       () => {
-  //         this.props.dispatch(clearProduct());
-  //       }
-  //     );
-  //   }, 3000);
-  // };
+    this.setState({
+      images: [],
+      languages: [],
+      formdata: newFormData,
+      formSuccess: true
+    });
+    setTimeout(() => {
+      this.setState(
+        {
+          formSuccess: false
+        },
+        () => {
+          this.props.dispatch(clearGame());
+        }
+      );
+    }, 3000);
+  };
 
   submitForm = event => {
     event.preventDefault();
 
     let dataToSubmit = generateData(this.state.formdata, 'products');
-    let formIsValid = isFormValid(this.state.formdata, 'products');
 
-    this.props.dispatch(addGame(dataToSubmit));
+    this.props.dispatch(addGame(dataToSubmit)).then(() => {
+      if (this.props.games.addGame.success) {
+        this.resetFieldHandler();
+      }
+    });
 
-    // if (formIsValid) {
-    //   this.props.dispatch(addGame(dataToSubmit)).then(() => {
-    //     if (this.props.games.addGame.success) {
-    //       this.resetFieldHandler();
-    //       console.log('Submitted!!');
-    //     } else {
-    //       this.setState({
-    //         formError: true
-    //       });
-    //     }
-    //   });
-    // } else {
-    //   this.setState({
-    //     formError: true
-    //   });
-    // }
     console.log(dataToSubmit);
   };
 
