@@ -88,7 +88,12 @@ class LanguageBlock extends Component {
               className="languages-block__svg"
               onClick={this.submitValue}
             />
-          ) : null}
+          ) : (
+            <FontAwesomeIcon
+              icon={faCheckCircle}
+              className="languages-block__not-allowed"
+            />
+          )}
         </div>
       </div>
     );

@@ -407,6 +407,7 @@ class AddGame extends Component {
     this.setState({
       screenshots
     });
+    console.log(this.state.formdata.screenshots);
   };
 
   addLanguage = event => {
