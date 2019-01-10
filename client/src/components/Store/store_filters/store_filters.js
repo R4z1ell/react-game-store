@@ -32,7 +32,7 @@ class StoreFilters extends Component {
     tr: ''
   };
 
-  collapseFilter = () => {
+  collapsedFilter = () => {
     this.setState({
       collapsedFilter: !this.state.collapsedFilter
     });
@@ -57,7 +57,6 @@ class StoreFilters extends Component {
       priceTag: true,
       ...newState
     });
-    console.log(this.state);
   };
 
   selectLanguages = (item, event) => {
@@ -74,8 +73,6 @@ class StoreFilters extends Component {
         languageTag: true
       });
     }
-
-    console.log(this.state);
   };
 
   renderSelectedElements = () => {
@@ -104,13 +101,40 @@ class StoreFilters extends Component {
     return finalValues;
   };
 
+  clearData = () => {
+    this.setState({
+      priceTag: false,
+      languageTag: false,
+      under5: '',
+      under10: '',
+      under15: '',
+      under25: '',
+      above25: '',
+      discounted: '',
+      en: '',
+      de: '',
+      fr: '',
+      es: '',
+      it: '',
+      pt: '',
+      ru: '',
+      pl: '',
+      jp: '',
+      cz: '',
+      du: '',
+      cn: '',
+      ko: '',
+      tr: ''
+    });
+  };
+
   render() {
     let collapsedFilter = this.state.collapsedFilter ? '--collapsed' : '';
 
     return (
       <div className={`filter__item filter__item${collapsedFilter}`}>
-        <div className="filter__header" onClick={() => this.collapseFilter()}>
-          <div className="filter__clear-wrapper">
+        <div className="filter__header">
+          <div className="filter__clear-wrapper" onClick={this.clearData}>
             {this.state.priceTag || this.state.languageTag ? (
               <svg
                 preserveAspectRatio="xMidYMax meet"
@@ -124,7 +148,10 @@ class StoreFilters extends Component {
               </svg>
             ) : null}
           </div>
-          <div className="filter__toggle">
+          <div
+            className="filter__toggle"
+            onClick={() => this.collapsedFilter()}
+          >
             {this.state.priceTag || this.state.languageTag ? (
               <div
                 className="filter__title"
