@@ -14,20 +14,20 @@ class StoreFilters extends Component {
     under25: '',
     above25: '',
     discounted: '',
-    en: false,
-    de: false,
-    fr: false,
-    es: false,
-    it: false,
-    pt: false,
-    ru: false,
-    pl: false,
-    jp: false,
-    cz: false,
-    du: false,
-    cn: false,
-    ko: false,
-    tr: false
+    en: '',
+    de: '',
+    fr: '',
+    es: '',
+    it: '',
+    pt: '',
+    ru: '',
+    pl: '',
+    jp: '',
+    cz: '',
+    du: '',
+    cn: '',
+    ko: '',
+    tr: ''
   };
 
   collapseFilter = () => {
@@ -36,7 +36,25 @@ class StoreFilters extends Component {
     });
   };
 
-  toggleSelected = item => {
+  selectPrice = item => {
+    const newState = {
+      under5: '',
+      under10: '',
+      under15: '',
+      under25: '',
+      above25: '',
+      discounted: ''
+    };
+
+    delete newState[item.styleName];
+
+    this.setState({
+      [item.styleName]: item.styleName,
+      ...newState
+    });
+  };
+
+  selectLanguages = item => {
     this.setState({
       [item.styleName]: item.styleName
     });
@@ -72,7 +90,7 @@ class StoreFilters extends Component {
             ? this.props.price.map((item, i) => (
                 <label
                   className="option__item"
-                  onClick={() => this.toggleSelected(item)}
+                  onClick={() => this.selectPrice(item)}
                   key={i}
                 >
                   {this.state[item.styleName] ? (
@@ -103,13 +121,18 @@ class StoreFilters extends Component {
                     className="option__checkbox"
                     value={item.styleName}
                     checked={this.state[item.styleName] === item.styleName}
-                    onChange={this.toggleSelected}
+                    onChange={this.selectPrice}
                   />
-                  <span
-                    className={`option__text option__text--${item.styleName}`}
-                  >
-                    {item.name}
-                  </span>
+                  {this.state[item.styleName] ? (
+                    <span
+                      className={`option__text option__text--${item.styleName}`}
+                      style={{ color: '#78387b', fontWeight: '600' }}
+                    >
+                      {item.name}
+                    </span>
+                  ) : (
+                    <span className="option__text">{item.name}</span>
+                  )}
                 </label>
               ))
             : null}
@@ -117,7 +140,7 @@ class StoreFilters extends Component {
             ? this.props.languages.map((item, i) => (
                 <label
                   className="option__item"
-                  onClick={() => this.toggleSelected(item)}
+                  onClick={() => this.selectLanguages(item)}
                   key={i}
                 >
                   {this.state[item.styleName] ? (
@@ -148,13 +171,18 @@ class StoreFilters extends Component {
                     className="option__checkbox"
                     value={item.styleName}
                     checked={this.state[item.styleName] === item.styleName}
-                    onChange={this.toggleSelected}
+                    onChange={this.selectLanguages}
                   />
-                  <span
-                    className={`option__text option__text--${item.styleName}`}
-                  >
-                    {item.name}
-                  </span>
+                  {this.state[item.styleName] ? (
+                    <span
+                      className={`option__text option__text--${item.styleName}`}
+                      style={{ color: '#78387b', fontWeight: '600' }}
+                    >
+                      {item.name}
+                    </span>
+                  ) : (
+                    <span className="option__text">{item.name}</span>
+                  )}
                 </label>
               ))
             : null}
