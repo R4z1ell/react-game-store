@@ -123,9 +123,6 @@ class StoreSearch extends Component {
     let everything = this.state.everything ? '--selected' : '';
     let upcoming = this.state.upcoming ? '--selected' : '';
     let onSale = this.state.onSale ? '--selected' : '';
-    let collapsedPrice = this.state.collapsedPrice ? '--collapsed' : '';
-    let collapsedLanguage = this.state.collapsedLanguage ? '--collapsed' : '';
-    let under5 = this.state.under5 ? '--selected' : '';
 
     return (
       <React.Fragment>
