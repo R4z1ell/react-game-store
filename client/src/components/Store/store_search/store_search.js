@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './store_search.scss';
 
@@ -9,9 +10,15 @@ import {
   faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { price, languages } from '../../utils/Form/fixed_categories';
+import {
+  getGames,
+  getGamesToStore
+} from '../../../store/actions/games_actions';
 
 import CardBlock from '../../utils/card_block';
 import StoreFilters from '../store_filters/store_filters';
+
+// ! Dispatch 'getGames' action when the CLEAR Price/Language button is pressed
 
 class StoreSearch extends Component {
   state = {
@@ -31,6 +38,11 @@ class StoreSearch extends Component {
     under5: false
   };
 
+  componentDidMount() {
+    this.props.dispatch(getGames());
+    //window.scrollTo(0, 0);
+  }
+
   handleInput = event => {
     if (event.target.value) {
       this.setState({
@@ -43,6 +55,21 @@ class StoreSearch extends Component {
         inputStatus: false
       });
     }
+  };
+
+  handlePriceFilters = item => {
+    let price = '';
+    if (item.styleName === 'under5') price = 'u5';
+    if (item.styleName === 'under10') price = 'u10';
+    if (item.styleName === 'under15') price = 'u15';
+    if (item.styleName === 'under25') price = 'u25';
+    if (item.styleName === 'above25') price = 'a25';
+
+    this.props.dispatch(getGamesToStore(price));
+  };
+
+  handleLanguagesFilters = item => {
+    console.log(item);
   };
 
   resetInputValue = () => {
@@ -441,16 +468,31 @@ class StoreSearch extends Component {
         <div className="container--catalog">
           <div className={`catalog__body catalog__body${slideSidebar}`}>
             <div className="catalog__sidebar">
-              <StoreFilters title={'Price'} price={price} />
-              <StoreFilters title={'Language'} languages={languages} />
+              <StoreFilters
+                title={'Price'}
+                price={price}
+                handlePriceFilters={item => this.handlePriceFilters(item)}
+              />
+              <StoreFilters
+                title={'Language'}
+                languages={languages}
+                handleLanguagesFilters={item =>
+                  this.handleLanguagesFilters(item)
+                }
+              />
             </div>
             <div className="catalog__games-list">
-              {this.props.games ? (
+              {this.props.games.allGames && !this.props.games.toStore ? (
                 <CardBlock
-                  list={this.props.games}
+                  list={this.props.games.allGames}
                   slide={this.state.slideSidebar}
                 />
-              ) : null}
+              ) : (
+                <CardBlock
+                  list={this.props.games.toStore}
+                  slide={this.state.slideSidebar}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -459,4 +501,10 @@ class StoreSearch extends Component {
   }
 }
 
-export default StoreSearch;
+const mapStateToProps = state => {
+  return {
+    games: state.games
+  };
+};
+
+export default connect(mapStateToProps)(StoreSearch);

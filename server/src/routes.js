@@ -18,4 +18,5 @@ module.exports = app => {
   app.get('/api/games/get_games', GameController.getGames);
   // app.get('/api/games/get_game_by_id', GameController.getGameById);
   app.get('/api/games/get_game_by_title/:title', GameController.getGameByTitle);
+  app.post('/api/games/shop', GameController.getGamesToShop);
 };

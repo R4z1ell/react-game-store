@@ -4,16 +4,19 @@ import { GAMES_SERVER } from '../../components/utils/misc';
 import {
   GET_GAMES,
   GET_GAME_DETAIL,
+  GET_GAMES_TO_STORE,
   ADD_GAME,
   CLEAR_GAME,
   CLEAR_GAME_DETAIL,
   GET_GENRES
 } from './types';
 
-export const getGames = limit => {
-  const request = axios
-    .get(`${GAMES_SERVER}/get_games?limit=${limit}`)
-    .then(res => res.data);
+export const getGames = (limit = '') => {
+  const request = limit
+    ? axios
+        .get(`${GAMES_SERVER}/get_games?limit=${limit}`)
+        .then(res => res.data)
+    : axios.get(`${GAMES_SERVER}/get_games`).then(res => res.data);
 
   return {
     type: GET_GAMES,
@@ -39,6 +42,21 @@ export const addGame = dataToSubmit => {
 
   return {
     type: ADD_GAME,
+    payload: request
+  };
+};
+
+export const getGamesToStore = dataToSubmit => {
+  const request = axios
+    .post(`${GAMES_SERVER}/shop?price=${dataToSubmit}`)
+    .then(response => {
+      return {
+        articles: response.data.articles
+      };
+    });
+
+  return {
+    type: GET_GAMES_TO_STORE,
     payload: request
   };
 };

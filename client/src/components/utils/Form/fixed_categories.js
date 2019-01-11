@@ -76,31 +76,31 @@ export const price = [
     _id: 0,
     name: 'Under € 5',
     styleName: 'under5',
-    array: [0, 5]
+    array: [0, 500]
   },
   {
     _id: 1,
     name: 'Under € 10',
     styleName: 'under10',
-    array: [0, 10]
+    array: [0, 1000]
   },
   {
     _id: 2,
     name: 'Under € 15',
     styleName: 'under15',
-    array: [0, 15]
+    array: [0, 1500]
   },
   {
     _id: 3,
     name: 'Under € 25',
     styleName: 'under25',
-    array: [0, 25]
+    array: [0, 2500]
   },
   {
     _id: 4,
     name: '€ 25+',
     styleName: 'above25',
-    array: [25, 15000]
+    array: [2500, 1500000]
   },
   {
     _id: 5,

@@ -57,6 +57,7 @@ class StoreFilters extends Component {
       priceTag: true,
       ...newState
     });
+    this.props.handlePriceFilters(item);
   };
 
   selectLanguages = (item, event) => {
@@ -67,11 +68,13 @@ class StoreFilters extends Component {
         [item.styleName]: '',
         languageTag: true
       });
+      this.props.handleLanguagesFilters(item);
     } else {
       this.setState({
         [item.styleName]: item.name,
         languageTag: true
       });
+      this.props.handleLanguagesFilters(item);
     }
   };
 

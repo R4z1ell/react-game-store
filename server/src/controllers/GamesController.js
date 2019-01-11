@@ -55,5 +55,24 @@ module.exports = {
         if (err) return res.status(400).send(err);
         res.status(200).send(game);
       });
+  },
+  getGamesToShop(req, res) {
+    let price = req.query.price;
+    let findArgs = {};
+
+    if (price === 'u5') findArgs = { $gte: 0, $lte: 500 };
+    if (price === 'u10') findArgs = { $gte: 0, $lte: 1000 };
+    if (price === 'u15') findArgs = { $gte: 0, $lte: 1500 };
+    if (price === 'u25') findArgs = { $gte: 0, $lte: 2500 };
+    if (price === 'a25') findArgs = { $gte: 2500, $lte: 1500000 };
+
+    Game.find({ 'prices.basePrice': findArgs })
+      .populate({ path: 'genres', model: 'Genre' })
+      .exec((err, articles) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).json({
+          articles
+        });
+      });
   }
 };
