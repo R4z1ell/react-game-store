@@ -83,6 +83,15 @@
   transform: rotate(-180deg);
 }
 
+.filter__clear-wrapper:after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  right: 5px;
+  left: -5px;
+}
+
 .option {
   &__checkbox {
     display: none;

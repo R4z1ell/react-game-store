@@ -60,41 +60,40 @@ class StoreFilters extends Component {
     this.props.handlePriceFilters(item);
   };
 
-  // ! FIX the selectLanguages method
-
-  checkProperties = obj => {
-    for (let key in obj) {
-      if ((obj[key] === true || obj[key] === false) && obj[key] === '')
-        return true;
+  filter = unfilteredArray => {
+    var filteredArray = [];
+    for (var key in this.state) {
+      if (unfilteredArray[key] === true || unfilteredArray[key] === false)
+        continue;
+      filteredArray.push(unfilteredArray[key]);
     }
+    return filteredArray;
   };
 
   selectLanguages = (item, event) => {
     event.preventDefault();
 
     if (this.state[item.styleName]) {
-      for (const key in this.state) {
-        const value = this.state[key];
-
-        if (value === false || value === true) break;
-        if (value) {
-          this.setState({
-            [item.styleName]: ''
-          });
-          this.props.handleLanguagesFilters(item);
-          if (this.checkProperties(this.state)) {
-            this.setState({
-              languageTag: false
-            });
-          }
-        }
-      }
+      this.setState(
+        {
+          [item.styleName]: ''
+        },
+        () =>
+          this.filter(this.state).every(x => x === '')
+            ? this.setState({ languageTag: false })
+            : null
+      );
+      this.props.handleLanguagesFilters(item);
     }
     if (!this.state[item.styleName]) {
-      this.setState({
-        [item.styleName]: item.name,
-        languageTag: true
-      });
+      this.setState(
+        {
+          [item.styleName]: item.name,
+          languageTag: true
+        },
+        () => this.filter(this.state)
+      );
+
       this.props.handleLanguagesFilters(item);
     }
   };
@@ -125,30 +124,18 @@ class StoreFilters extends Component {
     return finalValues;
   };
 
-  clearData = () => {
+  // ! FIX the 'clearFilter' when clicking on the 'Language' title
+
+  clearFilter = () => {
+    this.props.handlePriceFilters();
     this.setState({
       priceTag: false,
-      languageTag: false,
       under5: '',
       under10: '',
       under15: '',
       under25: '',
       above25: '',
-      discounted: '',
-      en: '',
-      de: '',
-      fr: '',
-      es: '',
-      it: '',
-      pt: '',
-      ru: '',
-      pl: '',
-      jp: '',
-      cz: '',
-      du: '',
-      cn: '',
-      ko: '',
-      tr: ''
+      discounted: ''
     });
   };
 
@@ -158,7 +145,7 @@ class StoreFilters extends Component {
     return (
       <div className={`filter__item filter__item${collapsedFilter}`}>
         <div className="filter__header">
-          <div className="filter__clear-wrapper" onClick={this.clearData}>
+          <div className="filter__clear-wrapper" onClick={this.clearFilter}>
             {this.state.priceTag || this.state.languageTag ? (
               <svg
                 preserveAspectRatio="xMidYMax meet"
@@ -235,7 +222,6 @@ class StoreFilters extends Component {
                   <input
                     type="radio"
                     className="option__checkbox"
-                    value={item.styleName}
                     checked={this.state[item.styleName] === item.name}
                     onChange={this.selectPrice}
                   />
@@ -285,7 +271,6 @@ class StoreFilters extends Component {
                   <input
                     type="radio"
                     className="option__checkbox"
-                    value={item.styleName}
                     checked={this.state[item.styleName] === item.name}
                     onChange={this.selectLanguages}
                   />

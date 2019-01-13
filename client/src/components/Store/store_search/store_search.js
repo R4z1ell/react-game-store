@@ -63,14 +63,20 @@ class StoreSearch extends Component {
     let price = '';
     let languages = this.state.languages;
 
-    if (item.styleName === 'under5') price = 'u5';
-    if (item.styleName === 'under10') price = 'u10';
-    if (item.styleName === 'under15') price = 'u15';
-    if (item.styleName === 'under25') price = 'u25';
-    if (item.styleName === 'above25') price = 'a25';
+    if (item) {
+      if (item.styleName === 'under5') price = 'u5';
+      if (item.styleName === 'under10') price = 'u10';
+      if (item.styleName === 'under15') price = 'u15';
+      if (item.styleName === 'under25') price = 'u25';
+      if (item.styleName === 'above25') price = 'a25';
 
-    this.setState({ price });
-    this.props.dispatch(getGamesToStore(price, languages));
+      this.setState({ price });
+      this.props.dispatch(getGamesToStore(price, languages));
+    }
+
+    if (!item) {
+      this.props.dispatch(getGamesToStore('', []));
+    }
   };
 
   handleLanguagesFilters = item => {
@@ -96,8 +102,6 @@ class StoreSearch extends Component {
       this.setState({ languages: newLanguages });
       this.props.dispatch(getGamesToStore(this.state.price, newLanguages));
     }
-
-    //console.log(newLanguages);
   };
 
   resetInputValue = () => {
