@@ -60,16 +60,37 @@ class StoreFilters extends Component {
     this.props.handlePriceFilters(item);
   };
 
+  // ! FIX the selectLanguages method
+
+  checkProperties = obj => {
+    for (let key in obj) {
+      if ((obj[key] === true || obj[key] === false) && obj[key] === '')
+        return true;
+    }
+  };
+
   selectLanguages = (item, event) => {
     event.preventDefault();
 
     if (this.state[item.styleName]) {
-      this.setState({
-        [item.styleName]: '',
-        languageTag: true
-      });
-      this.props.handleLanguagesFilters(item);
-    } else {
+      for (const key in this.state) {
+        const value = this.state[key];
+
+        if (value === false || value === true) break;
+        if (value) {
+          this.setState({
+            [item.styleName]: ''
+          });
+          this.props.handleLanguagesFilters(item);
+          if (this.checkProperties(this.state)) {
+            this.setState({
+              languageTag: false
+            });
+          }
+        }
+      }
+    }
+    if (!this.state[item.styleName]) {
       this.setState({
         [item.styleName]: item.name,
         languageTag: true

@@ -46,19 +46,64 @@ export const addGame = dataToSubmit => {
   };
 };
 
-export const getGamesToStore = dataToSubmit => {
-  const request = axios
-    .post(`${GAMES_SERVER}/shop?price=${dataToSubmit}`)
-    .then(response => {
+export const getGamesToStore = (price, languages) => {
+  if (price.length === 0 && languages.length > 0) {
+    const request = axios
+      .post(`${GAMES_SERVER}/shop?language=${languages}`)
+      .then(response => {
+        return {
+          articles: response.data.articles
+        };
+      });
+
+    return {
+      type: GET_GAMES_TO_STORE,
+      payload: request
+    };
+  }
+
+  if (price.length > 0 && languages.length === 0) {
+    const request = axios
+      .post(`${GAMES_SERVER}/shop?price=${price}`)
+      .then(response => {
+        return {
+          articles: response.data.articles
+        };
+      });
+
+    return {
+      type: GET_GAMES_TO_STORE,
+      payload: request
+    };
+  }
+
+  if (price.length > 0 && languages.length > 0) {
+    const request = axios
+      .post(`${GAMES_SERVER}/shop?language=${languages}&price=${price}`)
+      .then(response => {
+        return {
+          articles: response.data.articles
+        };
+      });
+
+    return {
+      type: GET_GAMES_TO_STORE,
+      payload: request
+    };
+  }
+
+  if (price.length === 0 && languages.length === 0) {
+    const request = axios.post(`${GAMES_SERVER}/shop`).then(response => {
       return {
         articles: response.data.articles
       };
     });
 
-  return {
-    type: GET_GAMES_TO_STORE,
-    payload: request
-  };
+    return {
+      type: GET_GAMES_TO_STORE,
+      payload: request
+    };
+  }
 };
 
 export const clearGame = () => {
