@@ -70,38 +70,64 @@ class StoreSearch extends Component {
       if (item.styleName === 'under25') price = 'u25';
       if (item.styleName === 'above25') price = 'a25';
 
-      this.setState({ price });
+      this.setState({ price }, () => console.log(this.state.price));
       this.props.dispatch(getGamesToStore(price, languages));
     }
 
-    if (!item) {
+    if (!item && this.state.languages.length === 0) {
       this.props.dispatch(getGamesToStore('', []));
+    }
+
+    if (!item && this.state.languages.length > 0) {
+      this.props.dispatch(getGamesToStore('', this.state.languages));
     }
   };
 
   handleLanguagesFilters = item => {
     let newLanguages = [...this.state.languages];
 
-    if (newLanguages.length === 0) {
-      newLanguages.push(item.name);
-      this.setState({ languages: newLanguages });
-      this.props.dispatch(getGamesToStore(this.state.price, newLanguages));
-    }
-
-    if (newLanguages.length > 0) {
-      if (!newLanguages.includes(item.name)) {
+    if (item) {
+      if (newLanguages.length === 0) {
         newLanguages.push(item.name);
+        this.setState({ languages: newLanguages });
+        this.props.dispatch(getGamesToStore(this.state.price, newLanguages));
+      }
+
+      if (newLanguages.length > 0) {
+        if (!newLanguages.includes(item.name)) {
+          newLanguages.push(item.name);
+          this.setState({ languages: newLanguages });
+          this.props.dispatch(getGamesToStore(this.state.price, newLanguages));
+        }
+      }
+
+      if (this.state.languages.includes(item.name)) {
+        const index = newLanguages.indexOf(item.name);
+        newLanguages.splice(index, 1);
         this.setState({ languages: newLanguages });
         this.props.dispatch(getGamesToStore(this.state.price, newLanguages));
       }
     }
 
-    if (this.state.languages.includes(item.name)) {
-      const index = newLanguages.indexOf(item.name);
-      newLanguages.splice(index, 1);
-      this.setState({ languages: newLanguages });
-      this.props.dispatch(getGamesToStore(this.state.price, newLanguages));
+    if (!item && this.state.price.length === 0) {
+      this.props.dispatch(getGamesToStore('', []));
     }
+
+    if (!item && this.state.price.length > 0) {
+      this.props.dispatch(getGamesToStore(this.state.price, []));
+    }
+  };
+
+  clearStateLanguages = () => {
+    this.setState({
+      languages: []
+    });
+  };
+
+  clearStatePrice = () => {
+    this.setState({
+      price: []
+    });
   };
 
   resetInputValue = () => {
@@ -503,11 +529,13 @@ class StoreSearch extends Component {
               <StoreFilters
                 title={'Price'}
                 price={price}
+                clearStatePrice={this.clearStatePrice}
                 handlePriceFilters={item => this.handlePriceFilters(item)}
               />
               <StoreFilters
                 title={'Language'}
                 languages={languages}
+                clearStateLanguages={this.clearStateLanguages}
                 handleLanguagesFilters={item =>
                   this.handleLanguagesFilters(item)
                 }

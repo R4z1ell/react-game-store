@@ -124,19 +124,42 @@ class StoreFilters extends Component {
     return finalValues;
   };
 
-  // ! FIX the 'clearFilter' when clicking on the 'Language' title
-
   clearFilter = () => {
-    this.props.handlePriceFilters();
-    this.setState({
-      priceTag: false,
-      under5: '',
-      under10: '',
-      under15: '',
-      under25: '',
-      above25: '',
-      discounted: ''
-    });
+    if (this.props.title === 'Price') {
+      this.setState({
+        priceTag: false,
+        under5: '',
+        under10: '',
+        under15: '',
+        under25: '',
+        above25: '',
+        discounted: ''
+      });
+      this.props.handlePriceFilters();
+      this.props.clearStatePrice();
+    }
+
+    if (this.props.title === 'Language') {
+      this.setState({
+        languageTag: false,
+        en: '',
+        de: '',
+        fr: '',
+        es: '',
+        it: '',
+        pt: '',
+        ru: '',
+        pl: '',
+        jp: '',
+        cz: '',
+        du: '',
+        cn: '',
+        ko: '',
+        tr: ''
+      });
+      this.props.handleLanguagesFilters();
+      this.props.clearStateLanguages();
+    }
   };
 
   render() {
