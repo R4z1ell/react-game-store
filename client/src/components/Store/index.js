@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import { connect } from 'react-redux';
 
-import StoreSearch from './store_search/store_search';
+import StoreContainer from './store_container/store_container';
 //import { getGames } from '../../store/actions/games_actions';
 
 class StorePage extends Component {
@@ -14,7 +14,7 @@ class StorePage extends Component {
     return (
       <div>
         {/* <StoreSearch games={this.props.games.allGames} /> */}
-        <StoreSearch />
+        <StoreContainer />
       </div>
     );
   }
