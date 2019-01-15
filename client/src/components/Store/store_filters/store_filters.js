@@ -4,6 +4,7 @@ import './store_filters.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { filter } from '../../utils/Form/form_actions';
 
 class StoreFilters extends Component {
   state = {
@@ -60,16 +61,6 @@ class StoreFilters extends Component {
     this.props.handlePriceFilters(item);
   };
 
-  filter = unfilteredArray => {
-    var filteredArray = [];
-    for (var key in this.state) {
-      if (unfilteredArray[key] === true || unfilteredArray[key] === false)
-        continue;
-      filteredArray.push(unfilteredArray[key]);
-    }
-    return filteredArray;
-  };
-
   selectLanguages = (item, event) => {
     event.preventDefault();
 
@@ -79,7 +70,7 @@ class StoreFilters extends Component {
           [item.styleName]: ''
         },
         () =>
-          this.filter(this.state).every(x => x === '')
+          filter(this.state).every(x => x === '')
             ? this.setState({ languageTag: false })
             : null
       );
@@ -91,7 +82,7 @@ class StoreFilters extends Component {
           [item.styleName]: item.name,
           languageTag: true
         },
-        () => this.filter(this.state)
+        () => filter(this.state)
       );
 
       this.props.handleLanguagesFilters(item);

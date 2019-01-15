@@ -181,3 +181,18 @@ export const resetFields = (formdata, formName) => {
   }
   return newFormdata;
 };
+
+export const filter = unfilteredArray => {
+  var filteredArray = [];
+  for (var key in unfilteredArray) {
+    if (
+      unfilteredArray[key] === true ||
+      unfilteredArray[key] === false ||
+      key === 'inputDefault'
+    )
+      continue;
+    filteredArray.push(unfilteredArray[key]);
+  }
+
+  return filteredArray;
+};

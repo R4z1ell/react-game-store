@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './store_search.scss';
 
+import { filter } from '../../utils/Form/form_actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSearch,
@@ -25,7 +26,7 @@ class StoreSearch extends Component {
     collapsedLanguage: false,
     priceSelected: false,
     under5: false,
-    'All-games': 'All-games',
+    'All-games': 'All games',
     'Role-playing': '',
     Simulation: '',
     Indie: '',
@@ -139,22 +140,31 @@ class StoreSearch extends Component {
       Adventure: ''
     };
 
-    if (event.target.value === 'All-games') {
+    if (event.target.value === 'All games') {
       delete newState['All-games'];
 
       this.setState({
-        [event.target.value]: 'All-games',
+        'All-games': 'All games',
+        dropdown: false,
+        ...newState
+      });
+    } else {
+      delete newState[genre.name];
+
+      this.setState({
+        [genre.name]: genre.name,
+        dropdown: false,
         ...newState
       });
     }
-
-    delete newState[genre.name];
-
-    this.setState({
-      [genre.name]: genre.name,
-      ...newState
-    });
   };
+
+  renderGenreTitle = () =>
+    filter(this.state).length > 0
+      ? filter(this.state).map((genre, i) =>
+          genre !== '' ? <span key={i}>{genre}</span> : null
+        )
+      : null;
 
   renderDropdownGenres = () =>
     this.props.genres
@@ -233,7 +243,9 @@ class StoreSearch extends Component {
             <span className="dropdown__trigger">
               <div className="search-categories">
                 <span>
-                  <span className="selected-category">All games</span>
+                  <span className="selected-category">
+                    {this.renderGenreTitle()}
+                  </span>
                 </span>
                 <FontAwesomeIcon
                   icon={faAngleDown}
@@ -270,8 +282,8 @@ class StoreSearch extends Component {
                   <input
                     type="radio"
                     className="search-dropdown-checkbox"
-                    value="All-games"
-                    checked={this.state['All-games'] === 'All-games'}
+                    value="All games"
+                    checked={this.state['All-games'] === 'All games'}
                     onChange={event =>
                       this.selectGenre(this.props.genres, event)
                     }
