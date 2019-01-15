@@ -38,7 +38,7 @@ class StoreContainer extends Component {
       if (item.styleName === 'under25') price = 'u25';
       if (item.styleName === 'above25') price = 'a25';
 
-      this.setState({ price }, () => console.log(this.state.price));
+      this.setState({ price });
       this.props.dispatch(getGamesToStore(price, languages));
     }
 

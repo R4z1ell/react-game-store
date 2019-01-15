@@ -6,6 +6,8 @@ import './game_card.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEuroSign } from '@fortawesome/free-solid-svg-icons';
 
+// todo --> background: #ececec; box-shadow: 0 1px 4px 0 rgba(0,0,0,.15);
+
 const GameCard = props => {
   return (
     <Link to={`/game/${props.title}`}>

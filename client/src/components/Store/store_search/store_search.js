@@ -16,7 +16,7 @@ class StoreSearch extends Component {
     inputDefault: '',
     inputStatus: false,
     filterStatus: false,
-    switchBtnGrid: false,
+    switchBtnGrid: true,
     switchBtnList: false,
     slideSidebar: true,
     everything: false,

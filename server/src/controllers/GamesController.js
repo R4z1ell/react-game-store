@@ -1,4 +1,5 @@
 const { Game } = require('../models/game');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports = {
   addGame(req, res) {
@@ -59,6 +60,7 @@ module.exports = {
   getGamesToShop(req, res) {
     let price = req.query.price;
     let language = req.query.language;
+    let genres = req.query.genres;
     let findArgs = {};
 
     if (price && !language) {
@@ -99,21 +101,47 @@ module.exports = {
       if (price === 'u25') findArgs = { $gte: 0, $lte: 2500 };
       if (price === 'a25') findArgs = { $gte: 2500, $lte: 1500000 };
 
-      Game.find({
-        'languages.language_name': { $all: languages },
-        'prices.basePrice': findArgs
-      })
-        .populate({ path: 'genres', model: 'Genre' })
-        .exec((err, articles) => {
-          if (err) return res.status(400).send(err);
-          res.status(200).json({
-            articles
+      if (genres) {
+        Game.find({
+          'languages.language_name': { $all: languages },
+          'prices.basePrice': findArgs,
+          genres: genres
+        })
+          .populate({ path: 'genres', model: 'Genre' })
+          .exec((err, articles) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({
+              articles
+            });
           });
+      }
+
+      if (!genres) {
+        Game.find({
+          'languages.language_name': { $all: languages },
+          'prices.basePrice': findArgs
+        })
+          .populate({ path: 'genres', model: 'Genre' })
+          .exec((err, articles) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({
+              articles
+            });
+          });
+      }
+    }
+
+    if (!language && !price && !genres) {
+      Game.find()
+        .populate({ path: 'genres', model: 'Genre' })
+        .exec((err, games) => {
+          if (err) return res.status(400).send(err);
+          res.send(games);
         });
     }
 
-    if (!language && !price) {
-      Game.find()
+    if (!language && !price && genres) {
+      Game.find({ genres: new ObjectId(genres) })
         .populate({ path: 'genres', model: 'Genre' })
         .exec((err, games) => {
           if (err) return res.status(400).send(err);
