@@ -14,6 +14,8 @@ class StoreSearch extends Component {
   state = {
     dropdown: false,
     inputDefault: '',
+    typing: false,
+    typingTimeout: 0,
     inputStatus: false,
     filterStatus: false,
     switchBtnGrid: true,
@@ -50,6 +52,24 @@ class StoreSearch extends Component {
         inputStatus: false
       });
     }
+  };
+
+  changeName = event => {
+    if (this.state.typingTimeout) {
+      clearTimeout(this.state.typingTimeout);
+    }
+
+    this.setState({
+      inputDefault: event.target.value,
+      typing: false,
+      typingTimeout: setTimeout(() => {
+        this.sendToParent(this.state.inputDefault);
+      }, 1000)
+    });
+  };
+
+  sendToParent = () => {
+    this.props.searching(this.state.inputDefault);
   };
 
   resetInputValue = () => {
@@ -319,7 +339,8 @@ class StoreSearch extends Component {
               placeholder="Search for..."
               value={this.state.inputDefault}
               className="search-input"
-              onChange={event => this.handleInput(event)}
+              //onChange={event => this.handleInput(event)}
+              onChange={event => this.changeName(event)}
             />
             {this.state.inputStatus ? (
               <div className="search-button-wrapper">

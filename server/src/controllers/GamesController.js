@@ -61,6 +61,7 @@ module.exports = {
     let price = req.query.price;
     let language = req.query.language;
     let genres = req.query.genres;
+    let search = req.query.search;
     let findArgs = {};
 
     if (price && !language) {
@@ -70,26 +71,59 @@ module.exports = {
       if (price === 'u25') findArgs = { $gte: 0, $lte: 2500 };
       if (price === 'a25') findArgs = { $gte: 2500, $lte: 1500000 };
 
-      Game.find({ 'prices.basePrice': findArgs })
-        .populate({ path: 'genres', model: 'Genre' })
-        .exec((err, articles) => {
-          if (err) return res.status(400).send(err);
-          res.status(200).json({
-            articles
+      if (genres) {
+        Game.find({
+          'prices.basePrice': findArgs,
+          genres: new ObjectId(genres)
+        })
+          .populate({ path: 'genres', model: 'Genre' })
+          .exec((err, articles) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({
+              articles
+            });
           });
-        });
+      }
+
+      if (!genres) {
+        Game.find({ 'prices.basePrice': findArgs })
+          .populate({ path: 'genres', model: 'Genre' })
+          .exec((err, articles) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({
+              articles
+            });
+          });
+      }
     }
 
     if (language && !price) {
       const languages = language.split(',');
-      Game.find({ 'languages.language_name': { $all: languages } })
-        .populate({ path: 'genres', model: 'Genre' })
-        .exec((err, articles) => {
-          if (err) return res.status(400).send(err);
-          res.status(200).json({
-            articles
+
+      if (genres) {
+        Game.find({
+          'languages.language_name': { $all: languages },
+          genres: new ObjectId(genres)
+        })
+          .populate({ path: 'genres', model: 'Genre' })
+          .exec((err, articles) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({
+              articles
+            });
           });
-        });
+      }
+
+      if (!genres) {
+        Game.find({ 'languages.language_name': { $all: languages } })
+          .populate({ path: 'genres', model: 'Genre' })
+          .exec((err, articles) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({
+              articles
+            });
+          });
+      }
     }
 
     if (language && price) {
@@ -105,7 +139,7 @@ module.exports = {
         Game.find({
           'languages.language_name': { $all: languages },
           'prices.basePrice': findArgs,
-          genres: genres
+          genres: new ObjectId(genres)
         })
           .populate({ path: 'genres', model: 'Genre' })
           .exec((err, articles) => {
@@ -132,12 +166,27 @@ module.exports = {
     }
 
     if (!language && !price && !genres) {
-      Game.find()
-        .populate({ path: 'genres', model: 'Genre' })
-        .exec((err, games) => {
-          if (err) return res.status(400).send(err);
-          res.send(games);
-        });
+      if (search) {
+        let regexQuery = { title: new RegExp(search, 'i') };
+
+        Game.find(regexQuery)
+          .populate({ path: 'genres', model: 'Genre' })
+          .exec((err, articles) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({
+              articles
+            });
+          });
+      }
+
+      if (!search) {
+        Game.find()
+          .populate({ path: 'genres', model: 'Genre' })
+          .exec((err, games) => {
+            if (err) return res.status(400).send(err);
+            res.send(games);
+          });
+      }
     }
 
     if (!language && !price && genres) {

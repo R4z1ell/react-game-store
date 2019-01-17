@@ -6,8 +6,8 @@ import './store_container.scss';
 import { price, languages } from '../../utils/Form/fixed_categories';
 import {
   getGenres,
-  getGames,
-  getGamesToStore
+  getGamesToStore,
+  getGames
 } from '../../../store/actions/games_actions';
 
 import CardBlock from '../../utils/card_block';
@@ -104,6 +104,10 @@ class StoreContainer extends Component {
     });
   };
 
+  searching = value => {
+    this.props.dispatch(getGamesToStore('', [], value));
+  };
+
   render() {
     let slideSidebar = this.state.slideSidebar ? '--slide' : '';
 
@@ -112,6 +116,7 @@ class StoreContainer extends Component {
         <StoreSearch
           slideSidebar={this.slideSidebar}
           genres={this.props.games.genres}
+          searching={value => this.searching(value)}
         />
         <div className={`catalog__body catalog__body${slideSidebar}`}>
           <div className="catalog__sidebar">

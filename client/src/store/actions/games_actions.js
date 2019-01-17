@@ -46,7 +46,7 @@ export const addGame = dataToSubmit => {
   };
 };
 
-export const getGamesToStore = (price, languages) => {
+export const getGamesToStore = (price, languages, search = null) => {
   if (price.length === 0 && languages.length > 0) {
     const request = axios
       .post(`${GAMES_SERVER}/shop?language=${languages}`)
@@ -93,11 +93,24 @@ export const getGamesToStore = (price, languages) => {
   }
 
   if (price.length === 0 && languages.length === 0) {
-    const request = axios.post(`${GAMES_SERVER}/shop`).then(response => {
-      return {
-        articles: response.data.articles
-      };
-    });
+    let request;
+    if (!search) {
+      request = axios.post(`${GAMES_SERVER}/shop`).then(response => {
+        return {
+          articles: response.data.articles
+        };
+      });
+    }
+
+    if (search) {
+      request = axios
+        .post(`${GAMES_SERVER}/shop?search=${search}`)
+        .then(response => {
+          return {
+            articles: response.data.articles
+          };
+        });
+    }
 
     return {
       type: GET_GAMES_TO_STORE,

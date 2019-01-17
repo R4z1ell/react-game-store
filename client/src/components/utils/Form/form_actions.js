@@ -188,7 +188,8 @@ export const filter = unfilteredArray => {
     if (
       unfilteredArray[key] === true ||
       unfilteredArray[key] === false ||
-      key === 'inputDefault'
+      key === 'inputDefault' ||
+      key === 'typingTimeout'
     )
       continue;
     filteredArray.push(unfilteredArray[key]);
