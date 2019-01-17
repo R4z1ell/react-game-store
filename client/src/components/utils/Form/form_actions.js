@@ -189,7 +189,8 @@ export const filter = unfilteredArray => {
       unfilteredArray[key] === true ||
       unfilteredArray[key] === false ||
       key === 'inputDefault' ||
-      key === 'typingTimeout'
+      key === 'typingTimeout' ||
+      key === 'genreId'
     )
       continue;
     filteredArray.push(unfilteredArray[key]);

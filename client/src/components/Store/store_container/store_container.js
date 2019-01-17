@@ -104,8 +104,10 @@ class StoreContainer extends Component {
     });
   };
 
-  searching = value => {
-    this.props.dispatch(getGamesToStore('', [], value));
+  searching = (genres, value) => {
+    this.props.dispatch(
+      getGamesToStore(this.state.price, this.state.languages, genres, value)
+    );
   };
 
   render() {
@@ -116,7 +118,7 @@ class StoreContainer extends Component {
         <StoreSearch
           slideSidebar={this.slideSidebar}
           genres={this.props.games.genres}
-          searching={value => this.searching(value)}
+          searching={(genres, value) => this.searching(genres, value)}
         />
         <div className={`catalog__body catalog__body${slideSidebar}`}>
           <div className="catalog__sidebar">

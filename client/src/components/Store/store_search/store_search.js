@@ -28,6 +28,7 @@ class StoreSearch extends Component {
     collapsedLanguage: false,
     priceSelected: false,
     under5: false,
+    genreId: null,
     'All-games': 'All games',
     'Role-playing': '',
     Simulation: '',
@@ -40,20 +41,6 @@ class StoreSearch extends Component {
     Adventure: ''
   };
 
-  handleInput = event => {
-    if (event.target.value) {
-      this.setState({
-        inputDefault: event.target.value,
-        inputStatus: true
-      });
-    } else {
-      this.setState({
-        inputDefault: '',
-        inputStatus: false
-      });
-    }
-  };
-
   changeName = event => {
     if (this.state.typingTimeout) {
       clearTimeout(this.state.typingTimeout);
@@ -61,22 +48,66 @@ class StoreSearch extends Component {
 
     this.setState({
       inputDefault: event.target.value,
+      inputStatus: true,
       typing: false,
       typingTimeout: setTimeout(() => {
-        this.sendToParent(this.state.inputDefault);
+        this.sendToParent(this.state.genreId, this.state.inputDefault);
       }, 1000)
     });
   };
 
-  sendToParent = () => {
-    this.props.searching(this.state.inputDefault);
+  selectGenre = (genre, event) => {
+    const newState = {
+      'All-games': '',
+      'Role-playing': '',
+      Simulation: '',
+      Indie: '',
+      Racing: '',
+      Sports: '',
+      Action: '',
+      Strategy: '',
+      Shooter: '',
+      Adventure: ''
+    };
+
+    if (event.target.value === 'All games') {
+      delete newState['All-games'];
+
+      this.setState(
+        {
+          'All-games': 'All games',
+          dropdown: false,
+          ...newState
+        },
+        () => this.sendToParent(null, null)
+      );
+    } else {
+      delete newState[genre.name];
+
+      this.setState(
+        {
+          [genre.name]: genre.name,
+          dropdown: false,
+          genreId: genre,
+          ...newState
+        },
+        () => this.sendToParent(genre, this.state.inputDefault)
+      );
+    }
+  };
+
+  sendToParent = (genres = null, value = null) => {
+    this.props.searching(genres, value);
   };
 
   resetInputValue = () => {
-    this.setState({
-      inputDefault: '',
-      inputStatus: false
-    });
+    this.setState(
+      {
+        inputDefault: '',
+        inputStatus: false
+      },
+      () => this.sendToParent(null, this.state.inputDefault)
+    );
   };
 
   filterToggle = () => {
@@ -144,39 +175,6 @@ class StoreSearch extends Component {
       priceSelected: true,
       under5: true
     });
-  };
-
-  selectGenre = (genre, event) => {
-    const newState = {
-      'All-games': '',
-      'Role-playing': '',
-      Simulation: '',
-      Indie: '',
-      Racing: '',
-      Sports: '',
-      Action: '',
-      Strategy: '',
-      Shooter: '',
-      Adventure: ''
-    };
-
-    if (event.target.value === 'All games') {
-      delete newState['All-games'];
-
-      this.setState({
-        'All-games': 'All games',
-        dropdown: false,
-        ...newState
-      });
-    } else {
-      delete newState[genre.name];
-
-      this.setState({
-        [genre.name]: genre.name,
-        dropdown: false,
-        ...newState
-      });
-    }
   };
 
   renderGenreTitle = () =>
@@ -339,7 +337,6 @@ class StoreSearch extends Component {
               placeholder="Search for..."
               value={this.state.inputDefault}
               className="search-input"
-              //onChange={event => this.handleInput(event)}
               onChange={event => this.changeName(event)}
             />
             {this.state.inputStatus ? (
