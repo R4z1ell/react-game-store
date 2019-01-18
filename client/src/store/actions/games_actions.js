@@ -52,231 +52,25 @@ export const getGamesToStore = (
   genres = null,
   search = null
 ) => {
-  if (price.length === 0 && languages.length > 0) {
-    let request;
-    if (search) {
-      if (genres) {
-        request = axios
-          .post(
-            `${GAMES_SERVER}/shop?language=${languages}&genres=${
-              genres._id
-            }&search=${search}`
-          )
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
+  let priceInput = price.length !== 0 ? `price=${price}` : '';
+  let languagesInput = languages.length !== 0 ? `&language=${languages}` : '';
+  let genresInput = genres ? `&genres=${genres._id}` : '';
+  let searchInput = search ? `&search=${search}` : '';
 
-      if (!genres) {
-        request = axios
-          .post(`${GAMES_SERVER}/shop?language=${languages}&search=${search}`)
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-    }
+  const request = axios
+    .post(
+      `${GAMES_SERVER}/shop?${priceInput}${languagesInput}${genresInput}${searchInput}`
+    )
+    .then(response => {
+      return {
+        articles: response.data.articles
+      };
+    });
 
-    if (!search) {
-      if (genres) {
-        request = axios
-          .post(
-            `${GAMES_SERVER}/shop?language=${languages}&genres=${genres._id}`
-          )
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-
-      if (!genres) {
-        request = axios
-          .post(`${GAMES_SERVER}/shop?language=${languages}`)
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-    }
-
-    return {
-      type: GET_GAMES_TO_STORE,
-      payload: request
-    };
-  }
-
-  if (price.length > 0 && languages.length === 0) {
-    let request;
-    if (search) {
-      if (genres) {
-        request = axios
-          .post(
-            `${GAMES_SERVER}/shop?price=${price}&genres=${
-              genres._id
-            }&search=${search}`
-          )
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-
-      if (!genres) {
-        request = axios
-          .post(`${GAMES_SERVER}/shop?price=${price}&search=${search}`)
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-    }
-
-    if (!search) {
-      if (genres) {
-        request = axios
-          .post(`${GAMES_SERVER}/shop?price=${price}&genres=${genres._id}`)
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-
-      if (!genres) {
-        request = axios
-          .post(`${GAMES_SERVER}/shop?price=${price}`)
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-    }
-
-    return {
-      type: GET_GAMES_TO_STORE,
-      payload: request
-    };
-  }
-
-  if (price.length > 0 && languages.length > 0) {
-    let request;
-    if (search) {
-      if (genres) {
-        request = axios
-          .post(
-            `${GAMES_SERVER}/shop?language=${languages}&price=${price}&genres=${
-              genres._id
-            }&search=${search}`
-          )
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-
-      if (!genres) {
-        request = axios
-          .post(
-            `${GAMES_SERVER}/shop?language=${languages}&price=${price}&search=${search}`
-          )
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-    }
-
-    if (!search) {
-      if (genres) {
-        request = axios
-          .post(
-            `${GAMES_SERVER}/shop?language=${languages}&price=${price}&genres=${
-              genres._id
-            }`
-          )
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-
-      if (!genres) {
-        request = axios
-          .post(`${GAMES_SERVER}/shop?language=${languages}&price=${price}`)
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-    }
-
-    return {
-      type: GET_GAMES_TO_STORE,
-      payload: request
-    };
-  }
-
-  if (price.length === 0 && languages.length === 0) {
-    let request;
-    if (!search) {
-      if (genres) {
-        request = axios
-          .post(`${GAMES_SERVER}/shop?genres=${genres._id}`)
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-
-      if (!genres) {
-        request = axios.post(`${GAMES_SERVER}/shop`).then(response => {
-          return {
-            articles: response.data.articles
-          };
-        });
-      }
-    }
-
-    if (search) {
-      if (genres) {
-        request = axios
-          .post(`${GAMES_SERVER}/shop?genres=${genres._id}&search=${search}`)
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-
-      if (!genres) {
-        request = axios
-          .post(`${GAMES_SERVER}/shop?search=${search}`)
-          .then(response => {
-            return {
-              articles: response.data.articles
-            };
-          });
-      }
-    }
-
-    return {
-      type: GET_GAMES_TO_STORE,
-      payload: request
-    };
-  }
+  return {
+    type: GET_GAMES_TO_STORE,
+    payload: request
+  };
 };
 
 export const clearGame = () => {
