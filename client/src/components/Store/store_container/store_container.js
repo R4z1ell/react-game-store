@@ -18,7 +18,9 @@ class StoreContainer extends Component {
   state = {
     slideSidebar: true,
     languages: [],
-    price: []
+    price: [],
+    genres: null,
+    search: null
   };
 
   componentDidMount() {
@@ -30,6 +32,8 @@ class StoreContainer extends Component {
   handlePriceFilters = item => {
     let price = '';
     let languages = this.state.languages;
+    let genres = this.state.genres !== null ? this.state.genres : '';
+    let search = this.state.search !== null ? this.state.search : '';
 
     if (item) {
       if (item.styleName === 'under5') price = 'u5';
@@ -38,34 +42,43 @@ class StoreContainer extends Component {
       if (item.styleName === 'under25') price = 'u25';
       if (item.styleName === 'above25') price = 'a25';
 
-      this.setState({ price });
-      this.props.dispatch(getGamesToStore(price, languages));
+      this.setState({ price }, () =>
+        this.props.dispatch(getGamesToStore(price, languages, genres, search))
+      );
     }
 
     if (!item && this.state.languages.length === 0) {
-      this.props.dispatch(getGamesToStore('', []));
+      this.props.dispatch(getGamesToStore('', [], genres, search));
     }
 
     if (!item && this.state.languages.length > 0) {
-      this.props.dispatch(getGamesToStore('', this.state.languages));
+      this.props.dispatch(
+        getGamesToStore('', this.state.languages, genres, search)
+      );
     }
   };
 
   handleLanguagesFilters = item => {
     let newLanguages = [...this.state.languages];
+    let genres = this.state.genres !== null ? this.state.genres : '';
+    let search = this.state.search !== null ? this.state.search : '';
 
     if (item) {
       if (newLanguages.length === 0) {
         newLanguages.push(item.name);
         this.setState({ languages: newLanguages });
-        this.props.dispatch(getGamesToStore(this.state.price, newLanguages));
+        this.props.dispatch(
+          getGamesToStore(this.state.price, newLanguages, genres, search)
+        );
       }
 
       if (newLanguages.length > 0) {
         if (!newLanguages.includes(item.name)) {
           newLanguages.push(item.name);
           this.setState({ languages: newLanguages });
-          this.props.dispatch(getGamesToStore(this.state.price, newLanguages));
+          this.props.dispatch(
+            getGamesToStore(this.state.price, newLanguages, genres, search)
+          );
         }
       }
 
@@ -73,16 +86,20 @@ class StoreContainer extends Component {
         const index = newLanguages.indexOf(item.name);
         newLanguages.splice(index, 1);
         this.setState({ languages: newLanguages });
-        this.props.dispatch(getGamesToStore(this.state.price, newLanguages));
+        this.props.dispatch(
+          getGamesToStore(this.state.price, newLanguages, genres, search)
+        );
       }
     }
 
     if (!item && this.state.price.length === 0) {
-      this.props.dispatch(getGamesToStore('', []));
+      this.props.dispatch(getGamesToStore('', [], genres, search));
     }
 
     if (!item && this.state.price.length > 0) {
-      this.props.dispatch(getGamesToStore(this.state.price, []));
+      this.props.dispatch(
+        getGamesToStore(this.state.price, [], genres, search)
+      );
     }
   };
 
@@ -108,6 +125,10 @@ class StoreContainer extends Component {
     this.props.dispatch(
       getGamesToStore(this.state.price, this.state.languages, genres, value)
     );
+    this.setState({
+      genres,
+      search: value
+    });
   };
 
   render() {

@@ -54,6 +54,12 @@ class StoreSearch extends Component {
         this.sendToParent(this.state.genreId, this.state.inputDefault);
       }, 1000)
     });
+
+    if (!event.target.value) {
+      this.setState({
+        inputStatus: false
+      });
+    }
   };
 
   selectGenre = (genre, event) => {
@@ -79,7 +85,7 @@ class StoreSearch extends Component {
           dropdown: false,
           ...newState
         },
-        () => this.sendToParent(null, null)
+        () => this.sendToParent(null, this.state.inputDefault)
       );
     } else {
       delete newState[genre.name];
@@ -101,13 +107,23 @@ class StoreSearch extends Component {
   };
 
   resetInputValue = () => {
-    this.setState(
-      {
-        inputDefault: '',
-        inputStatus: false
-      },
-      () => this.sendToParent(null, this.state.inputDefault)
-    );
+    if (this.state['All-games'] === 'All games') {
+      this.setState(
+        {
+          inputDefault: '',
+          inputStatus: false
+        },
+        () => this.sendToParent(null, this.state.inputDefault)
+      );
+    } else {
+      this.setState(
+        {
+          inputDefault: '',
+          inputStatus: false
+        },
+        () => this.sendToParent(this.state.genreId, this.state.inputDefault)
+      );
+    }
   };
 
   filterToggle = () => {
