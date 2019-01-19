@@ -3,12 +3,9 @@ import { Link } from 'react-router-dom';
 import './index.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBell,
-  faShoppingCart,
-  faSearch,
-  faAngleDown
-} from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+
+import HeaderTray from './header_tray/header_tray';
 
 class Header extends Component {
   render() {
@@ -26,19 +23,7 @@ class Header extends Component {
             </div>
             <div className="header__item">ON SALE</div>
           </div>
-          <div className="header__tray">
-            <div className="header__item">
-              <FontAwesomeIcon icon={faBell} />
-              <span>0</span>
-            </div>
-            <div className="header__item">
-              <FontAwesomeIcon icon={faShoppingCart} />
-              <span>0</span>
-            </div>
-            <div className="header__item header__search">
-              <FontAwesomeIcon icon={faSearch} />
-            </div>
-          </div>
+          <HeaderTray />
           <div className="logo__container">
             <Link to="/">
               <div className="logo__name">JetDeals</div>
