@@ -41,6 +41,10 @@
   border-top: 1px solid #bfbfbf;
 }
 
+.catalog__sidebar .product-tile {
+  transition: 0.3s ease-in-out;
+}
+
 .catalog__games-list .card_block {
   margin-top: 0px !important;
 }
@@ -53,4 +57,9 @@
 
 .catalog__games-list .card_block .card_wrapper--slide {
   grid-template-columns: repeat(4, 1fr);
+}
+
+.catalog__games-list .card_block .card_wrapper--list {
+  grid-template-columns: repeat(1, 1fr);
+  grid-row-gap: 0px;
 }

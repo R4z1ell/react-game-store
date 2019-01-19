@@ -137,17 +137,31 @@ class StoreSearch extends Component {
   };
 
   switchBtnGrid = () => {
-    this.setState({
-      switchBtnGrid: true,
-      switchBtnList: false
-    });
+    this.setState(
+      {
+        switchBtnGrid: true,
+        switchBtnList: false
+      },
+      () =>
+        this.props.switchBtnList(
+          this.state.switchBtnGrid,
+          this.state.switchBtnList
+        )
+    );
   };
 
   switchBtnList = () => {
-    this.setState({
-      switchBtnList: true,
-      switchBtnGrid: false
-    });
+    this.setState(
+      {
+        switchBtnList: true,
+        switchBtnGrid: false
+      },
+      () =>
+        this.props.switchBtnList(
+          this.state.switchBtnGrid,
+          this.state.switchBtnList
+        )
+    );
   };
 
   everything = () => {

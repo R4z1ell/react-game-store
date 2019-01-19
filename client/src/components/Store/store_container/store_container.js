@@ -17,6 +17,8 @@ import StoreSearch from '../store_search/store_search';
 class StoreContainer extends Component {
   state = {
     slideSidebar: true,
+    switchBtnGrid: true,
+    switchBtnList: false,
     languages: [],
     price: [],
     genres: null,
@@ -131,6 +133,13 @@ class StoreContainer extends Component {
     });
   };
 
+  switchBtnList = (grid, list) => {
+    this.setState({
+      switchBtnGrid: grid,
+      switchBtnList: list
+    });
+  };
+
   render() {
     let slideSidebar = this.state.slideSidebar ? '--slide' : '';
 
@@ -140,6 +149,7 @@ class StoreContainer extends Component {
           slideSidebar={this.slideSidebar}
           genres={this.props.games.genres}
           searching={(genres, value) => this.searching(genres, value)}
+          switchBtnList={(grid, list) => this.switchBtnList(grid, list)}
         />
         <div className={`catalog__body catalog__body${slideSidebar}`}>
           <div className="catalog__sidebar">
@@ -161,11 +171,15 @@ class StoreContainer extends Component {
               <CardBlock
                 list={this.props.games.allGames}
                 slide={this.state.slideSidebar}
+                gridView={this.state.switchBtnGrid}
+                listView={this.state.switchBtnList}
               />
             ) : (
               <CardBlock
                 list={this.props.games.toStore}
                 slide={this.state.slideSidebar}
+                gridView={this.state.switchBtnGrid}
+                listView={this.state.switchBtnList}
               />
             )}
           </div>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './store_filters.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { filter } from '../../utils/Form/form_actions';
 
 class StoreFilters extends Component {
@@ -188,7 +188,15 @@ class StoreFilters extends Component {
               <div className="filter__title">{this.props.title}</div>
             )}
             <div className="filter__arrow-wrapper">
-              <FontAwesomeIcon icon={faAngleDown} className="filter__arrow" />
+              {this.state.priceTag || this.state.languageTag ? (
+                <FontAwesomeIcon
+                  icon={faAngleUp}
+                  className="filter__arrow"
+                  style={{ color: '#78387b' }}
+                />
+              ) : (
+                <FontAwesomeIcon icon={faAngleUp} className="filter__arrow" />
+              )}
             </div>
           </div>
           {this.state.collapsedFilter && this.state.priceTag ? (

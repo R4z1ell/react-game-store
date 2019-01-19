@@ -17,7 +17,7 @@ class Home extends Component {
     return (
       <div>
         <HomeCarousel games={this.props.games.allGames} />
-        <CardBlock list={this.props.games.allGames} />
+        <CardBlock list={this.props.games.allGames} gridView={true} />
         <HomeSliders games={this.props.games.allGames} />
         <ProductsList list={this.props.games.allGames} />
       </div>
