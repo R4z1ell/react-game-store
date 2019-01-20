@@ -27,16 +27,23 @@
     float: left;
   }
 
-  &__store:hover {
-    color: $color-white;
+  &__item {
+    transition: transform 0.2s, opacity 0.2s;
+    transition-delay: 0.15s;
+
+    &:hover {
+      color: $color-white;
+    }
   }
 }
 
 .logo {
   &__container {
+    position: absolute;
+    top: 11px;
+    right: 42%;
     text-align: center;
     line-height: 30px;
-    margin: 10px auto 0 auto;
     width: 130px;
     transform: skew(-20deg);
     background-color: rgba($color-gray, 0.35);

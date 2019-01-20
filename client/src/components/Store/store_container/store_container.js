@@ -28,7 +28,7 @@ class StoreContainer extends Component {
   componentDidMount() {
     this.props.dispatch(getGames());
     this.props.dispatch(getGenres());
-    //window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }
 
   handlePriceFilters = item => {

@@ -8,6 +8,33 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import HeaderTray from './header_tray/header_tray';
 
 class Header extends Component {
+  state = {
+    logoStatus: true,
+    inputValue: ''
+  };
+
+  searchBar = value => {
+    if (value) {
+      this.setState({
+        logoStatus: false
+      });
+    }
+    if (!value) {
+      this.setState({
+        logoStatus: true
+      });
+    }
+  };
+
+  inputStatus = value => {
+    this.setState(
+      {
+        inputValue: value
+      },
+      () => this.props.checkInputStatus(this.state.inputValue)
+    );
+  };
+
   render() {
     return (
       <header className="header__bck">
@@ -23,12 +50,17 @@ class Header extends Component {
             </div>
             <div className="header__item">ON SALE</div>
           </div>
-          <HeaderTray />
-          <div className="logo__container">
-            <Link to="/">
-              <div className="logo__name">JetDeals</div>
-            </Link>
-          </div>
+          <HeaderTray
+            searchBar={value => this.searchBar(value)}
+            inputStatus={value => this.inputStatus(value)}
+          />
+          {this.state.logoStatus ? (
+            <div className="logo__container">
+              <Link to="/">
+                <div className="logo__name">JetDeals</div>
+              </Link>
+            </div>
+          ) : null}
         </div>
       </header>
     );

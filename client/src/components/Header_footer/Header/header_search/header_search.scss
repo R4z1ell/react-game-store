@@ -1,0 +1,93 @@
+@import '../../../../Resources/scss/variables';
+
+.header-search {
+  &__no-results {
+    position: absolute;
+    z-index: 20;
+    top: 50px;
+    left: 26%;
+    height: 370px;
+    width: 940px;
+    line-height: 370px;
+    text-align: center;
+    background: $color-white;
+    animation: fadeIn 0.3s both;
+  }
+
+  &-empty {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    text-align: center;
+    color: gray;
+    width: 440px;
+
+    &__btn {
+      background: #e6e6e6;
+      color: #4c4c4c;
+      box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.15),
+        0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+      display: inline-block;
+      position: relative;
+      height: 36px;
+      padding: 0 10px;
+      text-align: center;
+      border-radius: 3px;
+      cursor: pointer;
+      user-select: none;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 36px;
+      border: none;
+      text-decoration: none;
+    }
+
+    &__description {
+      margin-bottom: 15px;
+      font-size: 14px;
+      line-height: 22px;
+      font-weight: 400;
+    }
+
+    &__header {
+      position: relative;
+      padding-top: 50px;
+      margin-bottom: 15px;
+      color: gray;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    &__header-icon {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 34px;
+      width: 45px;
+      margin-left: -22.5px;
+      fill: gray;
+    }
+
+    &__line {
+      display: block;
+      margin: auto;
+      margin-bottom: 15px;
+      width: 180px;
+      height: 1px;
+      border: none;
+      background: #e5e5e5;
+    }
+  }
+}
+
+// Keyframes
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

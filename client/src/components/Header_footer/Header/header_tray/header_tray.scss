@@ -1,6 +1,15 @@
 @import '../../../../Resources/scss/variables';
 
 .header {
+  &-icon-svg {
+    fill: $color-white;
+    margin-top: 18px;
+    width: 16px;
+    height: 16px;
+    z-index: 2;
+    cursor: pointer;
+  }
+
   &__item {
     display: block;
     float: left;
@@ -30,12 +39,15 @@
     height: 16px;
     width: 14px !important;
     color: $color-gray;
+    animation: slideAndFadeInLupka 0.35s both;
+    animation-delay: 0.05s;
+    opacity: 1;
   }
 
   &-search-input {
     display: inline-block;
     position: relative;
-    width: 42%;
+    width: 57%;
     height: 100%;
     vertical-align: top;
 
@@ -55,6 +67,8 @@
       background: #595959;
       text-transform: uppercase;
       cursor: pointer;
+      animation: slideAndFadeIn 0.35s both;
+      animation-delay: 0.1s;
     }
 
     &__field {
@@ -72,6 +86,8 @@
       vertical-align: middle;
       background: none;
       line-height: normal;
+      animation: slideAndFadeIn 0.35s both;
+      animation-delay: 0.1s;
 
       &:focus {
         outline: none;
@@ -84,7 +100,7 @@
     position: relative;
     height: 52px;
     width: 100%;
-    padding-left: 32%;
+    padding-left: 20%;
     line-height: 52px;
 
     &__results-count {
@@ -97,6 +113,8 @@
       text-transform: uppercase;
       color: $color-white;
       cursor: pointer;
+      animation: slideAndFadeIn 0.35s both;
+      animation-delay: 0.15s;
 
       span {
         margin-right: 5px;
@@ -114,11 +132,11 @@
   &-submenu {
     display: block;
     position: absolute;
-    z-index: 2;
     top: 0px;
     left: 0;
     right: 0;
     width: auto;
+    margin: 0 150px 0 260px;
     padding-bottom: 0;
     padding-top: 0;
     background: none;
@@ -133,5 +151,30 @@
 
   &__tray {
     float: right;
+  }
+}
+
+// Kreyframes
+@keyframes slideAndFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes slideAndFadeInLupka {
+  from {
+    opacity: 0;
+    left: calc(60% - 38px);
+  }
+
+  to {
+    left: 20%;
+    opacity: 1;
   }
 }
