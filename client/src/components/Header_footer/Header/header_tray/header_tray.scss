@@ -6,7 +6,7 @@
     float: left;
     font-size: 14px;
     font-weight: 700;
-    line-height: 30px;
+    line-height: 52px;
     color: $color-gray;
     padding-right: 30px;
     cursor: pointer;
@@ -23,8 +23,112 @@
     }
   }
 
+  &-search-icon {
+    position: absolute;
+    top: 20px;
+    left: 32%;
+    height: 16px;
+    width: 14px !important;
+    color: $color-gray;
+  }
+
+  &-search-input {
+    display: inline-block;
+    position: relative;
+    width: 42%;
+    height: 100%;
+    vertical-align: top;
+
+    &__clear {
+      position: absolute;
+      right: -63px;
+      top: 19px;
+      z-index: 10;
+      padding-left: 5px;
+      padding-right: 5px;
+      border: 1px solid #595959;
+      border-radius: 3px;
+      line-height: 14px;
+      font-size: 11px !important;
+      color: #191a1a !important;
+      opacity: 1 !important;
+      background: #595959;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    &__field {
+      box-sizing: border-box;
+      position: absolute;
+      left: 28px;
+      top: 17px;
+      width: calc(100% + 36px);
+      height: 22px;
+      padding: 0;
+      border: none;
+      border-bottom: 1px solid #404040;
+      font-size: 14px;
+      color: #e5e5e5;
+      vertical-align: middle;
+      background: none;
+      line-height: normal;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &-search-toolbar {
+    box-sizing: border-box;
+    position: relative;
+    height: 52px;
+    width: 100%;
+    padding-left: 32%;
+    line-height: 52px;
+
+    &__results-count {
+      position: relative;
+      display: inline-block;
+      margin-left: 80px;
+      font-size: 14px;
+      font-weight: 600;
+      vertical-align: top;
+      text-transform: uppercase;
+      color: $color-white;
+      cursor: pointer;
+
+      span {
+        margin-right: 5px;
+        font-size: 14px;
+        color: $color-white !important;
+        opacity: 1;
+      }
+    }
+  }
+
   &__search {
     padding-right: 0;
+  }
+
+  &-submenu {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    left: 0;
+    right: 0;
+    width: auto;
+    padding-bottom: 0;
+    padding-top: 0;
+    background: none;
+    box-shadow: none;
+    color: #4c4c4c;
+    font-size: 13px;
+    line-height: normal;
+    transform-origin: 50% 0;
+    letter-spacing: normal;
+    cursor: default;
   }
 
   &__tray {

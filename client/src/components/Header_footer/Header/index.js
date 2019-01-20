@@ -13,7 +13,7 @@ class Header extends Component {
       <header className="header__bck">
         <div className="header__container">
           <div className="header__menu">
-            <div className="header__item">
+            <div className="header__item header__store">
               <Link to="/games">
                 STORE <FontAwesomeIcon icon={faAngleDown} />
               </Link>
