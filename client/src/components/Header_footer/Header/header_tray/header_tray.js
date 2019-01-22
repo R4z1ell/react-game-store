@@ -12,7 +12,8 @@ import {
 class HeaderTray extends Component {
   state = {
     searchBar: false,
-    inputStatus: ''
+    inputStatus: '',
+    typingTimeout: 0
   };
 
   showSearchBar = () => {
@@ -27,19 +28,39 @@ class HeaderTray extends Component {
   hideSearchBar = () => {
     this.setState(
       {
-        searchBar: false
+        searchBar: false,
+        inputStatus: ''
       },
-      () => this.props.searchBar(this.state.searchBar)
+      () => {
+        this.props.inputStatus(this.state.inputStatus);
+        this.props.searchBar(this.state.searchBar);
+        this.props.clearStore();
+      }
     );
   };
 
   handleChange = event => {
+    if (this.state.typingTimeout) {
+      clearTimeout(this.state.typingTimeout);
+    }
+
     this.setState(
       {
-        inputStatus: event.target.value
+        inputStatus: event.target.value,
+        typingTimeout: setTimeout(() => {
+          this.sendToParent(this.state.inputStatus);
+        }, 500)
       },
       () => this.props.inputStatus(this.state.inputStatus)
     );
+
+    if (!event.target.value) {
+      this.props.clearStore();
+    }
+  };
+
+  sendToParent = search => {
+    this.props.searching(search);
   };
 
   clearInput = () => {
@@ -47,7 +68,10 @@ class HeaderTray extends Component {
       {
         inputStatus: ''
       },
-      () => this.props.inputStatus(this.state.inputStatus)
+      () => {
+        this.props.inputStatus(this.state.inputStatus);
+        this.props.clearStore();
+      }
     );
   };
 
@@ -109,8 +133,9 @@ class HeaderTray extends Component {
                 </div>
                 {this.state.inputStatus !== '' ? (
                   <div className="header-search-toolbar__results-count">
-                    <span>4</span>
-                    Games
+                    {this.props.fromStoreLength.length > 0 ? (
+                      <span>{this.props.fromStoreLength.length} Games</span>
+                    ) : null}
                     <span className="header-triangle header-triangle--centered" />
                   </div>
                 ) : null}

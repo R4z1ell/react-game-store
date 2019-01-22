@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import './index.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,6 +25,14 @@ class Header extends Component {
         logoStatus: true
       });
     }
+  };
+
+  searching = search => {
+    this.props.searchValue(search);
+  };
+
+  clearStore = () => {
+    this.props.clearStore();
   };
 
   inputStatus = value => {
@@ -52,7 +61,10 @@ class Header extends Component {
           </div>
           <HeaderTray
             searchBar={value => this.searchBar(value)}
+            searching={search => this.searching(search)}
             inputStatus={value => this.inputStatus(value)}
+            clearStore={() => this.clearStore()}
+            fromStoreLength={this.props.fromStoreLength}
           />
           {this.state.logoStatus ? (
             <div className="logo__container">
