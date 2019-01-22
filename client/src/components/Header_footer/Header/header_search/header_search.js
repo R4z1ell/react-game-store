@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import './header_search.scss';
 
 import { FaWindows, FaEuroSign } from 'react-icons/fa';
+
+// ! Create a new action to search directly for title/developer/publisher, DON'T use the 'getGamesToStore'
 
 class HeaderSearch extends Component {
   renderSearchElements = () =>
@@ -51,7 +54,8 @@ class HeaderSearch extends Component {
                     </div> */}
                   </div>
                   <div className="menu-product__details">
-                    2017, {game.developer}, {game.publisher}
+                    {moment(game.release_date).format('YYYY')}, {game.developer}
+                    , {game.publisher}
                   </div>
                   <div className="menu-product__windows">
                     <FaWindows
