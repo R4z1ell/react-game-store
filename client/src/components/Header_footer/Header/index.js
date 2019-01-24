@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './index.scss';
 
@@ -7,11 +8,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 import HeaderTray from './header_tray/header_tray';
+import HeaderSearch from './header_search/header_search';
+import { getGamesToStore } from '../../../store/actions/games_actions';
 
 class Header extends Component {
   state = {
     logoStatus: true,
-    inputValue: ''
+    inputValue: '',
+    fromStore: [],
+    errorTab: false,
+    linkClickStatus: false
   };
 
   searchBar = value => {
@@ -27,20 +33,39 @@ class Header extends Component {
     }
   };
 
-  searching = search => {
-    this.props.searchValue(search);
-  };
-
   clearStore = () => {
-    this.props.clearStore();
+    this.setState({
+      fromStore: [],
+      errorTab: false
+    });
   };
 
   inputStatus = value => {
+    this.setState({
+      inputValue: value
+    });
+  };
+
+  searchValue = search => {
+    if (search !== '') {
+      this.props.dispatch(getGamesToStore('', [], '', search));
+      setTimeout(() => {
+        if (this.props.games.toStore) {
+          this.setState({
+            fromStore: this.props.games.toStore,
+            errorTab: true
+          });
+        }
+      }, 500);
+    }
+  };
+
+  linkClickStatus = value => {
     this.setState(
       {
-        inputValue: value
+        linkClickStatus: value
       },
-      () => this.props.checkInputStatus(this.state.inputValue)
+      () => this.refs.child.hideSearchBar()
     );
   };
 
@@ -61,11 +86,16 @@ class Header extends Component {
           </div>
           <HeaderTray
             searchBar={value => this.searchBar(value)}
-            searching={search => this.searching(search)}
+            searching={search => this.searchValue(search)}
             inputStatus={value => this.inputStatus(value)}
             clearStore={() => this.clearStore()}
-            fromStoreLength={this.props.fromStoreLength}
-            linkClickStatus={this.props.linkClickStatus}
+            fromStoreLength={this.state.fromStore}
+            ref="child"
+          />
+          <HeaderSearch
+            searchResult={this.state.fromStore}
+            errorTab={this.state.errorTab}
+            linkClickStatus={value => this.linkClickStatus(value)}
           />
           {this.state.logoStatus ? (
             <div className="logo__container">
@@ -80,4 +110,10 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    games: state.games
+  };
+};
+
+export default connect(mapStateToProps)(Header);

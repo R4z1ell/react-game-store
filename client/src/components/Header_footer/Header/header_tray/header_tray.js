@@ -13,15 +13,8 @@ class HeaderTray extends Component {
   state = {
     searchBar: false,
     inputStatus: '',
-    typingTimeout: 0,
-    linkClickStatus: null
+    typingTimeout: 0
   };
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.linkClickStatus) {
-      return { linkClickStatus: nextProps.linkClickStatus };
-    } else return null;
-  }
 
   showSearchBar = () => {
     this.setState(

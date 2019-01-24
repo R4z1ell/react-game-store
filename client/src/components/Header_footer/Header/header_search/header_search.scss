@@ -3,9 +3,9 @@
 // no-results
 .header-search {
   &__container {
-    position: fixed;
-    width: 100vw;
-    margin-top: 52px;
+    position: absolute;
+    top: 100%;
+    left: 9%;
     z-index: 20;
   }
 
