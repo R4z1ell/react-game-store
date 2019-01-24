@@ -65,6 +65,7 @@ class Header extends Component {
             inputStatus={value => this.inputStatus(value)}
             clearStore={() => this.clearStore()}
             fromStoreLength={this.props.fromStoreLength}
+            linkClickStatus={this.props.linkClickStatus}
           />
           {this.state.logoStatus ? (
             <div className="logo__container">

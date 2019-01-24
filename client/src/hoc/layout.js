@@ -12,7 +12,8 @@ class Layout extends Component {
   state = {
     inputStatus: '',
     fromStore: [],
-    errorTab: false
+    errorTab: false,
+    linkClickStatus: false
   };
 
   checkInputStatus = value => {
@@ -42,6 +43,12 @@ class Layout extends Component {
     }
   };
 
+  linkClickStatus = value => {
+    this.setState({
+      linkClickStatus: value
+    });
+  };
+
   render() {
     return (
       <div>
@@ -50,11 +57,13 @@ class Layout extends Component {
           searchValue={search => this.searchValue(search)}
           clearStore={() => this.clearStore()}
           fromStoreLength={this.state.fromStore}
+          linkClickStatus={this.state.linkClickStatus}
         />
         <HeaderSearch
           //inputValue={this.state.inputStatus}
           searchResult={this.state.fromStore}
           errorTab={this.state.errorTab}
+          linkClickStatus={value => this.linkClickStatus(value)}
         />
         {this.props.children}
         <Footer />

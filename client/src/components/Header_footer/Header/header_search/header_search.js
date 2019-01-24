@@ -7,8 +7,22 @@ import './header_search.scss';
 import { FaWindows, FaEuroSign } from 'react-icons/fa';
 
 // ! Create a new action to search directly for title/developer/publisher, DON'T use the 'getGamesToStore'
+// ! Add the white triangle for the search Tab
 
 class HeaderSearch extends Component {
+  state = {
+    linkClickStatus: false
+  };
+
+  linkIsClicked = () => {
+    this.setState(
+      {
+        linkClickStatus: true
+      },
+      () => this.props.linkClickStatus(this.state.linkClickStatus)
+    );
+  };
+
   renderSearchElements = () =>
     this.props.searchResult
       ? this.props.searchResult.map((game, i) => (
@@ -39,7 +53,11 @@ class HeaderSearch extends Component {
                 </span>
               </span>
             </div>
-            <Link to={`/game/${game.title}`} className="menu-product__link">
+            <Link
+              to={`/game/${game.title}`}
+              className="menu-product__link"
+              onClick={() => this.linkIsClicked()}
+            >
               <img
                 src={game.images.card}
                 alt="product"
