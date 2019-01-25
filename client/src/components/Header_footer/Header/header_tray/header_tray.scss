@@ -149,6 +149,24 @@
     cursor: default;
   }
 
+  &-triangle {
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid $color-white;
+    display: block;
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: auto;
+    z-index: 3;
+    animation: fadeInWithTransformTriangle 0.1s forwards;
+    animation-delay: 120ms;
+
+    &--centered {
+      right: 30%;
+    }
+  }
+
   &__tray {
     float: right;
   }
@@ -176,5 +194,17 @@
   to {
     left: 20%;
     opacity: 1;
+  }
+}
+
+@keyframes fadeInWithTransformTriangle {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scaleX(0.73);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px) scaleX(0.73);
   }
 }

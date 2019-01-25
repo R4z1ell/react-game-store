@@ -57,6 +57,25 @@ module.exports = {
         res.status(200).send(game);
       });
   },
+  searchGameByTitle(req, res) {
+    let search = req.query.search;
+
+    Game.find({
+      $or: [
+        { title: new RegExp(search, 'i') },
+        { publisher: new RegExp(search, 'i') },
+        { developer: new RegExp(search, 'i') }
+      ]
+    })
+      .populate({
+        path: 'genres',
+        model: 'Genre'
+      })
+      .exec((err, game) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).send(game);
+      });
+  },
   getGamesToShop(req, res) {
     let findArgs = {};
 

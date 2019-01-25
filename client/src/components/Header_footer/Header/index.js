@@ -9,13 +9,13 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 import HeaderTray from './header_tray/header_tray';
 import HeaderSearch from './header_search/header_search';
-import { getGamesToStore } from '../../../store/actions/games_actions';
+import { searchGameByTitle } from '../../../store/actions/games_actions';
 
 class Header extends Component {
   state = {
     logoStatus: true,
     inputValue: '',
-    fromStore: [],
+    searchedGame: [],
     errorTab: false,
     linkClickStatus: false
   };
@@ -31,11 +31,12 @@ class Header extends Component {
         logoStatus: true
       });
     }
+    this.props.searchBar(value);
   };
 
   clearStore = () => {
     this.setState({
-      fromStore: [],
+      searchedGame: [],
       errorTab: false
     });
   };
@@ -48,11 +49,11 @@ class Header extends Component {
 
   searchValue = search => {
     if (search !== '') {
-      this.props.dispatch(getGamesToStore('', [], '', search));
+      this.props.dispatch(searchGameByTitle(search));
       setTimeout(() => {
-        if (this.props.games.toStore) {
+        if (this.props.games.searchedGame) {
           this.setState({
-            fromStore: this.props.games.toStore,
+            searchedGame: this.props.games.searchedGame,
             errorTab: true
           });
         }
@@ -89,11 +90,11 @@ class Header extends Component {
             searching={search => this.searchValue(search)}
             inputStatus={value => this.inputStatus(value)}
             clearStore={() => this.clearStore()}
-            fromStoreLength={this.state.fromStore}
+            searchedGameLength={this.state.searchedGame}
             ref="child"
           />
           <HeaderSearch
-            searchResult={this.state.fromStore}
+            searchResult={this.state.searchedGame}
             errorTab={this.state.errorTab}
             linkClickStatus={value => this.linkClickStatus(value)}
           />

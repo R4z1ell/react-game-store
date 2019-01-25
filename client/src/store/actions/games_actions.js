@@ -8,7 +8,8 @@ import {
   ADD_GAME,
   CLEAR_GAME,
   CLEAR_GAME_DETAIL,
-  GET_GENRES
+  GET_GENRES,
+  SEARCH_GAME_BY_TITLE
 } from './types';
 
 export const getGames = (limit = '') => {
@@ -31,6 +32,17 @@ export function getGameDetail(gameTitle) {
 
   return {
     type: GET_GAME_DETAIL,
+    payload: request
+  };
+}
+
+export function searchGameByTitle(gameToSearch) {
+  const request = axios
+    .get(`${GAMES_SERVER}/search_game_by_title?search=${gameToSearch}`)
+    .then(res => res.data);
+
+  return {
+    type: SEARCH_GAME_BY_TITLE,
     payload: request
   };
 }

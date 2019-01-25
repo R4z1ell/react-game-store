@@ -5,7 +5,8 @@ import {
   ADD_GAME,
   CLEAR_GAME,
   CLEAR_GAME_DETAIL,
-  GET_GENRES
+  GET_GENRES,
+  SEARCH_GAME_BY_TITLE
 } from '../actions/types';
 
 export default function(state = {}, action) {
@@ -24,6 +25,8 @@ export default function(state = {}, action) {
       return { ...state, gameDetail: action.payload };
     case GET_GENRES:
       return { ...state, genres: action.payload };
+    case SEARCH_GAME_BY_TITLE:
+      return { ...state, searchedGame: action.payload };
     default:
       return state;
   }

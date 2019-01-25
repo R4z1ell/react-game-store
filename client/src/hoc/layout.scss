@@ -1,0 +1,20 @@
+.menu-overlay {
+  visibility: hidden;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.25s ease, visibility 0.25s linear;
+}
+
+.menu-overlay.is-visible {
+  visibility: inherit;
+  opacity: 1;
+  transition: opacity 0.45s ease 0.1s, visibility 0.45s linear 0.1s;
+}

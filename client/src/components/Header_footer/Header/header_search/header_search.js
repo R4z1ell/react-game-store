@@ -6,9 +6,6 @@ import './header_search.scss';
 
 import { FaWindows, FaEuroSign } from 'react-icons/fa';
 
-// ! Create a new action to search directly for title/developer/publisher, DON'T use the 'getGamesToStore'
-// ! Add the white triangle for the search Tab
-
 class HeaderSearch extends Component {
   state = {
     linkClickStatus: false

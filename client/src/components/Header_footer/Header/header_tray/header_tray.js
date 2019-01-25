@@ -133,8 +133,8 @@ class HeaderTray extends Component {
                 </div>
                 {this.state.inputStatus !== '' ? (
                   <div className="header-search-toolbar__results-count">
-                    {this.props.fromStoreLength.length > 0 ? (
-                      <span>{this.props.fromStoreLength.length} Games</span>
+                    {this.props.searchedGameLength.length > 0 ? (
+                      <span>{this.props.searchedGameLength.length} Games</span>
                     ) : null}
                     <span className="header-triangle header-triangle--centered" />
                   </div>
