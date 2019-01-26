@@ -1,0 +1,117 @@
+@import '../../../Resources/scss/variables';
+
+.modal {
+  &__box {
+    display: inline-block;
+    position: absolute;
+    top: 0%;
+    left: 36%;
+    text-align: left;
+    white-space: normal;
+    overflow: hidden;
+    height: auto;
+    width: 100%;
+    max-width: 390px;
+    vertical-align: top;
+    margin-top: 130px;
+    background: #dedede;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.15s linear;
+  }
+
+  &__footer {
+    padding: 17px 0;
+    border-top: 1px solid #ccc;
+    background-color: #d2d2d2;
+    text-align: center;
+
+    &--reset-pass,
+    &--sign-up {
+      font-size: 12px;
+      line-height: 16px;
+      color: #4f4f4f;
+    }
+  }
+}
+
+.modal__footer--sign-up::before {
+  content: '\2022';
+  display: inline-block;
+  margin: 0 10px;
+  color: #4f4f4f !important;
+  font-family: 'Lato';
+  font-size: 12px;
+}
+
+.form {
+  &__field {
+    margin: 10px 0;
+  }
+
+  &--login {
+    padding: 25px 30px 0 30px;
+    width: 100%;
+    max-width: 390px;
+    min-width: 200px;
+    background: #dedede;
+    font-size: 13px;
+    line-height: 1.5em;
+    text-align: center;
+    color: #595959;
+  }
+
+  &__title {
+    font-size: 2.46em;
+    font-family: 'Open Sans';
+    position: relative;
+    margin: 0 0 27px;
+    font-weight: 300;
+    line-height: 1.1em;
+    text-transform: uppercase;
+  }
+}
+
+.field {
+  position: relative;
+
+  &__input {
+    display: block;
+    width: 100%;
+    min-height: 42px;
+    padding: 10px;
+    border: #b1b1b1 solid 1px;
+    font-size: 1em;
+    line-height: 20px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: #ededed;
+    font-family: inherit;
+    color: #4c4c4c;
+  }
+}
+
+.btn--login {
+  display: block;
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid #b1b1b1;
+  color: $color-white;
+  font-weight: 400;
+  margin-top: 20px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  height: 36px;
+  padding: 0 10px;
+  line-height: 40px;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  background: linear-gradient(#9fbf00, #80ab00);
+  background-color: #9fbf00;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  position: relative;
+  border-radius: 3px;
+  font-family: inherit;
+  text-align: center;
+  outline: transparent solid;
+  cursor: pointer;
+}

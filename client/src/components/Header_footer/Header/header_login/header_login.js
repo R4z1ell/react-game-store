@@ -11,7 +11,12 @@ class HeaderLogin extends Component {
             Create account
           </div>
           <span className="menu-header__separator" />
-          <div className="menu-btn menu-btn__sign-in">Sign in</div>
+          <div
+            className="menu-btn menu-btn__sign-in"
+            onClick={this.showLoginModal}
+          >
+            Sign in
+          </div>
         </div>
       </div>
     );
