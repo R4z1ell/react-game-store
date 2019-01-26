@@ -9,6 +9,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 import HeaderTray from './header_tray/header_tray';
 import HeaderSearch from './header_search/header_search';
+import HeaderLogin from './header_login/header_login';
 import { searchGameByTitle } from '../../../store/actions/games_actions';
 
 class Header extends Component {
@@ -17,7 +18,8 @@ class Header extends Component {
     inputValue: '',
     searchedGame: [],
     errorTab: false,
-    linkClickStatus: false
+    linkClickStatus: false,
+    active: false
   };
 
   searchBar = value => {
@@ -31,7 +33,6 @@ class Header extends Component {
         logoStatus: true
       });
     }
-    this.props.searchBar(value);
   };
 
   clearStore = () => {
@@ -70,7 +71,21 @@ class Header extends Component {
     );
   };
 
+  showSignIn = () => {
+    this.setState({
+      active: true
+    });
+  };
+
+  hideSignIn = () => {
+    this.setState({
+      active: false
+    });
+  };
+
   render() {
+    const active = this.state.active ? 'block' : 'none';
+
     return (
       <header className="header__bck">
         <div className="header__container">
@@ -80,10 +95,19 @@ class Header extends Component {
                 STORE <FontAwesomeIcon icon={faAngleDown} />
               </Link>
             </div>
-            <div className="header__item">
-              BROWSE <FontAwesomeIcon icon={faAngleDown} />
+            <div
+              className="header__item header__signIn"
+              onMouseEnter={this.showSignIn}
+              onMouseLeave={this.hideSignIn}
+            >
+              <p className="header__sign-in">SIGN IN</p>
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                className="header__dropdown-icon"
+              />
+              <p className="menu-triangle" style={{ display: active }} />
+              {this.state.active ? <HeaderLogin /> : null}
             </div>
-            <div className="header__item">ON SALE</div>
           </div>
           <HeaderTray
             searchBar={value => this.searchBar(value)}
@@ -91,6 +115,7 @@ class Header extends Component {
             inputStatus={value => this.inputStatus(value)}
             clearStore={() => this.clearStore()}
             searchedGameLength={this.state.searchedGame}
+            active={this.state.active}
             ref="child"
           />
           <HeaderSearch

@@ -13,13 +13,25 @@ class HeaderTray extends Component {
   state = {
     searchBar: false,
     inputStatus: '',
-    typingTimeout: 0
+    typingTimeout: 0,
+    overlayStatus: false
+  };
+
+  closeOverlay = () => {
+    this.setState(
+      {
+        overlayStatus: false,
+        searchBar: false
+      },
+      () => this.props.searchBar(this.state.searchBar)
+    );
   };
 
   showSearchBar = () => {
     this.setState(
       {
-        searchBar: true
+        searchBar: true,
+        overlayStatus: true
       },
       () => this.props.searchBar(this.state.searchBar)
     );
@@ -29,7 +41,8 @@ class HeaderTray extends Component {
     this.setState(
       {
         searchBar: false,
-        inputStatus: ''
+        inputStatus: '',
+        overlayStatus: false
       },
       () => {
         this.props.inputStatus(this.state.inputStatus);
@@ -76,8 +89,13 @@ class HeaderTray extends Component {
   };
 
   render() {
+    const overlayClass =
+      this.props.active || this.state.overlayStatus
+        ? 'menu-overlay is-visible'
+        : 'menu-overlay';
     return (
       <div className="header__tray">
+        <div className={overlayClass} onClick={this.closeOverlay} />
         <div className="header__item">
           <FontAwesomeIcon icon={faBell} />
           <span>0</span>

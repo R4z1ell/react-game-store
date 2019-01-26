@@ -1,0 +1,68 @@
+.menu-submenu {
+  position: absolute;
+  z-index: 2;
+  left: 25px;
+  top: 52px;
+  width: 250px;
+  color: #4c4c4c;
+  font-size: 13px;
+  line-height: normal;
+  background: #fff;
+  transform-origin: 50% 0;
+  letter-spacing: normal;
+  cursor: default;
+}
+
+.menu-header {
+  position: relative;
+  height: 112px;
+  padding: 15px;
+  border-bottom: 1px solid #e6e6e6;
+  background: #f2f2f2;
+  line-height: normal;
+
+  &__separator {
+    display: block;
+    height: 8px;
+  }
+}
+
+.menu-btn {
+  display: block;
+  position: relative;
+  height: 36px;
+  padding: 0;
+  text-align: center;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.15),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 36px;
+  border: none;
+  text-decoration: none;
+
+  &--gray {
+    color: #4c4c4c;
+
+    &:hover {
+      background: linear-gradient(to bottom, #e6e6e6, #e1e1e1);
+    }
+  }
+
+  &__create-account {
+    background: #e6e6e6;
+  }
+
+  &__sign-in {
+    color: #fff;
+    background: linear-gradient(to bottom, #985fb2 0%, #713b8d 100%);
+
+    &:hover {
+      background: #713b8d;
+    }
+  }
+}

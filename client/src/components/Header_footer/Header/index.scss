@@ -22,6 +22,17 @@
     margin: auto;
   }
 
+  &__dropdown-icon {
+    position: absolute;
+    left: 13%;
+    top: 19.5px;
+    height: 14px;
+    width: 8.75px !important;
+    fill: #ccc;
+    vertical-align: middle;
+    transition: opacity 0.2s ease-in-out;
+  }
+
   &__menu {
     float: left;
   }
@@ -32,6 +43,16 @@
 
     &:hover {
       color: $color-white;
+    }
+  }
+
+  &__sign-in {
+    color: #d38ae5;
+    transition: transform 0.2s, opacity 0.2s;
+    transition-delay: 0.15s;
+
+    &:hover {
+      color: rgb(249, 178, 255);
     }
   }
 }
@@ -54,4 +75,16 @@
     color: $color-gray;
     transform: skew(20deg);
   }
+}
+
+.menu-triangle {
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 9px solid #f2f2f2;
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  right: 85.3%;
+  left: auto;
+  z-index: 3;
 }
