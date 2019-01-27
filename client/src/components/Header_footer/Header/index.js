@@ -83,6 +83,14 @@ class Header extends Component {
     });
   };
 
+  showLoginModal = value => {
+    this.props.showLoginModal(value);
+  };
+
+  showSignUpModal = value => {
+    this.props.showSignUpModal(value);
+  };
+
   render() {
     const active = this.state.active ? 'block' : 'none';
 
@@ -106,7 +114,12 @@ class Header extends Component {
                 className="header__dropdown-icon"
               />
               <p className="menu-triangle" style={{ display: active }} />
-              {this.state.active ? <HeaderLogin /> : null}
+              {this.state.active ? (
+                <HeaderLogin
+                  showLoginModal={value => this.showLoginModal(value)}
+                  showSignUpModal={value => this.showSignUpModal(value)}
+                />
+              ) : null}
             </div>
           </div>
           <HeaderTray

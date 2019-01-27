@@ -2,18 +2,11 @@
 
 .modal {
   &__box {
-    display: inline-block;
-    position: absolute;
-    top: 0%;
-    left: 36%;
-    text-align: left;
     white-space: normal;
     overflow: hidden;
-    height: auto;
+    height: fit-content;
     width: 100%;
     max-width: 390px;
-    vertical-align: top;
-    margin-top: 130px;
     background: #dedede;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.15);
     transition: opacity 0.15s linear;
@@ -26,10 +19,12 @@
     text-align: center;
 
     &--reset-pass,
-    &--sign-up {
+    &--sign-up,
+    &--login {
       font-size: 12px;
       line-height: 16px;
       color: #4f4f4f;
+      cursor: pointer;
     }
   }
 }
@@ -91,27 +86,27 @@
 
 .btn--login {
   display: block;
-  width: 100%;
-  min-height: 42px;
-  border: 1px solid #b1b1b1;
-  color: $color-white;
-  font-weight: 400;
-  margin-top: 20px;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  height: 36px;
-  padding: 0 10px;
-  line-height: 40px;
-  text-transform: uppercase;
-  overflow: hidden;
-  white-space: nowrap;
   background: linear-gradient(#9fbf00, #80ab00);
   background-color: #9fbf00;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  position: relative;
+  border: 1px solid #b1b1b1;
   border-radius: 3px;
-  font-family: inherit;
-  text-align: center;
-  outline: transparent solid;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  color: $color-white;
   cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  height: 36px;
+  letter-spacing: 0.5px;
+  line-height: 40px;
+  margin-top: 20px;
+  min-height: 42px;
+  outline: transparent solid;
+  overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: 100%;
 }

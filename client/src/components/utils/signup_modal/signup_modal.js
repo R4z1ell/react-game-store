@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import './login_modal.scss';
-
-class LoginModal extends Component {
+class SignupModal extends Component {
   render() {
     return (
       <div className="modal modal__box">
@@ -11,9 +9,17 @@ class LoginModal extends Component {
             <form className="form--login">
               <h2 className="form__title">
                 {/* <svg  className="key-logo"></svg> */}
-                <div className="form__title--text">Log in</div>
+                <div className="form__title--text">Sign-up</div>
               </h2>
               <ol className="form__fieldset">
+                <li className="form__field field">
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    className="field__input"
+                  />
+                  {/* <span className="field__msg is-hidden">Incorrect email</span> */}
+                </li>
                 <li className="form__field field">
                   <input
                     type="email"
@@ -35,18 +41,17 @@ class LoginModal extends Component {
               </ol>
               <ol className="form__fieldset">
                 <li className="form__field field btn-slot">
-                  <button className="btn--login">Log in now</button>
+                  <button className="btn--login">Sign up now</button>
                 </li>
               </ol>
             </form>
             <button className="modal__btn-close" />
             <footer className="modal__footer">
-              <span className="modal__footer--reset-pass">Password reset</span>
               <span
-                className="modal__footer--sign-up"
-                onClick={() => this.props.switchToSignUp(true)}
+                className="modal__footer--login"
+                onClick={() => this.props.switchToLogIn(true)}
               >
-                Sign up now
+                Log in to your account
               </span>
             </footer>
           </div>
@@ -56,4 +61,4 @@ class LoginModal extends Component {
   }
 }
 
-export default LoginModal;
+export default SignupModal;

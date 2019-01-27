@@ -7,13 +7,16 @@ class HeaderLogin extends Component {
     return (
       <div className="menu-submenu">
         <div className="menu-header">
-          <div className="menu-btn menu-btn--gray menu-btn__create-account">
+          <div
+            className="menu-btn menu-btn--gray menu-btn__create-account"
+            onClick={() => this.props.showSignUpModal(true)}
+          >
             Create account
           </div>
           <span className="menu-header__separator" />
           <div
             className="menu-btn menu-btn__sign-in"
-            onClick={this.showLoginModal}
+            onClick={() => this.props.showLoginModal(true)}
           >
             Sign in
           </div>
