@@ -80,10 +80,7 @@ class Layout extends Component {
           showSignUpModal={this.showSignUpModal}
         />
         <div className="login-modal__overlay" style={{ display: overlayStyle }}>
-          <div
-            ref={this.setWrapperRef}
-            style={{ width: '390px', marginTop: '130px' }}
-          >
+          <div ref={this.setWrapperRef} className="login-modal__wrapper">
             {this.state.loginModal && !this.state.switchToSignUp ? (
               <LoginModal switchToSignUp={this.switchToSignUp} />
             ) : null}

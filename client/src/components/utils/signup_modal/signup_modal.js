@@ -8,7 +8,6 @@ class SignupModal extends Component {
           <div className="modal__content-item">
             <form className="form--login">
               <h2 className="form__title">
-                {/* <svg  className="key-logo"></svg> */}
                 <div className="form__title--text">Sign-up</div>
               </h2>
               <ol className="form__fieldset">

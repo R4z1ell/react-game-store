@@ -1,3 +1,6 @@
+export const LOGIN_USER = 'login_user';
+export const REGISTER_USER = 'register_user';
+
 export const ADD_GAME = 'add_game';
 export const CLEAR_GAME = 'clear_game';
 export const GET_GAMES = 'get_games';

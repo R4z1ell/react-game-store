@@ -6,7 +6,7 @@ import Home from './components/Home';
 import GamePage from './components/Game';
 import StorePage from './components/Store';
 import UserDashboard from './components/User';
-import AddGame from './components/User/add_game/add_game';
+import AddGame from './components/User/Admin/add_game/add_game';
 
 const Routes = () => {
   return (

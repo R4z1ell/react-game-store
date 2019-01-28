@@ -12,16 +12,16 @@ import {
   populateOptionFields,
   generateData,
   resetFields
-} from '../../utils/Form/form_actions';
+} from '../../../utils/Form/form_actions';
 import {
   getGenres,
   addGame,
   clearGame
-} from '../../../store/actions/games_actions';
-import FormField from '../../utils/Form/form_field';
-import ScreenshotBlock from '../../utils/Form/screenshot_block/screenshot_block';
-import LanguageBlock from '../../utils/Form/language_block/language_block';
-import UserLayout from '../../../hoc/user_layout/user_layout';
+} from '../../../../store/actions/games_actions';
+import FormField from '../../../utils/Form/form_field';
+import ScreenshotBlock from '../../../utils/Form/screenshot_block/screenshot_block';
+import LanguageBlock from '../../../utils/Form/language_block/language_block';
+import UserLayout from '../../../../hoc/user_layout/user_layout';
 
 class AddGame extends Component {
   state = {

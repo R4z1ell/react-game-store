@@ -82,6 +82,30 @@
     font-family: inherit;
     color: #4c4c4c;
   }
+
+  &__msg {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    line-height: 1.3em;
+    text-align: right;
+    padding: 3px 5px 3px 30px;
+    font-size: 0.92308em;
+    font-weight: 600;
+    max-width: 60%;
+    right: 5px;
+    transform: translate(0, -50%);
+  }
+}
+
+.field--error > .field__input {
+  background: #eeddd5;
+  border-color: #b8a79f;
+}
+
+.field--error > .field__msg {
+  background: linear-gradient(90deg, rgba(238, 221, 213, 0), #eeddd5 15px);
+  color: #f25100;
 }
 
 .btn--login {

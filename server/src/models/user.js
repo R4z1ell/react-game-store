@@ -16,15 +16,10 @@ const userSchema = mongoose.Schema({
     required: true,
     minlength: 5
   },
-  name: {
+  username: {
     type: String,
     required: true,
-    maxlength: 100
-  },
-  lastname: {
-    type: String,
-    required: true,
-    maxlength: 100
+    maxlength: 20
   },
   cart: {
     type: Array,
