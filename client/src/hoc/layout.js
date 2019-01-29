@@ -71,6 +71,12 @@ class Layout extends Component {
     });
   };
 
+  closeOverlay = value => {
+    this.setState({
+      overlay: value
+    });
+  };
+
   render() {
     const overlayStyle = this.state.overlay ? 'flex' : 'none';
     return (
@@ -82,7 +88,10 @@ class Layout extends Component {
         <div className="login-modal__overlay" style={{ display: overlayStyle }}>
           <div ref={this.setWrapperRef} className="login-modal__wrapper">
             {this.state.loginModal && !this.state.switchToSignUp ? (
-              <LoginModal switchToSignUp={this.switchToSignUp} />
+              <LoginModal
+                switchToSignUp={this.switchToSignUp}
+                closeOverlay={this.closeOverlay}
+              />
             ) : null}
             {this.state.signupModal && this.state.switchToSignUp ? (
               <SignupModal switchToLogIn={this.switchToLogIn} />

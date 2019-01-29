@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Loader from 'react-loader-spinner';
 
-import { loginUser } from '../../../store/actions/user_actions';
+import { loginUser, auth } from '../../../store/actions/user_actions';
 
 import './login_modal.scss';
 
@@ -14,7 +15,8 @@ class LoginModal extends Component {
     blurEmail: false,
     blurPassword: false,
     validEmail: false,
-    logInBtnClicked: false
+    logInBtnClicked: false,
+    loading: false
   };
 
   submitForm = event => {
@@ -42,7 +44,16 @@ class LoginModal extends Component {
       };
       this.props.dispatch(loginUser(dataToSubmit)).then(res => {
         if (res.payload.loginSuccess) {
-          console.log('Logged in');
+          this.setState({
+            loading: true
+          });
+          this.props.dispatch(auth());
+          setTimeout(() => {
+            this.setState({
+              loading: false
+            });
+            this.props.closeOverlay(false);
+          }, 1000);
         } else {
           if (res.payload.message.length > 14) {
             this.setState({
@@ -200,6 +211,9 @@ class LoginModal extends Component {
                     className="btn--login"
                     onClick={event => this.submitForm(event)}
                   >
+                    {this.state.loading ? (
+                      <Loader type="Oval" color="#fff" height="20" width="20" />
+                    ) : null}
                     Log in now
                   </button>
                 </li>

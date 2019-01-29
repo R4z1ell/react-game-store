@@ -1,5 +1,6 @@
 export const LOGIN_USER = 'login_user';
 export const REGISTER_USER = 'register_user';
+export const AUTH_USER = 'auth_user';
 
 export const ADD_GAME = 'add_game';
 export const CLEAR_GAME = 'clear_game';

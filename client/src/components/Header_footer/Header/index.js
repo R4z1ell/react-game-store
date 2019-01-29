@@ -108,7 +108,15 @@ class Header extends Component {
               onMouseEnter={this.showSignIn}
               onMouseLeave={this.hideSignIn}
             >
-              <p className="header__sign-in">SIGN IN</p>
+              {this.props.user.userData ? (
+                !this.props.user.userData.isAuth ? (
+                  <p className="header__sign-in">SIGN IN</p>
+                ) : (
+                  <p className="header__logged-in">
+                    {this.props.user.userData.username}
+                  </p>
+                )
+              ) : null}
               <FontAwesomeIcon
                 icon={faAngleDown}
                 className="header__dropdown-icon"
@@ -151,7 +159,8 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    games: state.games
+    games: state.games,
+    user: state.user
   };
 };
 
