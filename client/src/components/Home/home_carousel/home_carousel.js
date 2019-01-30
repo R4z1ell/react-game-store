@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 
-import style from './home_carousel.module.scss';
+import './home_carousel.scss';
 import './slider.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faEuroSign } from '@fortawesome/free-solid-svg-icons';
+import { FaWindows } from 'react-icons/fa';
 
 import MyButton from '../../../components/utils/button/button';
 
@@ -83,20 +84,27 @@ const HomeCarousel = props => {
                 height: '490px'
               }}
             >
-              <div className={style.container}>
-                <div className={style.logo__container}>
+              <div className="container">
+                <div className="gamme__above--logo">
                   {game.images.logo ? (
                     <img src={`${game.images.logo}`} alt="logo" />
                   ) : null}
                 </div>
-                <div className={style.game__above}>
-                  <img src="/images/windows.png" alt="window-logo" />
-                  <FontAwesomeIcon icon={faCircle} />
+                <div className="game__above">
+                  <FaWindows
+                    fill="#999"
+                    className="game__above--windows"
+                    size="0.8em"
+                  />
+                  <FontAwesomeIcon
+                    icon={faCircle}
+                    className="game__above--circle"
+                  />
                   <span>Now available</span>
                 </div>
-                <div className={style.game__title}>{game.title}</div>
-                <div className={style.game__action}>
-                  <div className={style.game__price}>
+                <div className="game__title">{game.title}</div>
+                <div className="game__action">
+                  <div className="game__price">
                     <FontAwesomeIcon icon={faEuroSign} />
                     {game.prices.basePrice / 100}
                   </div>

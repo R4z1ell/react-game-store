@@ -10,6 +10,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import HeaderTray from './header_tray/header_tray';
 import HeaderSearch from './header_search/header_search';
 import HeaderLogin from './header_login/header_login';
+import HeaderAccount from './header_account/header_account';
 import { searchGameByTitle } from '../../../store/actions/games_actions';
 
 class Header extends Component {
@@ -109,6 +110,15 @@ class Header extends Component {
               onMouseLeave={this.hideSignIn}
             >
               {this.props.user.userData ? (
+                this.props.user.userData.isAuth ? (
+                  <img
+                    src="/images/avatar_small.jpg"
+                    alt="avatar-small"
+                    className="header__img-avatar"
+                  />
+                ) : null
+              ) : null}
+              {this.props.user.userData ? (
                 !this.props.user.userData.isAuth ? (
                   <p className="header__sign-in">SIGN IN</p>
                 ) : (
@@ -122,11 +132,14 @@ class Header extends Component {
                 className="header__dropdown-icon"
               />
               <p className="menu-triangle" style={{ display: active }} />
-              {this.state.active ? (
+              {this.state.active && !this.props.user.userData.isAuth ? (
                 <HeaderLogin
                   showLoginModal={value => this.showLoginModal(value)}
                   showSignUpModal={value => this.showSignUpModal(value)}
                 />
+              ) : null}
+              {this.state.active && this.props.user.userData.isAuth ? (
+                <HeaderAccount />
               ) : null}
             </div>
           </div>

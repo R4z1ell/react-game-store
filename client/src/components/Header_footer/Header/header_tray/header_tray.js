@@ -98,11 +98,11 @@ class HeaderTray extends Component {
         <div className={overlayClass} onClick={this.closeOverlay} />
         <div className="header__item">
           <FontAwesomeIcon icon={faBell} />
-          <span>0</span>
+          <span className="header__item-count">0</span>
         </div>
         <div className="header__item">
           <FontAwesomeIcon icon={faShoppingCart} />
-          <span>0</span>
+          <span className="header__item-count">0</span>
         </div>
         <div className="header__item header__search">
           <div className="header-link header-link--last header-link--search header-link--icon">

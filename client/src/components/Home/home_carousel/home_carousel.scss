@@ -14,9 +14,9 @@
   align-items: center;
   bottom: 135px;
 
-  img {
+  &-img {
     width: 10px;
-    height: 9px;
+    height: 10px;
   }
 
   span {
@@ -25,7 +25,7 @@
     margin-left: 10px;
   }
 
-  svg {
+  &--circle {
     color: $color-gray;
     width: 8px;
     height: 7px;
@@ -64,7 +64,7 @@
   }
 }
 
-.logo__container {
+.gamme__above--logo {
   width: 50%;
   padding-top: 71px;
 }
