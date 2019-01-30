@@ -11,6 +11,37 @@
     border-bottom: 1px solid $color-gray;
   }
 
+  &__buy-block {
+    position: relative;
+  }
+
+  &__button {
+    position: absolute;
+    top: -7px;
+    right: -34%;
+    opacity: 0;
+    border: 1px solid #7fab34;
+    border-radius: 3px;
+    width: 33px;
+    height: 30px;
+    cursor: pointer;
+    background-image: linear-gradient(180deg, #a5c700, #86b300);
+    box-shadow: 0 1px 2px 0 rgba($color-black, 0.35);
+    transition: none;
+
+    &:hover {
+      background-image: linear-gradient(180deg, #acce00, #8bba00);
+    }
+
+    &-image {
+      position: absolute;
+      top: 7px;
+      left: 9px;
+      width: 16px;
+      height: 13px;
+    }
+  }
+
   &__cover {
     height: 80px;
 
@@ -27,10 +58,15 @@
     color: #999;
   }
 
-  &__price {
+  &__image {
+    margin-top: 5px;
+  }
+
+  &__prices {
     font-size: 15px;
     font-weight: 700;
     color: $color-dark;
+    transition: 0.1s;
 
     svg {
       color: $color-dark;
@@ -69,6 +105,15 @@
   cursor: pointer;
 }
 
+.product-card--active .product-card__button {
+  right: -7%;
+  opacity: 1;
+}
+
+.product-card--active .product-card__prices {
+  transform: translateX(-40px);
+}
+
 .product-card--active::before {
   content: '';
   position: absolute;
@@ -79,9 +124,4 @@
 .product-card--active::before {
   left: 100%;
   border-left: 40px solid $color-white-dark;
-}
-
-.fa-windows {
-  width: 13px !important;
-  height: 35px !important;
 }

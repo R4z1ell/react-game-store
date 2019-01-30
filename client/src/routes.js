@@ -10,9 +10,6 @@ import StorePage from './components/Store';
 import UserDashboard from './components/User';
 import AddGame from './components/User/Admin/add_game/add_game';
 
-// ! Create the 'Auth' HOC Component to handle the authentication, create the 'auth' action inside the
-// ! 'user_actions.js' file
-
 const Routes = () => {
   return (
     <Layout>

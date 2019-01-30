@@ -40,9 +40,34 @@
   height: 47px;
   background-color: rgba($color-white-light, 0.6);
 
+  &__button {
+    position: absolute;
+    top: 8px;
+    right: -8%;
+    opacity: 0;
+    border: 1px solid #7fab34;
+    border-radius: 3px;
+    width: 33px;
+    height: 30px;
+    cursor: pointer;
+    background-image: linear-gradient(180deg, #a5c700, #86b300);
+    box-shadow: 0 1px 2px 0 rgba($color-black, 0.35);
+    transition: 0.2s;
+
+    &:hover {
+      background-image: linear-gradient(180deg, #acce00, #8bba00);
+    }
+
+    &-image {
+      position: absolute;
+      top: 7px;
+      left: 9px;
+      width: 16px;
+      height: 13px;
+    }
+  }
+
   &__image {
-    width: 10px;
-    height: 9px;
     margin: 0 15px 0 15px;
   }
 
@@ -52,11 +77,13 @@
     color: $color-dark;
   }
 
-  &__price {
+  &__prices {
     position: absolute;
-    right: 10px;
+    top: 16px;
+    right: 16px;
     font-size: 15px;
     font-weight: 700;
+    transition: 0.2s;
 
     svg {
       color: $color-dark;
@@ -168,4 +195,13 @@
 
 .slick-active button {
   background-color: $color-dark !important;
+}
+
+.slick-current:hover .featured-detail__prices {
+  transform: translateX(-42px);
+}
+
+.slick-current:hover .featured-detail__button {
+  right: 2%;
+  opacity: 1;
 }
