@@ -3,6 +3,23 @@ import React from 'react';
 import GameCard from './game_card/game_card';
 
 const CardBlock = props => {
+  const renderCardsForHome = () =>
+    props.list
+      ? props.list.map((card, i) => {
+          if (i <= 3 && props.fromHome) {
+            return (
+              <GameCard
+                key={i}
+                {...card}
+                grid={props.gridView}
+                list={props.listView}
+              />
+            );
+          }
+          return null;
+        })
+      : null;
+
   const renderCards = () =>
     props.list
       ? props.list.map((card, i) => (
@@ -28,7 +45,9 @@ const CardBlock = props => {
           }}
           className={`card_wrapper ${slideStatus} ${gridStatus} ${listStatus}`}
         >
-          {renderCards(props.list)}
+          {props.fromHome
+            ? renderCardsForHome(props.list)
+            : renderCards(props.list)}
         </div>
       </div>
     </div>

@@ -9,6 +9,8 @@ import {
   faSearch
 } from '@fortawesome/free-solid-svg-icons';
 
+import HeaderCart from '../header_cart/header_cart';
+
 class HeaderTray extends Component {
   state = {
     searchBar: false,
@@ -88,6 +90,8 @@ class HeaderTray extends Component {
     );
   };
 
+  // ! show and Hide the 'HeaderCart' Component when clicking on the 'cart' icons
+
   render() {
     const overlayClass =
       this.props.active || this.state.overlayStatus
@@ -103,6 +107,7 @@ class HeaderTray extends Component {
         <div className="header__item">
           <FontAwesomeIcon icon={faShoppingCart} />
           <span className="header__item-count">0</span>
+          <HeaderCart />
         </div>
         <div className="header__item header__search">
           <div className="header-link header-link--last header-link--search header-link--icon">

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './index.scss';
@@ -12,6 +12,7 @@ import HeaderSearch from './header_search/header_search';
 import HeaderLogin from './header_login/header_login';
 import HeaderAccount from './header_account/header_account';
 import { searchGameByTitle } from '../../../store/actions/games_actions';
+import { logoutUser } from '../../../store/actions/user_actions';
 
 class Header extends Component {
   state = {
@@ -92,6 +93,14 @@ class Header extends Component {
     this.props.showSignUpModal(value);
   };
 
+  logoutHandler = () => {
+    this.props.dispatch(logoutUser()).then(response => {
+      if (response.payload.success) {
+        this.props.history.push('/');
+      }
+    });
+  };
+
   render() {
     const active = this.state.active ? 'block' : 'none';
     const triangleClass = this.state.active
@@ -142,7 +151,10 @@ class Header extends Component {
                 />
               ) : null}
               {this.state.active && this.props.user.userData.isAuth ? (
-                <HeaderAccount />
+                <HeaderAccount
+                  userData={this.props.user.userData}
+                  logoutUser={this.logoutHandler}
+                />
               ) : null}
             </div>
           </div>
@@ -180,4 +192,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(withRouter(Header));

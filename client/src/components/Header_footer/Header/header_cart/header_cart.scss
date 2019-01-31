@@ -1,0 +1,105 @@
+@import '../../../../Resources/scss/variables';
+
+.menu-cart__submenu {
+  position: absolute;
+  left: 58%;
+  width: 500px;
+  padding-bottom: 0;
+  padding-top: 0;
+  z-index: 2;
+  top: 52px;
+  color: #4c4c4c;
+  font-size: 13px;
+  line-height: normal;
+  background: $color-white;
+  transform-origin: 50% 0;
+  letter-spacing: normal;
+  cursor: default;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 1px 3px 0px rgba($color-black, 0.1),
+      0px 0px 15px 5px rgba($color-black, 0.15);
+  }
+}
+
+.menu-cart-empty {
+  padding: 40px;
+  padding-bottom: 99px;
+  padding-top: 70px;
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: $color-gray;
+  background: $color-white;
+
+  &__btn {
+    display: inline-block;
+    position: relative;
+    height: 36px;
+    padding: 0 10px;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 13.5px;
+    line-height: 36px;
+    border: none;
+    text-decoration: none;
+    background: #e6e6e6;
+    color: #4c4c4c !important;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.15),
+      0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+    margin-left: 5px;
+    margin-right: 9px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+
+    &--wishlist {
+      background: #f5e6c0;
+    }
+  }
+
+  &__description {
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    color: gray !important;
+  }
+
+  &__header {
+    position: relative;
+    padding-top: 50px;
+    margin-bottom: 15px;
+    color: #569a3e;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__header-icon {
+    position: absolute;
+    top: 0;
+    left: 4%;
+    height: 30px;
+    margin-left: -15px !important;
+    fill: #569a3e;
+  }
+
+  &__line {
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+    width: 180px;
+    height: 1px;
+    border: none;
+    background: #e5e5e5;
+  }
+}
