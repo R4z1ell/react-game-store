@@ -94,6 +94,9 @@ class Header extends Component {
 
   render() {
     const active = this.state.active ? 'block' : 'none';
+    const triangleClass = this.state.active
+      ? 'menu-triangle menu-triangle-animated'
+      : 'menu-triangle';
 
     return (
       <header className="header__bck">
@@ -131,7 +134,7 @@ class Header extends Component {
                 icon={faAngleDown}
                 className="header__dropdown-icon"
               />
-              <p className="menu-triangle" style={{ display: active }} />
+              <p className={triangleClass} style={{ display: active }} />
               {this.state.active && !this.props.user.userData.isAuth ? (
                 <HeaderLogin
                   showLoginModal={value => this.showLoginModal(value)}

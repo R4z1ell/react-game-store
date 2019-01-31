@@ -110,3 +110,21 @@
   left: auto;
   z-index: 3;
 }
+
+.menu-triangle-animated {
+  opacity: 0;
+  animation: fadeInWithTransformTriangle 0.1s forwards;
+  animation-delay: 120ms;
+}
+
+@keyframes fadeInWithTransformTriangle {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scaleX(0.73);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px) scaleX(0.73);
+  }
+}

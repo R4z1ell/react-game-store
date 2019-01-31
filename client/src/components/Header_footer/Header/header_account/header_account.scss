@@ -17,6 +17,7 @@
     transform-origin: 50% 0;
     letter-spacing: normal;
     cursor: default;
+    animation: fadeInWithTransform 0.2s forwards;
 
     &::before {
       content: '';
@@ -97,5 +98,18 @@
     margin-top: 8px;
     margin-bottom: 7px;
     background: #e6e6e6;
+  }
+}
+
+// Kreyframes
+@keyframes fadeInWithTransform {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }

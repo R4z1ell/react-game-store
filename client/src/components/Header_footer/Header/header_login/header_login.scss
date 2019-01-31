@@ -1,3 +1,5 @@
+@import '../../../../Resources/scss/variables';
+
 .menu-submenu {
   position: absolute;
   z-index: 2;
@@ -7,10 +9,22 @@
   color: #4c4c4c;
   font-size: 13px;
   line-height: normal;
-  background: #fff;
+  background: $color-white;
   transform-origin: 50% 0;
   letter-spacing: normal;
   cursor: default;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 1px 3px 0px rgba($color-black, 0.1),
+      0px 0px 15px 5px rgba($color-black, 0.15);
+  }
 }
 
 .menu-header {
@@ -37,8 +51,8 @@
   cursor: pointer;
   user-select: none;
   text-transform: uppercase;
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.15),
-    0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 0px 1px rgba($color-black, 0.15),
+    0px 1px 3px 0px rgba($color-black, 0.15);
   font-size: 14px;
   font-weight: 700;
   line-height: 36px;
@@ -58,7 +72,7 @@
   }
 
   &__sign-in {
-    color: #fff;
+    color: $color-white;
     background: linear-gradient(to bottom, #985fb2 0%, #713b8d 100%);
 
     &:hover {
