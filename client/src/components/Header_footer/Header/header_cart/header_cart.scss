@@ -2,7 +2,7 @@
 
 .menu-cart__submenu {
   position: absolute;
-  left: 58%;
+  left: 54.5%;
   width: 500px;
   padding-bottom: 0;
   padding-top: 0;
@@ -15,6 +15,7 @@
   transform-origin: 50% 0;
   letter-spacing: normal;
   cursor: default;
+  animation: fadeInWithTransform 0.2s forwards;
 
   &::before {
     content: '';

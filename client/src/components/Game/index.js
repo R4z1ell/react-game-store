@@ -13,6 +13,7 @@ import {
   faTimesCircle,
   faAngleDoubleDown
 } from '@fortawesome/free-solid-svg-icons';
+import { FaWindows } from 'react-icons/fa';
 
 import ProductActions from '../utils/product_actions/product_actions';
 import {
@@ -172,20 +173,7 @@ class GamePage extends Component {
           <div className="game-page__title">
             {game.title}
             <div className="game-page__windows">
-              <svg
-                aria-hidden="true"
-                data-prefix="fab"
-                data-icon="windows"
-                className="svg-inline--fa fa-windows fa-w-14"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-              >
-                <path
-                  fill="#545454"
-                  d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z"
-                />
-              </svg>
+              <FaWindows fill="#545454" size="0.4em" />
               <div className="game-page__separator" />
               <div className="game-page__Languages">
                 {game.languages.length === 1

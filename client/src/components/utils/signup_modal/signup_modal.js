@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { MdClose } from 'react-icons/md';
 
 class SignupModal extends Component {
+  closeSignUp = () => {
+    this.props.closeSignUpModal(false);
+  };
+
   render() {
     return (
       <div className="modal modal__box">
@@ -44,7 +49,6 @@ class SignupModal extends Component {
                 </li>
               </ol>
             </form>
-            <button className="modal__btn-close" />
             <footer className="modal__footer">
               <span
                 className="modal__footer--login"
@@ -53,6 +57,9 @@ class SignupModal extends Component {
                 Log in to your account
               </span>
             </footer>
+            <button className="modal__btn-close" onClick={this.closeSignUp}>
+              <MdClose fill="#595959" size="1em" />
+            </button>
           </div>
         </div>
       </div>

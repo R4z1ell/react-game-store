@@ -165,6 +165,7 @@ class Header extends Component {
             clearStore={() => this.clearStore()}
             searchedGameLength={this.state.searchedGame}
             active={this.state.active}
+            auth={this.props.user.userData}
             ref="child"
           />
           <HeaderSearch

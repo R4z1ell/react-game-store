@@ -194,6 +194,25 @@
   transition: opacity 0.45s ease 0.1s, visibility 0.45s linear 0.1s;
 }
 
+// cart-triangle
+.cart-triangle {
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 9px solid #f2f2f2;
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  right: 4.8%;
+  left: auto;
+  z-index: 3;
+}
+
+.cart-triangle-animated {
+  opacity: 0;
+  animation: fadeInWithTransformTriangle 0.1s forwards;
+  animation-delay: 120ms;
+}
+
 // Kreyframes
 @keyframes slideAndFadeIn {
   from {

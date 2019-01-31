@@ -16,7 +16,9 @@ class HeaderTray extends Component {
     searchBar: false,
     inputStatus: '',
     typingTimeout: 0,
-    overlayStatus: false
+    overlayStatus: false,
+    headerCartStatus: false,
+    active: false
   };
 
   closeOverlay = () => {
@@ -90,13 +92,34 @@ class HeaderTray extends Component {
     );
   };
 
-  // ! show and Hide the 'HeaderCart' Component when clicking on the 'cart' icons
+  toggleHeaderCart = () => {
+    this.setState({
+      headerCartStatus: !this.state.headerCartStatus,
+      active: !this.state.active,
+      overlayStatus: !this.state.overlayStatus
+    });
+  };
+
+  closeAll = value => {
+    this.setState({
+      headerCartStatus: value,
+      overlayStatus: value,
+      active: value
+    });
+  };
 
   render() {
     const overlayClass =
       this.props.active || this.state.overlayStatus
         ? 'menu-overlay is-visible'
         : 'menu-overlay';
+
+    const triangleClass = this.state.active
+      ? 'cart-triangle cart-triangle-animated'
+      : 'cart-triangle';
+
+    const active = this.state.active ? 'block' : 'none';
+
     return (
       <div className="header__tray">
         <div className={overlayClass} onClick={this.closeOverlay} />
@@ -104,10 +127,16 @@ class HeaderTray extends Component {
           <FontAwesomeIcon icon={faBell} />
           <span className="header__item-count">0</span>
         </div>
-        <div className="header__item">
+        <div className="header__item" onClick={this.toggleHeaderCart}>
           <FontAwesomeIcon icon={faShoppingCart} />
           <span className="header__item-count">0</span>
-          <HeaderCart />
+          <p className={triangleClass} style={{ display: active }} />
+          {this.state.headerCartStatus ? (
+            <HeaderCart
+              closeAll={value => this.closeAll(value)}
+              auth={this.props.auth}
+            />
+          ) : null}
         </div>
         <div className="header__item header__search">
           <div className="header-link header-link--last header-link--search header-link--icon">

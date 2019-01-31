@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
-import { loginUser, auth } from '../../../store/actions/user_actions';
-
 import './login_modal.scss';
+
+import { MdClose } from 'react-icons/md';
+
+import { loginUser, auth } from '../../../store/actions/user_actions';
 
 class LoginModal extends Component {
   state = {
@@ -129,6 +131,10 @@ class LoginModal extends Component {
     }
   };
 
+  closeLogin = () => {
+    this.props.closeLoginModal(false);
+  };
+
   render() {
     const fieldEmail =
       this.state.errorEmail || this.state.blurEmail
@@ -219,7 +225,6 @@ class LoginModal extends Component {
                 </li>
               </ol>
             </form>
-            <button className="modal__btn-close" />
             <footer className="modal__footer">
               <span className="modal__footer--reset-pass">Password reset</span>
               <span
@@ -229,6 +234,9 @@ class LoginModal extends Component {
                 Sign up now
               </span>
             </footer>
+            <button className="modal__btn-close" onClick={this.closeLogin}>
+              <MdClose fill="#595959" size="1em" />
+            </button>
           </div>
         </div>
       </div>

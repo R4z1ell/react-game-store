@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 
 import './header_cart.scss';
 
-// ! remember to HIDE the 'Your Wishlist' Button when the user is NOT logged in
-
 class HeaderCart extends Component {
+  closeAll = () => {
+    setTimeout(() => {
+      this.props.closeAll(false);
+    }, 500);
+  };
+
   render() {
     return (
-      <div className="menu-cart__submenu">
+      <div className="menu-cart__submenu" onMouseLeave={this.closeAll}>
         {/* <div className="menu-header-cart"></div> */}
         <div className="menu-cart-empty">
           <div className="menu-cart-empty__header">
@@ -36,12 +40,14 @@ class HeaderCart extends Component {
           <Link to="/games" className="menu-cart-empty__btn">
             Browse games
           </Link>
-          <Link
-            to="/games"
-            className="menu-cart-empty__btn menu-cart-empty__btn--wishlist"
-          >
-            Your Wishlist
-          </Link>
+          {this.props.auth.isAuth ? (
+            <Link
+              to="/games"
+              className="menu-cart-empty__btn menu-cart-empty__btn--wishlist"
+            >
+              Your Wishlist
+            </Link>
+          ) : null}
         </div>
         {/* <div className="menu-cart__products-list"></div> */}
       </div>

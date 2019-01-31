@@ -12,6 +12,19 @@
     transition: opacity 0.15s linear;
   }
 
+  &__btn-close {
+    position: absolute;
+    top: 12%;
+    right: 34%;
+    padding: 10px;
+    line-height: 10px;
+    border: none;
+    background: none;
+    user-select: none;
+    outline: none;
+    cursor: pointer;
+  }
+
   &__footer {
     padding: 17px 0;
     border-top: 1px solid #ccc;
