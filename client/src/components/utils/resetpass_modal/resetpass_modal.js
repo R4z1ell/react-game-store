@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner';
 
+import './resetpass_modal.scss';
+
+import { MdClose } from 'react-icons/md';
+
 class ResetpassModal extends Component {
   state = {
     email: '',
@@ -30,7 +34,7 @@ class ResetpassModal extends Component {
                     placeholder="Email"
                     className="field__input"
                     name="email"
-                    value={this.state.email}
+                    //value={this.state.email}
                     //onChange={this.handleChange}
                     //onBlur={this.handleBlur}
                   />
@@ -53,11 +57,20 @@ class ResetpassModal extends Component {
                     {this.state.loading ? (
                       <Loader type="Oval" color="#fff" height="20" width="20" />
                     ) : null}
-                    Log in now
+                    Get new password
                   </button>
                 </li>
               </ol>
             </form>
+            <footer className="modal__footer">
+              <span className="modal__footer--login">
+                Log in to your account
+              </span>
+              <span className="modal__footer--sign-up">Sign up now</span>
+            </footer>
+            <button className="modal__btn-close" onClick={this.closeLogin}>
+              <MdClose fill="#595959" size="1em" />
+            </button>
           </div>
         </div>
       </div>

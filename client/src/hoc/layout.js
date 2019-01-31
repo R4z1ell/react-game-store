@@ -6,12 +6,14 @@ import Header from '../components/Header_footer/Header';
 import Footer from '../components/Header_footer/Footer';
 import LoginModal from '../components/utils/login_modal/login_modal';
 import SignupModal from '../components/utils/signup_modal/signup_modal';
+import ResetpassModal from '../components/utils/resetpass_modal/resetpass_modal';
 
 class Layout extends Component {
   state = {
     overlay: false,
     loginModal: false,
     signupModal: false,
+    resetPassModal: false,
     switchToSignUp: false
   };
 
@@ -71,6 +73,13 @@ class Layout extends Component {
     });
   };
 
+  switchToResetPass = value => {
+    this.setState({
+      resetPassModal: value,
+      loginModal: false
+    });
+  };
+
   closeOverlay = value => {
     this.setState({
       overlay: value
@@ -104,6 +113,7 @@ class Layout extends Component {
             {this.state.loginModal && !this.state.switchToSignUp ? (
               <LoginModal
                 switchToSignUp={this.switchToSignUp}
+                switchToResetPass={this.switchToResetPass}
                 closeOverlay={this.closeOverlay}
                 closeLoginModal={this.closeLogin}
               />
@@ -114,6 +124,7 @@ class Layout extends Component {
                 closeSignUpModal={this.closeSignUp}
               />
             ) : null}
+            {this.state.resetPassModal ? <ResetpassModal /> : null}
           </div>
         </div>
         {this.props.children}

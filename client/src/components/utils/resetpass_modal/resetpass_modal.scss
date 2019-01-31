@@ -1,0 +1,43 @@
+.form--password-reset {
+  padding: 25px 30px 10px 30px;
+  width: 100%;
+  max-width: 390px;
+  min-width: 200px;
+  background: #dedede;
+  font-size: 13px;
+  line-height: 1.5em;
+  text-align: center;
+  color: #595959;
+}
+
+.btn--new-password {
+  display: block;
+  background: -webkit-linear-gradient(#9fbf00, #80ab00);
+  background: linear-gradient(#9fbf00, #80ab00);
+  background-color: #9fbf00;
+  border: 1px solid #b1b1b1;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  height: 36px;
+  letter-spacing: 0.5px;
+  line-height: 40px;
+  margin-top: 20px;
+  min-height: 42px;
+  outline: transparent solid;
+  overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: 100%;
+
+  &:hover {
+    background: linear-gradient(#a3c400, #84b000);
+  }
+}

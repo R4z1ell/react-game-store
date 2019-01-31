@@ -226,7 +226,12 @@ class LoginModal extends Component {
               </ol>
             </form>
             <footer className="modal__footer">
-              <span className="modal__footer--reset-pass">Password reset</span>
+              <span
+                className="modal__footer--reset-pass"
+                onClick={() => this.props.switchToResetPass(true)}
+              >
+                Password reset
+              </span>
               <span
                 className="modal__footer--sign-up"
                 onClick={() => this.props.switchToSignUp(true)}

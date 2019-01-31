@@ -146,6 +146,10 @@
   text-transform: uppercase;
   white-space: nowrap;
   width: 100%;
+
+  &:hover {
+    background: linear-gradient(#a3c400, #84b000);
+  }
 }
 
 .btn--login svg {
