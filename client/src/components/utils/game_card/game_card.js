@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import slug from 'slug';
 
 import './game_card.scss';
 
@@ -19,6 +20,7 @@ class GameCard extends Component {
   };
 
   render() {
+    //console.log(slug(this.props.title, '_'));
     return this.props.grid ? (
       <Link to={`/game/${this.props.title}`}>
         <div className="game-card">
@@ -97,7 +99,7 @@ class GameCard extends Component {
     ) : (
       <div className="product-tile product-tile--list">
         <Link
-          to={`/game/${this.props.title}`}
+          to={`/game/${slug(this.props.title)}`}
           className="product-tile__content"
         >
           <div className="product-tile__cover">
