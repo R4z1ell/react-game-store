@@ -1,4 +1,5 @@
 const { User } = require('../models/user');
+const mongoose = require('mongoose');
 
 module.exports = {
   register(req, res) {
@@ -56,5 +57,23 @@ module.exports = {
         success: true
       });
     });
+  },
+  addToCart(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.user._id },
+      {
+        $push: {
+          cart: {
+            id: mongoose.Types.ObjectId(req.query.productId),
+            date: Date.now()
+          }
+        }
+      },
+      { new: true },
+      (err, doc) => {
+        if (err) return res.json({ success: false, err });
+        res.status(200).json(doc.cart);
+      }
+    );
   }
 };

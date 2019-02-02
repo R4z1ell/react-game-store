@@ -41,7 +41,9 @@ const CardBlock = props => {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div
           style={{
-            display: 'flex'
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4,256px)',
+            gridColumnGap: '26px'
           }}
           className={`card_wrapper ${slideStatus} ${gridStatus} ${listStatus}`}
         >

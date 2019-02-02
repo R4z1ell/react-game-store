@@ -2,14 +2,12 @@
 
 .game-card {
   max-width: 256px;
-  height: 159px;
-  margin-right: 25px;
   box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
 
   &__button {
     position: absolute;
     top: -7px;
-    right: -55px;
+    right: -42px;
     border: 1px solid #7fab34;
     border-radius: 3px;
     width: 33px;
@@ -17,10 +15,15 @@
     cursor: pointer;
     background-image: linear-gradient(180deg, #a5c700, #86b300);
     box-shadow: 0 1px 2px 0 rgba($color-black, 0.35);
-    transition: 0.2s;
+    transition: all 0.2s;
+    outline: none;
 
     &:hover {
       background-image: linear-gradient(180deg, #acce00, #8bba00);
+    }
+
+    &--clicked {
+      cursor: default;
     }
 
     &-image {
@@ -67,15 +70,15 @@
     }
   }
 
-  &__prices {
-    transition: 0.2s;
-  }
-
   &__buy-block {
     font-size: 15px;
     font-weight: 700;
     color: $color-dark;
-    position: relative;
+    position: absolute;
+    top: 82%;
+    right: 4%;
+    transition: all 0.2s;
+    overflow: hidden;
 
     svg {
       color: $color-dark;
@@ -104,8 +107,17 @@
   transform: translateX(-34px);
 }
 
-.game-card:hover .game-card__button {
-  right: -7px;
+.link-wrapper {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.link-wrapper:hover .game-card__buy-block {
+  right: 20%;
+  overflow: visible;
+}
+
+.game-card__prices svg {
+  margin-bottom: 1px;
 }
 
 .product-tile {
@@ -141,6 +153,7 @@
     background-image: linear-gradient(180deg, #a5c700, #86b300);
     box-shadow: 0 1px 2px 0 rgba($color-black, 0.35);
     transition: 0.2s;
+    outline: none;
 
     &:hover {
       background-image: linear-gradient(180deg, #acce00, #8bba00);
