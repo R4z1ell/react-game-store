@@ -63,10 +63,18 @@ class ResetpassModal extends Component {
               </ol>
             </form>
             <footer className="modal__footer">
-              <span className="modal__footer--login">
+              <span
+                className="modal__footer--login"
+                onClick={() => this.props.switchToLogIn(true)}
+              >
                 Log in to your account
               </span>
-              <span className="modal__footer--sign-up">Sign up now</span>
+              <span
+                className="modal__footer--sign-up"
+                onClick={() => this.props.switchToSignUp(true)}
+              >
+                Sign up now
+              </span>
             </footer>
             <button className="modal__btn-close" onClick={this.closeLogin}>
               <MdClose fill="#595959" size="1em" />

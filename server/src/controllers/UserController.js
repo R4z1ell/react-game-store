@@ -75,5 +75,10 @@ module.exports = {
         res.status(200).json(doc.cart);
       }
     );
+    // .populate({ path: 'cart', model: 'Game' })
+    // .exec((err, doc) => {
+    //   if (err) return res.status(400).send(err);
+    //   res.status(200).send(doc);
+    // });
   }
 };

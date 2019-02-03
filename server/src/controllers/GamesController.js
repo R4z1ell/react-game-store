@@ -32,9 +32,7 @@ module.exports = {
     }
   },
   // getGameById(req, res) {
-  //   let gameId = req.query.id;
-
-  //   Game.find({ _id: { $in: gameId } })
+  //   Game.find({ _id: { $in: req.query.id } })
   //     .populate({
   //       path: 'genres',
   //       model: 'Genre'

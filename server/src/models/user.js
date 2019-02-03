@@ -25,6 +25,7 @@ const userSchema = mongoose.Schema({
     type: Array,
     default: []
   },
+  //cart: [{ type: Schema.Types.ObjectId, ref: 'cart' }],
   history: {
     type: Array,
     default: []

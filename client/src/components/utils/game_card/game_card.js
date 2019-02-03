@@ -12,6 +12,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FaWindows, FaShoppingCart } from 'react-icons/fa';
 import { addToCart } from '../../../store/actions/user_actions';
+import { getOverlayStatus } from '../../../store/actions/site_actions';
 
 class GameCard extends Component {
   state = {
@@ -25,13 +26,39 @@ class GameCard extends Component {
     if (this.props.user.userData.isAuth) {
       this.props.dispatch(addToCart(this.props._id));
       this.setState({
-        isCartBtnClicked: true
+        isCartBtnClicked: true,
+        inCart: true
       });
     }
     if (!this.props.user.userData.isAuth) {
-      console.log('You must log in');
+      this.props.dispatch(getOverlayStatus(true, true));
     }
   };
+
+  componentDidMount() {
+    if (this.props.user.userData) {
+      if (this.props.user.userData.isAuth) {
+        if (this.props.user.userData.cart.length !== 0) {
+          const found = this.props.user.userData.cart.find(element => {
+            return element.id === this.props._id;
+          });
+
+          if (found) {
+            this.setState({
+              inCart: true,
+              isCartBtnClicked: true
+            });
+          }
+        }
+      }
+      if (!this.props.user.userData.isAuth) {
+        this.setState({
+          inCart: false,
+          isCartBtnClicked: false
+        });
+      }
+    }
+  }
 
   render() {
     const buttonClass = this.state.isCartBtnClicked
@@ -45,7 +72,7 @@ class GameCard extends Component {
             <div className="game-card__cover">
               <img src={this.props.images.card} alt="cover" />
               <div className="game-card__labels">
-                {this.state.inCart ? (
+                {this.state.inCart && this.props.user.userData.isAuth ? (
                   <span className="game-card__label game-card__label--in-cart">
                     <FaShoppingCart
                       fill="#fff"
@@ -91,7 +118,7 @@ class GameCard extends Component {
               {this.props.prices.basePrice / 100}
             </div>
             <button className={buttonClass}>
-              {!this.state.isCartBtnClicked ? (
+              {!this.state.isCartBtnClicked && !this.state.inCart ? (
                 <svg
                   viewBox="0 0 16 13"
                   width="100%"

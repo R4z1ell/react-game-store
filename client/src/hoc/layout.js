@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './layout.scss';
 
@@ -8,9 +9,10 @@ import LoginModal from '../components/utils/login_modal/login_modal';
 import SignupModal from '../components/utils/signup_modal/signup_modal';
 import ResetpassModal from '../components/utils/resetpass_modal/resetpass_modal';
 
+import { getOverlayStatus } from '../store/actions/site_actions';
+
 class Layout extends Component {
   state = {
-    overlay: false,
     loginModal: false,
     signupModal: false,
     resetPassModal: false,
@@ -19,19 +21,21 @@ class Layout extends Component {
 
   showLoginModal = value => {
     this.setState({
-      overlay: value,
       loginModal: value,
-      signupModal: false
+      signupModal: false,
+      resetPassModal: false
     });
+    this.props.dispatch(getOverlayStatus(value));
   };
 
   showSignUpModal = value => {
     this.setState({
-      overlay: value,
       signupModal: value,
       loginModal: false,
+      resetPassModal: false,
       switchToSignUp: true
     });
+    this.props.dispatch(getOverlayStatus(value));
   };
 
   componentDidMount() {
@@ -42,14 +46,23 @@ class Layout extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
+  componentDidUpdate() {
+    if (this.props.site.overlay) {
+      if (this.props.site.overlay.showLogIn) {
+        this.showLoginModal(true);
+      }
+    }
+  }
+
   handleClickOutside = event => {
     if (!this.wrapperRef.contains(event.target)) {
       this.setState({
-        overlay: false,
         signupModal: false,
         loginModal: false,
+        resetPassModal: false,
         switchToSignUp: false
       });
+      this.props.dispatch(getOverlayStatus(false));
     }
   };
 
@@ -61,7 +74,8 @@ class Layout extends Component {
     this.setState({
       switchToSignUp: value,
       signupModal: value,
-      loginModal: false
+      loginModal: false,
+      resetPassModal: false
     });
   };
 
@@ -69,6 +83,7 @@ class Layout extends Component {
     this.setState({
       switchToSignUp: false,
       signupModal: false,
+      resetPassModal: false,
       loginModal: value
     });
   };
@@ -76,32 +91,35 @@ class Layout extends Component {
   switchToResetPass = value => {
     this.setState({
       resetPassModal: value,
-      loginModal: false
+      loginModal: false,
+      signupModal: false
     });
   };
 
   closeOverlay = value => {
-    this.setState({
-      overlay: value
-    });
+    this.props.dispatch(getOverlayStatus(value));
   };
 
   closeLogin = value => {
     this.setState({
-      overlay: value,
       loginModal: value
     });
+    this.props.dispatch(getOverlayStatus(value));
   };
 
   closeSignUp = value => {
     this.setState({
-      overlay: value,
       signupModal: value
     });
+    this.props.dispatch(getOverlayStatus(value));
   };
 
   render() {
-    const overlayStyle = this.state.overlay ? 'flex' : 'none';
+    const overlayStyle =
+      this.props.site.overlay && this.props.site.overlay.value
+        ? 'flex'
+        : 'none';
+
     return (
       <div>
         <Header
@@ -124,7 +142,12 @@ class Layout extends Component {
                 closeSignUpModal={this.closeSignUp}
               />
             ) : null}
-            {this.state.resetPassModal ? <ResetpassModal /> : null}
+            {this.state.resetPassModal ? (
+              <ResetpassModal
+                switchToSignUp={this.switchToSignUp}
+                switchToLogIn={this.switchToLogIn}
+              />
+            ) : null}
           </div>
         </div>
         {this.props.children}
@@ -134,4 +157,10 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+const mapStateToProps = state => {
+  return {
+    site: state.site
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

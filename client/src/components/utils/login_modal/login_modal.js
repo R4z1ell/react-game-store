@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 
 import './login_modal.scss';
@@ -55,6 +56,7 @@ class LoginModal extends Component {
               loading: false
             });
             this.props.closeOverlay(false);
+            this.props.history.push('/');
           }, 1000);
         } else {
           if (res.payload.message.length > 14) {
@@ -255,4 +257,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(LoginModal);
+export default connect(mapStateToProps)(withRouter(LoginModal));
