@@ -35,31 +35,6 @@ class GameCard extends Component {
     }
   };
 
-  componentDidMount() {
-    if (this.props.user.userData) {
-      if (this.props.user.userData.isAuth) {
-        if (this.props.user.userData.cart.length !== 0) {
-          const found = this.props.user.userData.cart.find(element => {
-            return element.id === this.props._id;
-          });
-
-          if (found) {
-            this.setState({
-              inCart: true,
-              isCartBtnClicked: true
-            });
-          }
-        }
-      }
-      if (!this.props.user.userData.isAuth) {
-        this.setState({
-          inCart: false,
-          isCartBtnClicked: false
-        });
-      }
-    }
-  }
-
   render() {
     const buttonClass = this.state.isCartBtnClicked
       ? 'game-card__button game-card__button--clicked'
@@ -72,7 +47,11 @@ class GameCard extends Component {
             <div className="game-card__cover">
               <img src={this.props.images.card} alt="cover" />
               <div className="game-card__labels">
-                {this.state.inCart && this.props.user.userData.isAuth ? (
+                {this.props.user.userData.cart.find(element => {
+                  if (element.id === this.props._id) {
+                    return true;
+                  } else return false;
+                }) ? (
                   <span className="game-card__label game-card__label--in-cart">
                     <FaShoppingCart
                       fill="#fff"

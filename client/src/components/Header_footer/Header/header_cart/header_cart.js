@@ -7,10 +7,12 @@ import './header_cart.scss';
 import { FaEuroSign } from 'react-icons/fa';
 import { getCartItems } from '../../../../store/actions/user_actions';
 
+// ! Implement the 'wishlist' span below inside the 'renderCartGames' method when the user have that game in
+// ! his wishlist
+
 class HeaderCart extends Component {
   state = {
-    total: 0,
-    onOverStatus: false
+    total: 0
   };
 
   componentDidMount() {
@@ -49,27 +51,10 @@ class HeaderCart extends Component {
     });
   };
 
-  onEnter = () => {
-    this.setState({
-      onOverStatus: true
-    });
-  };
-
-  onLeave = () => {
-    this.setState({
-      onOverStatus: false
-    });
-  };
-
   renderCartGames = () =>
     this.props.auth.cart.length !== 0 && this.props.user.cartDetail
       ? this.props.user.cartDetail.map((game, i) => (
-          <div
-            className="menu-product menu-cart-item"
-            key={i}
-            onMouseEnter={this.onEnter}
-            onMouseLeave={this.onLeave}
-          >
+          <div className="menu-product menu-cart-item" key={i}>
             <div className="menu-cart-item__price">
               <FaEuroSign size="0.91em" />
               {game.prices.basePrice / 100}
@@ -86,22 +71,8 @@ class HeaderCart extends Component {
                     {game.title}
                   </div>
                   <div className="menu-cart-item__options">
-                    <span
-                      className={
-                        this.state.onOverStatus
-                          ? 'menu-cart-option menu-cart-option__hovered'
-                          : 'menu-cart-option'
-                      }
-                    >
-                      Remove
-                    </span>
-                    <span
-                      className={
-                        this.state.onOverStatus
-                          ? 'menu-cart-option menu-cart-option--add-to-wishlist-hovered'
-                          : 'menu-cart-option menu-cart-option--add-to-wishlist'
-                      }
-                    >
+                    <span className="menu-cart-option">Remove</span>
+                    <span className="menu-cart-option menu-cart-option--add-to-wishlist">
                       Move to wishlist
                     </span>
                     {/* <span className="menu-cart-option menu-cart-option--wishlisted">Wishlisted</span> */}
@@ -118,8 +89,7 @@ class HeaderCart extends Component {
 
   render() {
     return (
-      // <div className="menu-cart__submenu" onMouseLeave={this.closeAll}>
-      <div className="menu-cart__submenu">
+      <div className="menu-cart__submenu" onMouseLeave={this.closeAll}>
         {this.props.auth.cart.length === 0 ? (
           <div className="menu-cart-empty">
             <div className="menu-cart-empty__header">
@@ -179,7 +149,10 @@ class HeaderCart extends Component {
             <div className="menu-cart__products-list">
               <div className="menu-cart__custom-scrollbar">
                 <div className="menu-cart__custom-scrollbar--wrapper">
-                  <div className="menu-cart__custom-scrollbar--content">
+                  <div
+                    className="menu-cart__custom-scrollbar--content"
+                    id="bar"
+                  >
                     {this.renderCartGames()}
                   </div>
                 </div>
