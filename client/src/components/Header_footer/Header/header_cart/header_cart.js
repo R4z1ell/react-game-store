@@ -1,39 +1,117 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './header_cart.scss';
 
 import { FaEuroSign } from 'react-icons/fa';
+import { getCartItems } from '../../../../store/actions/user_actions';
 
 class HeaderCart extends Component {
+  state = {
+    total: 0,
+    onOverStatus: false
+  };
+
+  componentDidMount() {
+    let cartItems = [];
+    let user = this.props.user;
+
+    if (user.userData.cart) {
+      if (user.userData.cart.length > 0) {
+        user.userData.cart.forEach(item => {
+          cartItems.push(item.id);
+        });
+        this.props.dispatch(getCartItems(cartItems)).then(() => {
+          if (this.props.user.cartDetail.length > 0) {
+            this.calculateTotal(this.props.user.cartDetail);
+          }
+        });
+      }
+    }
+  }
+
   closeAll = () => {
     setTimeout(() => {
       this.props.closeAll(false);
     }, 500);
   };
 
+  calculateTotal = cartDetail => {
+    let total = 0;
+
+    cartDetail.forEach(item => {
+      total += item.prices.basePrice / 100;
+    });
+
+    this.setState({
+      total
+    });
+  };
+
+  onEnter = () => {
+    this.setState({
+      onOverStatus: true
+    });
+  };
+
+  onLeave = () => {
+    this.setState({
+      onOverStatus: false
+    });
+  };
+
   renderCartGames = () =>
-    this.props.auth.cart.length !== 0
-      ? this.props.auth.cart.map((card, i) => (
-          <div className="menu-product__content" key={i}>
-            <div className="menu-product__content-in">
-              <div className="menu-product__title menu-cart-item__title">
-                Frostpunk
-              </div>
-              <div className="menu-cart-item__options">
-                <span className="menu-cart-option">Remove</span>
-                <span className="menu-cart-option menu-cart-option--add-to-wishlist">
-                  Move to wishlist
-                </span>
-                {/* <span className="menu-cart-option menu-cart-option--wishlisted">Wishlisted</span> */}
-              </div>
-              <div className="menu-cart-item__discount">
-                <span className="menu-product__discount-text">-49%</span>
-              </div>
-              <div className="menu-cart-item__price">
-                <FaEuroSign size="0.89em" /> 15.48
-              </div>
+    this.props.auth.cart.length !== 0 && this.props.user.cartDetail
+      ? this.props.user.cartDetail.map((game, i) => (
+          <div
+            className="menu-product menu-cart-item"
+            key={i}
+            onMouseEnter={this.onEnter}
+            onMouseLeave={this.onLeave}
+          >
+            <div className="menu-cart-item__price">
+              <FaEuroSign size="0.91em" />
+              {game.prices.basePrice / 100}
             </div>
+            <Link to={`/game/${game.title}`}>
+              <img
+                src={game.images.card}
+                alt="card_image"
+                className="menu-cart-item__image"
+              />
+              <div className="menu-cart__content">
+                <div className="menu-cart__content-in">
+                  <div className="menu-product__title menu-cart-item__title">
+                    {game.title}
+                  </div>
+                  <div className="menu-cart-item__options">
+                    <span
+                      className={
+                        this.state.onOverStatus
+                          ? 'menu-cart-option menu-cart-option__hovered'
+                          : 'menu-cart-option'
+                      }
+                    >
+                      Remove
+                    </span>
+                    <span
+                      className={
+                        this.state.onOverStatus
+                          ? 'menu-cart-option menu-cart-option--add-to-wishlist-hovered'
+                          : 'menu-cart-option menu-cart-option--add-to-wishlist'
+                      }
+                    >
+                      Move to wishlist
+                    </span>
+                    {/* <span className="menu-cart-option menu-cart-option--wishlisted">Wishlisted</span> */}
+                  </div>
+                  <div className="menu-cart-item__discount">
+                    <span className="menu-product__discount-text">-49%</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
           </div>
         ))
       : null;
@@ -42,18 +120,6 @@ class HeaderCart extends Component {
     return (
       // <div className="menu-cart__submenu" onMouseLeave={this.closeAll}>
       <div className="menu-cart__submenu">
-        <div className="menu-header-cart">
-          <div className="menu-cart-items">
-            <span className="menu-header__label">Your shopping cart</span>
-            <span className="menu-header__items">3 Items added</span>
-          </div>
-          <div className="menu-cart__total-price">
-            <FaEuroSign size="0.89em" /> 35.48
-          </div>
-          <Link to="/games" className="menu-btn--green">
-            Go to checkout
-          </Link>
-        </div>
         {this.props.auth.cart.length === 0 ? (
           <div className="menu-cart-empty">
             <div className="menu-cart-empty__header">
@@ -90,11 +156,46 @@ class HeaderCart extends Component {
               </Link>
             ) : null}
           </div>
-        ) : null}
-        <div className="menu-cart__products-list">{this.renderCartGames()}</div>
+        ) : (
+          <React.Fragment>
+            <div className="menu-header-cart">
+              <div className="menu-cart-items">
+                <span className="menu-header__label">Your shopping cart</span>
+                <span className="menu-header__items">
+                  {this.props.user.cartDetail
+                    ? this.props.user.cartDetail.length > 1
+                      ? `${this.props.user.cartDetail.length} Items added`
+                      : `${this.props.user.cartDetail.length} Item added`
+                    : null}
+                </span>
+              </div>
+              <div className="menu-cart__total-price">
+                <FaEuroSign size="0.75em" /> {this.state.total}
+              </div>
+              <Link to="/games" className="menu-btn--green">
+                Go to checkout
+              </Link>
+            </div>
+            <div className="menu-cart__products-list">
+              <div className="menu-cart__custom-scrollbar">
+                <div className="menu-cart__custom-scrollbar--wrapper">
+                  <div className="menu-cart__custom-scrollbar--content">
+                    {this.renderCartGames()}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </React.Fragment>
+        )}
       </div>
     );
   }
 }
 
-export default HeaderCart;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(HeaderCart);

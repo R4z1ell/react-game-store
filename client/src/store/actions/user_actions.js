@@ -6,7 +6,8 @@ import {
   REGISTER_USER,
   AUTH_USER,
   LOGOUT_USER,
-  ADD_TO_CART_USER
+  ADD_TO_CART_USER,
+  GET_CART_ITEMS_USER
 } from './types';
 
 export function registerUser(dataToSubmit) {
@@ -60,6 +61,17 @@ export function addToCart(_id) {
 
   return {
     type: ADD_TO_CART_USER,
+    payload: request
+  };
+}
+
+export function getCartItems(cartItems) {
+  const request = axios
+    .get(`${USER_SERVER}/articles_by_id?id=${cartItems}`)
+    .then(response => response.data);
+
+  return {
+    type: GET_CART_ITEMS_USER,
     payload: request
   };
 }

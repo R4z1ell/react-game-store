@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const SALT_I = 10;
 require('dotenv').config();
 
+// ! check here https://stackoverflow.com/questions/39912017/mongodb-aggregate-query-with-lookup
+
 const userSchema = mongoose.Schema({
   email: {
     type: String,

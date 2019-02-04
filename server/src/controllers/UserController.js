@@ -1,4 +1,5 @@
 const { User } = require('../models/user');
+const { Game } = require('../models/game');
 const mongoose = require('mongoose');
 
 module.exports = {
@@ -75,10 +76,19 @@ module.exports = {
         res.status(200).json(doc.cart);
       }
     );
-    // .populate({ path: 'cart', model: 'Game' })
-    // .exec((err, doc) => {
-    //   if (err) return res.status(400).send(err);
-    //   res.status(200).send(doc);
-    // });
+  },
+  getCartItems(req, res) {
+    let ids = req.query.id.split(',');
+    items = [];
+    items = ids.map(item => {
+      return mongoose.Types.ObjectId(item);
+    });
+
+    Game.find({ _id: { $in: items } })
+      .populate({ path: 'genres', model: 'Genre' })
+      .exec((err, docs) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).send(docs);
+      });
   }
 };

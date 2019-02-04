@@ -10,6 +10,7 @@ module.exports = app => {
   app.get('/api/users/auth', auth, UserController.authentication);
   app.get('/api/users/logout', auth, UserController.logout);
   app.post('/api/users/addToCart', auth, UserController.addToCart);
+  app.get('/api/users/articles_by_id', UserController.getCartItems);
 
   app.post('/api/games/genre', auth, admin, GenresController.addGenre);
   app.get('/api/games/get_genres', GenresController.getGenres);
