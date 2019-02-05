@@ -28,6 +28,7 @@ class StoreContainer extends Component {
   componentDidMount() {
     this.props.dispatch(getGames());
     this.props.dispatch(getGenres());
+    this.props.dispatch(getGamesToStore('', [], '', ''));
     window.scrollTo(0, 0);
   }
 

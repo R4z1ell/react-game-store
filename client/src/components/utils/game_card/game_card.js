@@ -47,11 +47,7 @@ class GameCard extends Component {
             <div className="game-card__cover">
               <img src={this.props.images.card} alt="cover" />
               <div className="game-card__labels">
-                {this.props.user.userData.cart.find(element => {
-                  if (element.id === this.props._id) {
-                    return true;
-                  } else return false;
-                }) ? (
+                {this.state.inCart ? (
                   <span className="game-card__label game-card__label--in-cart">
                     <FaShoppingCart
                       fill="#fff"

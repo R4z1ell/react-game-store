@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './header_tray.scss';
 
@@ -108,6 +109,15 @@ class HeaderTray extends Component {
     });
   };
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.auth) {
+      return (state = {
+        cartItems: props.auth.cart.length
+      });
+    }
+    return null;
+  }
+
   render() {
     const overlayClass =
       this.props.active || this.state.overlayStatus
@@ -120,6 +130,7 @@ class HeaderTray extends Component {
 
     const active = this.state.active ? 'block' : 'none';
 
+    console.log(this.state);
     return (
       <div className="header__tray">
         <div className={overlayClass} onClick={this.closeOverlay} />
@@ -129,7 +140,7 @@ class HeaderTray extends Component {
         </div>
         <div className="header__item" onClick={this.toggleHeaderCart}>
           <FontAwesomeIcon icon={faShoppingCart} />
-          <span className="header__item-count">0</span>
+          <span className="header__item-count">{this.state.cartItems}</span>
           <p className={triangleClass} style={{ display: active }} />
           {this.state.headerCartStatus ? (
             <HeaderCart
@@ -200,4 +211,10 @@ class HeaderTray extends Component {
   }
 }
 
-export default HeaderTray;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(HeaderTray);
