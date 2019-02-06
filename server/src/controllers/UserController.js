@@ -90,5 +90,28 @@ module.exports = {
         if (err) return res.status(400).send(err);
         res.status(200).send(docs);
       });
+  },
+  removeCartItem(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.user._id },
+      {
+        $pull: { cart: { id: mongoose.Types.ObjectId(req.query._id) } }
+      },
+      { new: true },
+      (err, doc) => {
+        let cart = doc.cart;
+
+        let array = cart.map(item => {
+          return mongoose.Types.ObjectId(item.id);
+        });
+
+        Game.find({ _id: { $in: array } })
+          .populate('brand')
+          .populate('wood')
+          .exec((err, cartDetail) => {
+            return res.status(200).json({ cartDetail, cart });
+          });
+      }
+    );
   }
 };

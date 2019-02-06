@@ -56,13 +56,23 @@ class Layout extends Component {
 
   handleClickOutside = event => {
     if (!this.wrapperRef.contains(event.target)) {
-      this.setState({
-        signupModal: false,
-        loginModal: false,
-        resetPassModal: false,
-        switchToSignUp: false
-      });
-      this.props.dispatch(getOverlayStatus(false));
+      if (
+        this.state.signupModal ||
+        this.state.loginModal ||
+        this.state.resetPassModal ||
+        this.state.switchToSignUp
+      ) {
+        this.setState({
+          signupModal: false,
+          loginModal: false,
+          resetPassModal: false,
+          switchToSignUp: false
+        });
+      }
+
+      if (this.props.site.overlay && this.props.site.overlay.value) {
+        this.props.dispatch(getOverlayStatus(false));
+      }
     }
   };
 

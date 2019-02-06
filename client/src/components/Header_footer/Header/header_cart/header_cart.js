@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 import './header_cart.scss';
 
 import { FaEuroSign } from 'react-icons/fa';
-import { getCartItems } from '../../../../store/actions/user_actions';
+import {
+  getCartItems,
+  removeCartItem
+} from '../../../../store/actions/user_actions';
 
 // ! Implement the 'wishlist' span below inside the 'renderCartGames' method when the user have that game in
 // ! his wishlist
@@ -51,6 +54,12 @@ class HeaderCart extends Component {
     });
   };
 
+  removeCartItem = id => {
+    this.props.dispatch(removeCartItem(id)).then(() => {
+      this.calculateTotal(this.props.user.cartDetail);
+    });
+  };
+
   renderCartGames = () =>
     this.props.auth.cart.length !== 0 && this.props.user.cartDetail
       ? this.props.user.cartDetail.map((game, i) => (
@@ -70,13 +79,6 @@ class HeaderCart extends Component {
                   <div className="menu-product__title menu-cart-item__title">
                     {game.title}
                   </div>
-                  <div className="menu-cart-item__options">
-                    {/* <span className="menu-cart-option">Remove</span>
-                    <span className="menu-cart-option menu-cart-option--add-to-wishlist">
-                      Move to wishlist
-                    </span> */}
-                    {/* <span className="menu-cart-option menu-cart-option--wishlisted">Wishlisted</span> */}
-                  </div>
                   <div className="menu-cart-item__discount">
                     <span className="menu-product__discount-text">-49%</span>
                   </div>
@@ -85,7 +87,7 @@ class HeaderCart extends Component {
             </Link>
             <span
               className="menu-cart-option"
-              onClick={() => console.log('removed')}
+              onClick={() => this.removeCartItem(game._id)}
             >
               Remove
             </span>
@@ -123,7 +125,11 @@ class HeaderCart extends Component {
       <div className="menu-cart-empty__description">
         Explore great games and offers
       </div>
-      <Link to="/games" className="menu-cart-empty__btn">
+      <Link
+        to="/games"
+        className="menu-cart-empty__btn"
+        onClick={this.closeAll}
+      >
         Browse games
       </Link>
       {this.props.auth.isAuth ? (
@@ -139,8 +145,7 @@ class HeaderCart extends Component {
 
   render() {
     return (
-      // <div className="menu-cart__submenu" onMouseLeave={this.closeAll}>
-      <div className="menu-cart__submenu">
+      <div className="menu-cart__submenu" onMouseLeave={this.closeAll}>
         {!this.props.auth.isAuth ? (
           this.renderMenuCartIsEmpty()
         ) : this.props.auth.cart.length === 0 ? (

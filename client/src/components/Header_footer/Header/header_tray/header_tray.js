@@ -173,8 +173,7 @@ class HeaderTray extends Component {
       <div className="header__tray">
         <div className={overlayClass} onClick={this.closeOverlay} />
         <div
-          className="header__item"
-          onClick={this.toggleHeaderCart}
+          className="header__item header__item-cart"
           style={{ paddingRight: '21px' }}
         >
           <svg
@@ -182,6 +181,7 @@ class HeaderTray extends Component {
             viewBox="0 0 17 16.1"
             className="menu-icon-svg"
             style={{ marginRight: svgClass }}
+            onClick={this.toggleHeaderCart}
           >
             <path
               d="M16.8,1.5l-1.8,0L13,11l-1,1l-9,0l-1.1-1L0,3l1.5,0l2.1,7.6h7.7L13.4,1l1-1L17,0L16.8,1.5z
