@@ -101,6 +101,14 @@ class Header extends Component {
     });
   };
 
+  hideHeaderSearch = () => {
+    this.setState({
+      searchedGame: [],
+      errorTab: false,
+      logoStatus: true
+    });
+  };
+
   render() {
     const active = this.state.active ? 'block' : 'none';
     const triangleClass = this.state.active
@@ -166,6 +174,7 @@ class Header extends Component {
             searchedGameLength={this.state.searchedGame}
             active={this.state.active}
             auth={this.props.user.userData}
+            hideHeaderSearch={this.hideHeaderSearch}
             ref="child"
           />
           <HeaderSearch
@@ -189,7 +198,8 @@ class Header extends Component {
 const mapStateToProps = state => {
   return {
     games: state.games,
-    user: state.user
+    user: state.user,
+    site: state.site
   };
 };
 

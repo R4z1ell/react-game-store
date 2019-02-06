@@ -161,10 +161,15 @@
     font-weight: 400;
     margin-right: 1em;
     color: #999;
-    position: relative;
+    position: absolute;
+    top: 55%;
+    left: 23%;
+    font-size: 12px;
     white-space: nowrap;
+    cursor: pointer;
 
     &--add-to-wishlist {
+      left: 33.5%;
       opacity: 0;
       transition: opacity 0.15s ease-in-out;
     }
@@ -232,7 +237,7 @@
   &__title {
     display: inline-block;
     max-width: 250px;
-    margin-bottom: 4px;
+    margin-bottom: 25px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;

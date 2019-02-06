@@ -71,10 +71,10 @@ class HeaderCart extends Component {
                     {game.title}
                   </div>
                   <div className="menu-cart-item__options">
-                    <span className="menu-cart-option">Remove</span>
+                    {/* <span className="menu-cart-option">Remove</span>
                     <span className="menu-cart-option menu-cart-option--add-to-wishlist">
                       Move to wishlist
-                    </span>
+                    </span> */}
                     {/* <span className="menu-cart-option menu-cart-option--wishlisted">Wishlisted</span> */}
                   </div>
                   <div className="menu-cart-item__discount">
@@ -83,6 +83,18 @@ class HeaderCart extends Component {
                 </div>
               </div>
             </Link>
+            <span
+              className="menu-cart-option"
+              onClick={() => console.log('removed')}
+            >
+              Remove
+            </span>
+            <span
+              className="menu-cart-option menu-cart-option--add-to-wishlist"
+              onClick={() => console.log('wishlisted')}
+            >
+              Move to wishlist
+            </span>
           </div>
         ))
       : null;
@@ -127,7 +139,8 @@ class HeaderCart extends Component {
 
   render() {
     return (
-      <div className="menu-cart__submenu" onMouseLeave={this.closeAll}>
+      // <div className="menu-cart__submenu" onMouseLeave={this.closeAll}>
+      <div className="menu-cart__submenu">
         {!this.props.auth.isAuth ? (
           this.renderMenuCartIsEmpty()
         ) : this.props.auth.cart.length === 0 ? (
