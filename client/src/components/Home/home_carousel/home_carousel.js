@@ -75,49 +75,58 @@ const HomeCarousel = props => {
   const generateGameSlides = () =>
     props.games
       ? props.games.map((game, i) => (
-          <Link to={`/game/${game.title}`} key={i}>
-            <div
-              style={{
-                background: `linear-gradient(180deg,transparent 0,rgba(0,0,0,.6)),url(${
-                  game.images.background
-                })`,
-                height: '490px'
-              }}
-            >
-              <div className="container">
-                <div className="gamme__above--logo">
-                  {game.images.logo ? (
-                    <img src={`${game.images.logo}`} alt="logo" />
-                  ) : null}
-                </div>
-                <div className="game__above">
-                  <FaWindows
-                    fill="#999"
-                    className="game__above--windows"
-                    size="0.8em"
-                  />
-                  <FontAwesomeIcon
-                    icon={faCircle}
-                    className="game__above--circle"
-                  />
-                  <span>Now available</span>
-                </div>
-                <div className="game__title">{game.title}</div>
-                <div className="game__action">
-                  <div className="game__price">
-                    <FontAwesomeIcon icon={faEuroSign} />
-                    {game.prices.basePrice / 100}
+          <React.Fragment key={i}>
+            <Link to={`/game/${game.title}`}>
+              <div
+                style={{
+                  background: `linear-gradient(180deg,transparent 0,rgba(0,0,0,.6)),url(${
+                    game.images.background
+                  })`,
+                  height: '490px'
+                }}
+              >
+                <div className="container">
+                  <div className="gamme__above--logo">
+                    {game.images.logo ? (
+                      <img src={`${game.images.logo}`} alt="logo" />
+                    ) : null}
                   </div>
-                  <MyButton type="add_to_cart_link" />
+                  <div className="game__above">
+                    <FaWindows
+                      fill="#999"
+                      className="game__above--windows"
+                      size="0.8em"
+                    />
+                    <FontAwesomeIcon
+                      icon={faCircle}
+                      className="game__above--circle"
+                    />
+                    <span>Now available</span>
+                  </div>
+                  <div className="game__title">{game.title}</div>
+                  <div className="game__action">
+                    <div className="game__price">
+                      <FontAwesomeIcon icon={faEuroSign} />
+                      {game.prices.basePrice / 100}
+                    </div>
+                  </div>
                 </div>
               </div>
+            </Link>
+            <div className="myButton__container">
+              <div className="myButton__wrapper">
+                <MyButton type="add_to_cart_link" gameId={game._id} />
+              </div>
             </div>
-          </Link>
+          </React.Fragment>
         ))
       : null;
+
   return (
     <div>
-      <Slider {...settings}>{generateGameSlides()}</Slider>
+      <Slider {...settings} className="game__wrapper">
+        {generateGameSlides()}
+      </Slider>
     </div>
   );
 };

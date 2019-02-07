@@ -3,7 +3,7 @@
 .add_to_cart_link {
   display: inline-block;
   border-radius: 3px;
-  width: 179px;
+  min-width: 179px;
   height: 50px;
   cursor: pointer;
   background: linear-gradient(-180deg, #c1ec51, #80b02a);
@@ -18,18 +18,25 @@
   }
 }
 
-.button__text {
-  font-size: 20px;
-  font-weight: 700;
-}
+.button {
+  &__content {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+  }
 
-.button__content {
-  display: flex;
-  height: 50px;
-  justify-content: center;
-  align-items: center;
-}
+  &__icon {
+    margin-right: 15px;
+  }
 
-.button__icon {
-  margin-right: 15px;
+  &__in-cart {
+    width: 20px;
+    margin-right: 6px;
+  }
+
+  &__text {
+    font-size: 20px;
+    font-weight: 700;
+  }
 }

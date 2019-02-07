@@ -43,7 +43,7 @@ const CardBlock = props => {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4,256px)',
-            gridColumnGap: '26px'
+            gridColumnGap: '25px'
           }}
           className={`card_wrapper ${slideStatus} ${gridStatus} ${listStatus}`}
         >
