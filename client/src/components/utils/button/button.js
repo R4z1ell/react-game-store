@@ -12,7 +12,13 @@ import { getOverlayStatus } from '../../../store/actions/site_actions';
 class MyButton extends Component {
   addGameToCart = id => {
     if (this.props.user.userData.isAuth) {
-      this.props.dispatch(addToCart(id));
+      if (
+        !this.props.user.userData.cart.some(
+          game => game.id === this.props.gameId
+        )
+      ) {
+        this.props.dispatch(addToCart(id));
+      }
     }
     if (!this.props.user.userData.isAuth) {
       this.props.dispatch(getOverlayStatus(true, true));
@@ -33,7 +39,7 @@ class MyButton extends Component {
               {this.props.user.userData.cart.some(
                 game => game.id === this.props.gameId
               ) ? (
-                <React.Fragment>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                   <svg
                     viewBox="0 0 16 14"
                     id="button-in-cart"
@@ -54,17 +60,12 @@ class MyButton extends Component {
                     </g>
                   </svg>
                   <div className="button__text">Checkout now</div>
-                </React.Fragment>
+                </div>
               ) : (
-                <React.Fragment>
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faCartPlus}
-                      className="button__icon"
-                    />
-                  </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <FontAwesomeIcon icon={faCartPlus} className="button__icon" />
                   <div className="button__text">Add to cart</div>
-                </React.Fragment>
+                </div>
               )}
             </div>
           </div>

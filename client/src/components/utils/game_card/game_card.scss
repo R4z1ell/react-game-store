@@ -6,7 +6,6 @@
 
   &__button {
     position: absolute;
-    top: -7px;
     right: -42px;
     border: 1px solid #7fab34;
     border-radius: 3px;
@@ -72,11 +71,10 @@
   }
 
   &__buy-block {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     color: $color-dark;
     position: absolute;
-    top: 82%;
     right: 4%;
     transition: all 0.2s;
     overflow: hidden;
@@ -102,6 +100,69 @@
     padding: 0 16px;
     overflow: hidden;
   }
+
+  &__discount {
+    margin-right: 8px;
+    border-radius: 2px;
+    background: #78387b;
+    color: $color-white;
+    font-weight: 700;
+    line-height: 12px;
+    font-size: 14px;
+    padding: 9px 8px;
+  }
+
+  &__prices-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: right;
+  }
+
+  &__base-price {
+    font-size: 10px;
+    line-height: 9px;
+    display: block;
+    color: #999;
+    text-align: right;
+    font-weight: 600;
+    text-decoration: line-through;
+
+    svg {
+      color: #999;
+      font-size: 9px;
+    }
+  }
+
+  &__price-discounted {
+    color: #404040;
+    font-weight: 700;
+    line-height: 12px;
+    font-size: 14px;
+
+    svg {
+      font-size: 11px;
+    }
+  }
+
+  &__prices {
+    display: flex;
+    transition: all 0.2s;
+  }
+}
+
+.game-card__base-price.no-discount {
+  color: #404040;
+  font-weight: 700;
+  line-height: 12px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.game-card__base-price.no-discount svg {
+  font-size: 11.3px;
+  margin-right: 3px;
+  color: #404040;
 }
 
 .game-card:hover .game-card__prices {
@@ -135,7 +196,7 @@
   overflow: hidden;
 
   &:hover &__button {
-    right: -7px;
+    right: 13px;
   }
 
   &:hover &__prices {
@@ -143,12 +204,35 @@
   }
 
   &__prices {
-    transition: 0.2s;
+    display: flex;
+    transition: all 0.2s;
+  }
+
+  &__prices-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: right;
+  }
+
+  &__base-price {
+    font-size: 10px;
+    line-height: 9px;
+    display: block;
+    color: #999;
+    text-align: right;
+    font-weight: 600;
+    text-decoration: line-through;
+
+    svg {
+      font-size: 9px;
+      margin-right: 2px;
+    }
   }
 
   &__button {
     position: absolute;
-    top: -7px;
+    top: 31.5px;
     right: -55px;
     border: 1px solid #7fab34;
     border-radius: 3px;
@@ -171,6 +255,10 @@
       width: 16px;
       height: 13px;
     }
+
+    &--clicked {
+      cursor: default;
+    }
   }
 
   &__content {
@@ -184,10 +272,41 @@
     }
   }
 
+  &__discount {
+    margin-right: 8px;
+    border-radius: 2px;
+    background: #78387b;
+    color: $color-white;
+    font-weight: 700;
+    line-height: 12px;
+    font-size: 14px;
+    padding: 9px 8px;
+  }
+
   &__info {
     position: absolute;
-    top: 39px;
     right: 10px;
+  }
+
+  &__label-icon {
+    margin-right: 5px;
+  }
+
+  &__labels {
+    display: flex;
+    pointer-events: none;
+    border-radius: 2px;
+    padding: 7px 16px;
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 10px;
+    width: fit-content;
+
+    &--in-cart {
+      background: #80ab00;
+    }
   }
 
   &--list:hover {
@@ -198,13 +317,16 @@
   }
 
   &__platform {
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 19px;
   }
 
   &__price-discounted {
     color: #404040;
     font-weight: 700;
     line-height: 12px;
+    font-size: 14px;
 
     svg {
       width: 7.5px !important;
@@ -229,6 +351,23 @@
       width: 10px;
     }
   }
+
+  &__windows {
+    margin-left: 10px;
+  }
+}
+
+.product-tile__base-price.no-discount {
+  color: #404040;
+  font-weight: 700;
+  line-height: 12px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.product-tile__base-price.no-discount svg {
+  width: 7.5px;
+  margin-right: 3px;
 }
 
 .product-tile--list:hover .product-tile__cover {

@@ -7,14 +7,13 @@
   z-index: 50;
   width: 39.5%;
   min-width: 380px;
-  height: 192px;
   padding: 16px 20px 0px 20px;
   background-color: $color-gray-light;
   box-shadow: 0 0 6px 0 rgba($color-black, 0.25);
 
   &__cart-button {
-    margin-top: 5px;
-    height: 64px;
+    margin-top: 8px;
+    height: 59px;
 
     .add_to_cart_link {
       width: 100%;
@@ -35,14 +34,10 @@
 
       .button__text {
         font-size: 16px;
-        margin-left: 23px;
         margin-bottom: 4px;
       }
 
       .button__icon {
-        position: absolute;
-        left: 159px;
-        top: 104px;
         font-size: 15px;
       }
     }
@@ -108,7 +103,6 @@
 }
 
 .base-price {
-  height: 72px;
   margin-top: 8px;
 }
 

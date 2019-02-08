@@ -62,43 +62,59 @@ class HeaderCart extends Component {
 
   renderCartGames = () =>
     this.props.auth.cart.length !== 0 && this.props.user.cartDetail
-      ? this.props.user.cartDetail.map((game, i) => (
-          <div className="menu-product menu-cart-item" key={i}>
-            <div className="menu-cart-item__price">
-              <FaEuroSign size="0.91em" />
-              {game.prices.basePrice / 100}
-            </div>
-            <Link to={`/game/${game.title}`}>
-              <img
-                src={game.images.card}
-                alt="card_image"
-                className="menu-cart-item__image"
-              />
-              <div className="menu-cart__content">
-                <div className="menu-cart__content-in">
-                  <div className="menu-product__title menu-cart-item__title">
-                    {game.title}
-                  </div>
-                  <div className="menu-cart-item__discount">
-                    <span className="menu-product__discount-text">-49%</span>
+      ? this.props.user.cartDetail.map((game, i) => {
+          const discountedPrice = Number(
+            game.prices.basePrice / 100 - (game.prices.basePrice / 10000) * 33
+          ).toFixed(2);
+          return (
+            <div className="menu-product menu-cart-item" key={i}>
+              {game.prices.discount ? (
+                <div className="menu-cart-item__price">
+                  <FaEuroSign size="0.91em" />
+                  {discountedPrice}
+                </div>
+              ) : (
+                <div className="menu-cart-item__price">
+                  <FaEuroSign size="0.91em" />
+                  {game.prices.basePrice / 100}
+                </div>
+              )}
+              <Link to={`/game/${game.title}`}>
+                <img
+                  src={game.images.card}
+                  alt="card_image"
+                  className="menu-cart-item__image"
+                />
+                <div className="menu-cart__content">
+                  <div className="menu-cart__content-in">
+                    <div className="menu-product__title menu-cart-item__title">
+                      {game.title}
+                    </div>
+                    {game.prices.discount ? (
+                      <div className="menu-cart-item__discount">
+                        <span className="menu-product__discount-text">
+                          -{game.prices.discount}%
+                        </span>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
-              </div>
-            </Link>
-            <span
-              className="menu-cart-option"
-              onClick={() => this.removeCartItem(game._id)}
-            >
-              Remove
-            </span>
-            <span
-              className="menu-cart-option menu-cart-option--add-to-wishlist"
-              onClick={() => console.log('wishlisted')}
-            >
-              Move to wishlist
-            </span>
-          </div>
-        ))
+              </Link>
+              <span
+                className="menu-cart-option"
+                onClick={() => this.removeCartItem(game._id)}
+              >
+                Remove
+              </span>
+              <span
+                className="menu-cart-option menu-cart-option--add-to-wishlist"
+                onClick={() => console.log('wishlisted')}
+              >
+                Move to wishlist
+              </span>
+            </div>
+          );
+        })
       : null;
 
   renderMenuCartIsEmpty = () => (
