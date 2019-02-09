@@ -10,6 +10,12 @@ import StorePage from './components/Store';
 import UserDashboard from './components/User';
 import AddGame from './components/User/Admin/add_game/add_game';
 
+// ! Show our Hide the 'discount' element in the 'HeaderSearch' Component if the game has or not a discount
+// ! add a game to the cart when clicking on his price in the 'HeaderSearch' Component and change the relative icon
+// ! shot the discounted price for discounted game inside the 'HeaderSearch' Component
+// ! dispatch a game to the cart when clicking on the cart button of the 'ProductCard' Component
+// ! add the 'in cart' or 'wishlist' to the 'ProductCard' Component
+
 const Routes = () => {
   return (
     <Layout>
