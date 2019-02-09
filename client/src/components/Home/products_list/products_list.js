@@ -34,7 +34,11 @@ class ProductsList extends Component {
       ? this.props.list.map((card, i) => (
           <div key={i} className="products-list__wrapper">
             <Link to={`/game/${card.title}`}>
-              <ProductCard {...card} callbackFromParent={this.updateState} />
+              <ProductCard
+                {...card}
+                callbackFromParent={this.updateState}
+                user={this.props.user}
+              />
             </Link>
             {!this.props.user.userData.cart.some(
               game => game.id === card._id

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import './product_card.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEuroSign } from '@fortawesome/free-solid-svg-icons';
-import { FaWindows } from 'react-icons/fa';
+import { faEuroSign, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FaWindows, FaShoppingCart } from 'react-icons/fa';
 
 class ProductCard extends Component {
   state = {
@@ -41,22 +41,65 @@ class ProductCard extends Component {
         </div>
         <div className="product-card__title-content">
           <div className="product-card__title">
-            <span>{this.props.title}</span>
-            <div className="product-card__genres">
-              {this.props.genres
-                ? this.props.genres.map((genre, i) => (
-                    <div key={i} style={{ marginRight: '5px' }}>
-                      {genre.name}{' '}
-                      {i === this.props.genres.length - 1 ? '' : ','}
-                    </div>
-                  ))
-                : null}
+            <div>
+              <span>{this.props.title}</span>
+              <div className="product-card__genres">
+                {this.props.genres
+                  ? this.props.genres.map((genre, i) => (
+                      <div key={i} style={{ marginRight: '5px' }}>
+                        {genre.name}{' '}
+                        {i === this.props.genres.length - 1 ? '' : ','}
+                      </div>
+                    ))
+                  : null}
+              </div>
+              {this.props.user.userData.cart.some(
+                game => game.id === this.props._id
+              ) ? null : (
+                <FaWindows
+                  fill="#999"
+                  size="0.8em"
+                  className="product-card__windows"
+                />
+              )}
             </div>
-            <FaWindows
-              fill="#999"
-              size="0.8em"
-              className="product-card__image"
-            />
+            <div className="product-card__labels">
+              {this.props.user.userData.cart.some(
+                game => game.id === this.props._id
+              ) ? (
+                <div style={{ display: 'flex' }}>
+                  <span className="product-card__label product-card__label--in-cart">
+                    <FaShoppingCart
+                      fill="#fff"
+                      size="1em"
+                      className="product-card__label-icon"
+                    />
+                    in cart
+                  </span>
+                  <FaWindows
+                    fill="#999"
+                    size="0.8em"
+                    className="product-card__image"
+                  />
+                </div>
+              ) : null}
+              {/* {this.state.wishlisted ? (
+                <div>
+                  <span className="product-card__label product-card__label--is-wishlisted">
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      className="product-card__label-icon"
+                    />
+                    wishlisted
+                  </span>
+                  <FaWindows
+                    fill="#999"
+                    size="0.8em"
+                    className="product-card__image"
+                  />
+                </div>
+              ) : null} */}
+            </div>
           </div>
           <div className="product-card__buy-block">
             <div className="product-card__prices">
