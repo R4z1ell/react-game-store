@@ -96,10 +96,18 @@
       margin: 0 5px -1px 0;
       height: 10px;
       width: 10px;
+
+      &--wishlisted {
+        margin-bottom: 0px;
+      }
     }
 
     &--in-cart {
       background: #80ab00;
+    }
+
+    &--is-wishlisted {
+      background: #eca125;
     }
   }
 

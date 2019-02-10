@@ -10,7 +10,7 @@ import StorePage from './components/Store';
 import UserDashboard from './components/User';
 import AddGame from './components/User/Admin/add_game/add_game';
 
-// ! Add the 'discount', 'in-cart' , 'wishlisted' tags in the 'HomeCaraousel' Component
+// ! Add 'wishlisted' tag in the 'HomeCaraousel' Component
 // ! Add logic and error handling for the 'SignupModal' Component
 // ! Add logic and error handling for the 'ResetpassModal' Component
 

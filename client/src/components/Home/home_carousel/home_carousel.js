@@ -6,7 +6,11 @@ import './home_carousel.scss';
 import './slider.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faEuroSign } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircle,
+  faEuroSign,
+  faHeart
+} from '@fortawesome/free-solid-svg-icons';
 import { FaWindows, FaShoppingCart } from 'react-icons/fa';
 
 import MyButton from '../../../components/utils/button/button';
@@ -147,7 +151,20 @@ const HomeCarousel = props => {
                           in cart
                         </span>
                       ) : null}
-                      {/* <span className="game__label game__label--is-wishlisted">wishlisted</span> */}
+                      {props.user.userData.wishlist.some(
+                        elem => elem.id === game._id
+                      ) &&
+                      !props.user.userData.cart.some(
+                        elem => elem.id === game._id
+                      ) ? (
+                        <span className="game__label game__label--is-wishlisted">
+                          <FontAwesomeIcon
+                            icon={faHeart}
+                            className="game__label-icon game__label-icon--wishlisted"
+                          />
+                          wishlisted
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                 </div>

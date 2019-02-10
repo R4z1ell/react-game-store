@@ -307,6 +307,11 @@
     &--in-cart {
       background: #80ab00;
     }
+
+    &--is-wishlisted {
+      background: #eca125;
+      margin-right: 10px;
+    }
   }
 
   &--list:hover {

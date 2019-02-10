@@ -48,6 +48,7 @@ module.exports = {
       username: req.user.username,
       role: req.user.role,
       cart: req.user.cart,
+      wishlist: req.user.wishlist,
       history: req.user.history
     });
   },
@@ -111,6 +112,37 @@ module.exports = {
           .exec((err, cartDetail) => {
             return res.status(200).json({ cartDetail, cart });
           });
+      }
+    );
+  },
+  addToWishlist(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.user._id },
+      {
+        $push: {
+          wishlist: {
+            id: mongoose.Types.ObjectId(req.query.productId),
+            date: Date.now()
+          }
+        }
+      },
+      { new: true },
+      (err, doc) => {
+        if (err) return res.json({ success: false, err });
+        res.status(200).json(doc.wishlist);
+      }
+    );
+  },
+  removeFromWishlist(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.user._id },
+      {
+        $pull: { wishlist: { id: mongoose.Types.ObjectId(req.query._id) } }
+      },
+      { new: true },
+      (err, doc) => {
+        if (err) return res.json({ success: false, err });
+        res.status(200).json(doc.wishlist);
       }
     );
   }

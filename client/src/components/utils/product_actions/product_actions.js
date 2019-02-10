@@ -6,10 +6,24 @@ import MyButton from '../button/button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import {
+  addToWishlist,
+  removeFromWishlist
+} from '../../../store/actions/user_actions';
+import { getOverlayStatus } from '../../../store/actions/site_actions';
 
 class ProductActions extends Component {
-  state = {
-    wishlist: false
+  sendToWishlist = () => {
+    if (this.props.user.userData.isAuth) {
+      this.props.dispatch(addToWishlist(this.props.gameInfo.gameDetail._id));
+    }
+    if (!this.props.user.userData.isAuth) {
+      this.props.dispatch(getOverlayStatus(true, true));
+    }
+  };
+
+  removeFromWishlist = () => {
+    this.props.dispatch(removeFromWishlist(this.props.gameInfo.gameDetail._id));
   };
 
   render() {
@@ -57,28 +71,33 @@ class ProductActions extends Component {
           </div>
         )}
         <div className="product-actions__wishlist-button">
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              cursor: 'pointer'
-            }}
-            onClick={() =>
-              this.setState({
-                wishlist: !this.state.wishlist
-              })
-            }
-          >
-            {this.state.wishlist ? (
-              <React.Fragment>
+          <div>
+            {this.props.user.userData.wishlist.some(
+              game => game.id === this.props.gameInfo.gameDetail._id
+            ) ? (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  cursor: 'pointer'
+                }}
+                onClick={this.removeFromWishlist}
+              >
                 <FontAwesomeIcon
                   icon={faHeart}
                   style={{ color: '#ffa200', width: '16px', height: '16px' }}
                 />
                 <p style={{ color: '#a16600' }}>Wishlisted</p>
-              </React.Fragment>
+              </div>
             ) : (
-              <React.Fragment>
+              <div
+                onClick={this.sendToWishlist}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  cursor: 'pointer'
+                }}
+              >
                 <svg
                   viewBox="0 0 25.1 25.1"
                   id="heart-empty"
@@ -91,7 +110,7 @@ class ProductActions extends Component {
                   />
                 </svg>
                 <p>Wishlist it</p>{' '}
-              </React.Fragment>
+              </div>
             )}
           </div>
         </div>

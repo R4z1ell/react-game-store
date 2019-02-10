@@ -12,6 +12,12 @@ module.exports = app => {
   app.post('/api/users/addToCart', auth, UserController.addToCart);
   app.get('/api/users/removeFromCart', auth, UserController.removeCartItem);
   app.get('/api/users/articles_by_id', UserController.getCartItems);
+  app.post('/api/users/addToWishlist', auth, UserController.addToWishlist);
+  app.get(
+    '/api/users/removeFromWishlist',
+    auth,
+    UserController.removeFromWishlist
+  );
 
   app.post('/api/games/genre', auth, admin, GenresController.addGenre);
   app.get('/api/games/get_genres', GenresController.getGenres);

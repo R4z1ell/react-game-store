@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 
 import './header_cart.scss';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FaEuroSign } from 'react-icons/fa';
 import {
   getCartItems,
-  removeCartItem
+  removeCartItem,
+  addToWishlist
 } from '../../../../store/actions/user_actions';
-
-// ! Implement the 'wishlist' span below inside the 'renderCartGames' method when the user have that game in
-// ! his wishlist
+import { getOverlayStatus } from '../../../../store/actions/site_actions';
 
 class HeaderCart extends Component {
   state = {
@@ -60,6 +61,16 @@ class HeaderCart extends Component {
     });
   };
 
+  sendToWishlist = id => {
+    if (this.props.user.userData.isAuth) {
+      this.removeCartItem(id);
+      this.props.dispatch(addToWishlist(id));
+    }
+    if (!this.props.user.userData.isAuth) {
+      this.props.dispatch(getOverlayStatus(true, true));
+    }
+  };
+
   renderCartGames = () =>
     this.props.auth.cart.length !== 0 && this.props.user.cartDetail
       ? this.props.user.cartDetail.map((game, i) => {
@@ -106,12 +117,34 @@ class HeaderCart extends Component {
               >
                 Remove
               </span>
-              <span
-                className="menu-cart-option menu-cart-option--add-to-wishlist"
-                onClick={() => console.log('wishlisted')}
-              >
-                Move to wishlist
-              </span>
+              {!this.props.user.userData.wishlist.some(
+                elem => elem.id === game._id
+              ) ? (
+                <span
+                  className="menu-cart-option menu-cart-option--add-to-wishlist"
+                  onClick={() => this.sendToWishlist(game._id)}
+                >
+                  Move to wishlist
+                </span>
+              ) : null}
+              {this.props.user.userData.wishlist.some(
+                elem => elem.id === game._id
+              ) ? (
+                <Link to={`/game/${game.title}`}>
+                  <span className="menu-cart-option menu-cart-option--wishlisted">
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      style={{
+                        color: '#ffa200',
+                        width: '11px',
+                        height: '11px',
+                        marginRight: '5px'
+                      }}
+                    />
+                    Wishlisted
+                  </span>
+                </Link>
+              ) : null}
             </div>
           );
         })

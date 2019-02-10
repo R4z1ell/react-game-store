@@ -462,7 +462,8 @@ class GamePage extends Component {
 
 const mapStateToProps = state => {
   return {
-    gameInfo: state.games
+    gameInfo: state.games,
+    user: state.user
   };
 };
 

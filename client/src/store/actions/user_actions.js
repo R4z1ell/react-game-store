@@ -8,7 +8,9 @@ import {
   LOGOUT_USER,
   ADD_TO_CART_USER,
   GET_CART_ITEMS_USER,
-  REMOVE_CART_ITEM_USER
+  REMOVE_CART_ITEM_USER,
+  ADD_TO_WISHLIST_USER,
+  REMOVE_WISHLIST_ITEM_USER
 } from './types';
 
 export function registerUser(dataToSubmit) {
@@ -84,6 +86,28 @@ export function removeCartItem(id) {
 
   return {
     type: REMOVE_CART_ITEM_USER,
+    payload: request
+  };
+}
+
+export function addToWishlist(_id) {
+  const request = axios
+    .post(`${USER_SERVER}/addToWishlist?productId=${_id}`)
+    .then(response => response.data);
+
+  return {
+    type: ADD_TO_WISHLIST_USER,
+    payload: request
+  };
+}
+
+export function removeFromWishlist(id) {
+  const request = axios
+    .get(`${USER_SERVER}/removeFromWishlist?_id=${id}`)
+    .then(response => response.data);
+
+  return {
+    type: REMOVE_WISHLIST_ITEM_USER,
     payload: request
   };
 }

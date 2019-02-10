@@ -168,6 +168,11 @@
     white-space: nowrap;
     cursor: pointer;
 
+    &--wishlisted {
+      color: #ffb54d;
+      margin-left: 54px;
+    }
+
     &--add-to-wishlist {
       left: 33.5%;
       opacity: 0;
@@ -192,6 +197,10 @@
 
 .menu-cart-item:hover .menu-cart-option {
   text-decoration: underline;
+}
+
+.menu-cart-item:hover .menu-cart-option--wishlisted {
+  text-decoration: none;
 }
 
 .menu-cart-item:hover .menu-cart-option--add-to-wishlist {

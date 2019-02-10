@@ -8,8 +8,7 @@ import { FaWindows, FaShoppingCart } from 'react-icons/fa';
 
 class ProductCard extends Component {
   state = {
-    isHovered: false,
-    wishlisted: false
+    isHovered: false
   };
 
   handleHover = () => {
@@ -62,6 +61,9 @@ class ProductCard extends Component {
               </div>
               {this.props.user.userData.cart.some(
                 game => game.id === this.props._id
+              ) ||
+              this.props.user.userData.wishlist.some(
+                game => game.id === this.props._id
               ) ? null : (
                 <FaWindows
                   fill="#999"
@@ -90,8 +92,13 @@ class ProductCard extends Component {
                   />
                 </div>
               ) : null}
-              {this.state.wishlisted ? (
-                <div>
+              {this.props.user.userData.wishlist.some(
+                game => game.id === this.props._id
+              ) &&
+              !this.props.user.userData.cart.some(
+                game => game.id === this.props._id
+              ) ? (
+                <div style={{ display: 'flex' }}>
                   <span className="product-card__label product-card__label--is-wishlisted">
                     <FontAwesomeIcon
                       icon={faHeart}

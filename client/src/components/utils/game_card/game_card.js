@@ -62,7 +62,12 @@ class GameCard extends Component {
                     in cart
                   </span>
                 ) : null}
-                {this.state.wishlisted ? (
+                {this.props.user.userData.wishlist.some(
+                  game => game.id === this.props._id
+                ) &&
+                !this.props.user.userData.cart.some(
+                  game => game.id === this.props._id
+                ) ? (
                   <span className="game-card__label game-card__label--is-wishlisted">
                     <FontAwesomeIcon
                       icon={faHeart}
@@ -199,7 +204,20 @@ class GameCard extends Component {
                   in cart
                 </div>
               ) : null}
-              {/* <div className="product-tile__labels product-tile__labels--is-wishlisted"></div> */}
+              {this.props.user.userData.wishlist.some(
+                game => game.id === this.props._id
+              ) &&
+              !this.props.user.userData.cart.some(
+                game => game.id === this.props._id
+              ) ? (
+                <div className="product-tile__labels product-tile__labels--is-wishlisted">
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    className="game-card__label-icon"
+                  />
+                  wishlisted
+                </div>
+              ) : null}
               <FaWindows
                 fill="#999"
                 size="0.9em"
