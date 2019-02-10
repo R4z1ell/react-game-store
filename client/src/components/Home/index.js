@@ -16,7 +16,10 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <HomeCarousel games={this.props.games.allGames} />
+        <HomeCarousel
+          games={this.props.games.allGames}
+          user={this.props.user}
+        />
         <CardBlock
           list={this.props.games.allGames}
           gridView={true}
@@ -31,7 +34,8 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    games: state.games
+    games: state.games,
+    user: state.user
   };
 };
 

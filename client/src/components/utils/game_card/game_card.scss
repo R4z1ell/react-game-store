@@ -319,7 +319,7 @@
   &__platform {
     display: flex;
     align-items: center;
-    margin-top: 19px;
+    margin-top: 9px;
   }
 
   &__price-discounted {
@@ -366,7 +366,7 @@
 }
 
 .product-tile__base-price.no-discount svg {
-  width: 7.5px;
+  font-size: 11px;
   margin-right: 3px;
 }
 

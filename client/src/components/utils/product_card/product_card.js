@@ -8,7 +8,8 @@ import { FaWindows, FaShoppingCart } from 'react-icons/fa';
 
 class ProductCard extends Component {
   state = {
-    isHovered: false
+    isHovered: false,
+    wishlisted: false
   };
 
   handleHover = () => {
@@ -27,6 +28,12 @@ class ProductCard extends Component {
     const productClass = this.state.isHovered
       ? 'product-card product-card--active'
       : 'product-card';
+
+    const discountedPrice = Number(
+      this.props.prices.basePrice / 100 -
+        (this.props.prices.basePrice / 10000) * 33
+    ).toFixed(2);
+
     return (
       <div
         className={productClass}
@@ -83,7 +90,7 @@ class ProductCard extends Component {
                   />
                 </div>
               ) : null}
-              {/* {this.state.wishlisted ? (
+              {this.state.wishlisted ? (
                 <div>
                   <span className="product-card__label product-card__label--is-wishlisted">
                     <FontAwesomeIcon
@@ -98,13 +105,35 @@ class ProductCard extends Component {
                     className="product-card__image"
                   />
                 </div>
-              ) : null} */}
+              ) : null}
             </div>
           </div>
           <div className="product-card__buy-block">
             <div className="product-card__prices">
-              <FontAwesomeIcon icon={faEuroSign} />
-              {this.props.prices.basePrice / 100}
+              {this.props.prices.discount ? (
+                <span className="product-card__discount">
+                  -{this.props.prices.discount}%
+                </span>
+              ) : null}
+              <div className="product-card__prices-inner">
+                {this.props.prices.discount ? (
+                  <span className="product-card__base-price">
+                    <FontAwesomeIcon icon={faEuroSign} />
+                    {this.props.prices.basePrice / 100}
+                  </span>
+                ) : (
+                  <span className="product-card__base-price no-discount">
+                    <FontAwesomeIcon icon={faEuroSign} />
+                    {this.props.prices.basePrice / 100}
+                  </span>
+                )}
+                {this.props.prices.discount ? (
+                  <span className="product-card__price-discounted">
+                    <FontAwesomeIcon icon={faEuroSign} />
+                    {discountedPrice}
+                  </span>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>

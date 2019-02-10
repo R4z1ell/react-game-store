@@ -7,7 +7,7 @@ import './slider.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faEuroSign } from '@fortawesome/free-solid-svg-icons';
-import { FaWindows } from 'react-icons/fa';
+import { FaWindows, FaShoppingCart } from 'react-icons/fa';
 
 import MyButton from '../../../components/utils/button/button';
 
@@ -74,52 +74,95 @@ const HomeCarousel = props => {
 
   const generateGameSlides = () =>
     props.games
-      ? props.games.map((game, i) => (
-          <React.Fragment key={i}>
-            <Link to={`/game/${game.title}`}>
-              <div
-                style={{
-                  background: `linear-gradient(180deg,transparent 0,rgba(0,0,0,.6)),url(${
-                    game.images.background
-                  })`,
-                  height: '490px'
-                }}
-              >
-                <div className="container">
-                  <div className="gamme__above--logo">
-                    {game.images.logo ? (
-                      <img src={`${game.images.logo}`} alt="logo" />
-                    ) : null}
-                  </div>
-                  <div className="game__above">
-                    <FaWindows
-                      fill="#999"
-                      className="game__above--windows"
-                      size="0.8em"
-                    />
-                    <FontAwesomeIcon
-                      icon={faCircle}
-                      className="game__above--circle"
-                    />
-                    <span>Now available</span>
-                  </div>
-                  <div className="game__title">{game.title}</div>
-                  <div className="game__action">
-                    <div className="game__price">
-                      <FontAwesomeIcon icon={faEuroSign} />
-                      {game.prices.basePrice / 100}
+      ? props.games.map((game, i) => {
+          const discountedPrice = Number(
+            game.prices.basePrice / 100 - (game.prices.basePrice / 10000) * 33
+          ).toFixed(2);
+          const myButtonClass = game.prices.discount ? '23.8%' : '23%';
+          const titleClass = game.title.length >= 35 ? '29px' : '32px';
+
+          return (
+            <React.Fragment key={i}>
+              <Link to={`/game/${game.title}`}>
+                <div
+                  style={{
+                    background: `linear-gradient(180deg,transparent 0,rgba(0,0,0,.6)),url(${
+                      game.images.background
+                    })`,
+                    height: '490px'
+                  }}
+                >
+                  <div className="container">
+                    <div className="game__above--logo">
+                      {game.images.logo ? (
+                        <img src={`${game.images.logo}`} alt="logo" />
+                      ) : null}
+                    </div>
+                    <div className="game__above">
+                      <FaWindows
+                        fill="#999"
+                        className="game__above--windows"
+                        size="0.8em"
+                      />
+                      <FontAwesomeIcon
+                        icon={faCircle}
+                        className="game__above--circle"
+                      />
+                      <span>Now available</span>
+                    </div>
+                    <div
+                      className="game__title"
+                      style={{ fontSize: titleClass }}
+                    >
+                      {game.title}
+                    </div>
+                    <div className="game__action">
+                      {game.prices.discount ? (
+                        <span className="game__discount">
+                          -{game.prices.discount}%
+                        </span>
+                      ) : null}
+                      <div className="game__price">
+                        {game.prices.discount ? (
+                          <span className="game__base-price">
+                            {game.prices.basePrice / 100}
+                          </span>
+                        ) : null}
+                        <FontAwesomeIcon icon={faEuroSign} />
+                        {game.prices.discount
+                          ? discountedPrice
+                          : game.prices.basePrice / 100}
+                      </div>
+                    </div>
+                    <div className="game__labels">
+                      {props.user.userData.cart.some(
+                        elem => elem.id === game._id
+                      ) ? (
+                        <span className="game__label game__label--in-cart">
+                          <FaShoppingCart
+                            fill="#fff"
+                            size="1em"
+                            className="game__label-icon"
+                          />
+                          in cart
+                        </span>
+                      ) : null}
+                      {/* <span className="game__label game__label--is-wishlisted">wishlisted</span> */}
                     </div>
                   </div>
                 </div>
+              </Link>
+              <div
+                className="myButton__container"
+                style={{ bottom: myButtonClass }}
+              >
+                <div className="myButton__wrapper">
+                  <MyButton type="add_to_cart_link" gameId={game._id} />
+                </div>
               </div>
-            </Link>
-            <div className="myButton__container">
-              <div className="myButton__wrapper">
-                <MyButton type="add_to_cart_link" gameId={game._id} />
-              </div>
-            </div>
-          </React.Fragment>
-        ))
+            </React.Fragment>
+          );
+        })
       : null;
 
   return (

@@ -116,6 +116,13 @@
   padding-left: 105px;
   border-bottom: 1px solid #e6e6e6;
 
+  &__in-cart {
+    margin-top: 3px;
+    height: 13px;
+    width: 13px;
+    fill: #686868;
+  }
+
   &:hover {
     background: #f2f2f2;
   }
@@ -245,7 +252,11 @@
 
 .menu-product:hover .menu-product__price-btn--active {
   background: linear-gradient(to bottom, #9fbf00, #80ab00);
-  color: #fff;
+  color: $color-white;
+}
+
+.menu-product:hover .menu-product__in-cart {
+  fill: $color-white;
 }
 
 .menu-search__result {
