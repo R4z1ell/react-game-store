@@ -6,6 +6,7 @@ export const ADD_TO_CART_USER = 'add_to_cart_user';
 export const REMOVE_CART_ITEM_USER = 'remove_cart_item_user';
 export const GET_CART_ITEMS_USER = 'get_cart_items_user';
 export const ADD_TO_WISHLIST_USER = 'add_to_wishlist_user';
+export const GET_WISHLIST_ITEMS_USER = 'get_wishlist_items_user';
 export const REMOVE_WISHLIST_ITEM_USER = 'remove_wishlist_item_user';
 
 export const ADD_GAME = 'add_game';

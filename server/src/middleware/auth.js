@@ -9,7 +9,8 @@ let auth = (req, res, next) => {
       return res.json({
         isAuth: false,
         error: true,
-        cart: []
+        cart: [],
+        wishlist: []
       });
 
     req.token = token;

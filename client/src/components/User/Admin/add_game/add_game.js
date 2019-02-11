@@ -21,7 +21,6 @@ import {
 import FormField from '../../../utils/Form/form_field';
 import ScreenshotBlock from '../../../utils/Form/screenshot_block/screenshot_block';
 import LanguageBlock from '../../../utils/Form/language_block/language_block';
-import UserLayout from '../../../../hoc/user_layout/user_layout';
 
 class AddGame extends Component {
   state = {
@@ -573,196 +572,191 @@ class AddGame extends Component {
 
   render() {
     return (
-      <UserLayout>
-        <div className="add_game">
-          <h1 className="add_game__title">Add Product</h1>
-          <form onSubmit={event => this.submitForm(event)}>
+      <div className="add_game">
+        <h1 className="add_game__title">Add Product</h1>
+        <form onSubmit={event => this.submitForm(event)}>
+          <FormField
+            id={'title'}
+            formdata={this.state.formdata.title}
+            change={element => this.updateForm(element)}
+          />
+          <div className="formBlock">
+            <div className="label_inputs">Game release</div>
+          </div>
+          <DatePicker
+            dateFormat="dd/MM/yyyy"
+            selected={this.state.formdata.release_date}
+            onChange={this.handleChange}
+            showMonthDropdown
+          />
+          <div className="add_game__price">
             <FormField
-              id={'title'}
-              formdata={this.state.formdata.title}
+              id={'prices'}
+              formdata={this.state.formdata.prices}
               change={element => this.updateForm(element)}
             />
-            <div className="formBlock">
-              <div className="label_inputs">Game release</div>
-            </div>
-            <DatePicker
-              dateFormat="dd/MM/yyyy"
-              selected={this.state.formdata.release_date}
-              onChange={this.handleChange}
-              showMonthDropdown
-            />
-            <div className="add_game__price">
-              <FormField
-                id={'prices'}
-                formdata={this.state.formdata.prices}
-                change={element => this.updateForm(element)}
-              />
-            </div>
-            <div className="formBlock">
-              <div className="label_inputs">Genres</div>
-            </div>
-            <Select
-              options={this.populateGenres()}
-              onChange={this.handleChangeSelect}
-              isMulti
-            />
-            <div className="form_divider" />
-            <div className="formBlock">
-              <div className="label_inputs">Languages</div>
-            </div>
-            <div className="add_game__languages">
-              <LanguageBlock data={this.handleLanguage} />
-              {this.state.languages.map((item, i) => (
-                <LanguageBlock key={i} data={this.handleLanguage} />
-              ))}
-              <button
-                className="add_game__button-add"
-                onClick={this.addLanguage}
-              >
-                Add
-              </button>
-              <button
-                className="add_game__button-remove"
-                onClick={this.removeLanguage}
-                disabled={this.state.languages.length === 0}
-              >
-                Remove
-              </button>
-            </div>
-            <div className="form_divider" />
-            <FormField
-              id={'lead'}
-              formdata={this.state.formdata.lead}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'full'}
-              formdata={this.state.formdata.full}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'whats_cool_about_it'}
-              formdata={this.state.formdata.whats_cool_about_it}
-              change={element => this.updateForm(element)}
-            />
-            <div className="form_divider" />
-            <FormField
-              id={'developer'}
-              formdata={this.state.formdata.developer}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'publisher'}
-              formdata={this.state.formdata.publisher}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'total_size'}
-              formdata={this.state.formdata.total_size}
-              change={element => this.updateForm(element)}
-            />
-            <div className="form_divider" />
-            <FormField
-              id={'background'}
-              formdata={this.state.formdata.background}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'mobile'}
-              formdata={this.state.formdata.mobile}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'logo'}
-              formdata={this.state.formdata.logo}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'card'}
-              formdata={this.state.formdata.card}
-              change={element => this.updateForm(element)}
-            />
-            <div className="form_divider" />
-            <FormField
-              id={'video_url'}
-              formdata={this.state.formdata.video_url}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'thumbnail_url'}
-              formdata={this.state.formdata.thumbnail_url}
-              change={element => this.updateForm(element)}
-            />
-            <div className="form_divider" />
-            <FormField
-              id={'system'}
-              formdata={this.state.formdata.system}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'processor'}
-              formdata={this.state.formdata.processor}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'memory'}
-              formdata={this.state.formdata.memory}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'graphics'}
-              formdata={this.state.formdata.graphics}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'directX'}
-              formdata={this.state.formdata.directX}
-              change={element => this.updateForm(element)}
-            />
-            <FormField
-              id={'storage'}
-              formdata={this.state.formdata.storage}
-              change={element => this.updateForm(element)}
-            />
-            <div className="form_divider" />
-            <div className="formBlock">
-              <div className="label_inputs">Screenshots</div>
-            </div>
-            <div className="add_game__screenshots">
-              <ScreenshotBlock data={this.handleData} />
-              {this.state.images.map((item, i) => (
-                <ScreenshotBlock key={i} data={this.handleData} />
-              ))}
-              <button
-                className="add_game__button-add"
-                onClick={this.addScreenshot}
-              >
-                Add
-              </button>
-              <button
-                className="add_game__button-remove"
-                onClick={this.removeScreenshot}
-                disabled={this.state.images.length === 0}
-              >
-                Remove
-              </button>
-            </div>
-            <div className="form_divider" />
-            {this.state.formSuccess ? (
-              <div className="form_success">Success</div>
-            ) : null}
-            {this.state.formError ? (
-              <div className="error_label">Please check your data</div>
-            ) : null}
-            <button
-              className="add_game__button-submit"
-              onClick={event => this.submitForm(event)}
-            >
-              Submit Game
+          </div>
+          <div className="formBlock">
+            <div className="label_inputs">Genres</div>
+          </div>
+          <Select
+            options={this.populateGenres()}
+            onChange={this.handleChangeSelect}
+            isMulti
+          />
+          <div className="form_divider" />
+          <div className="formBlock">
+            <div className="label_inputs">Languages</div>
+          </div>
+          <div className="add_game__languages">
+            <LanguageBlock data={this.handleLanguage} />
+            {this.state.languages.map((item, i) => (
+              <LanguageBlock key={i} data={this.handleLanguage} />
+            ))}
+            <button className="add_game__button-add" onClick={this.addLanguage}>
+              Add
             </button>
-          </form>
-        </div>
-      </UserLayout>
+            <button
+              className="add_game__button-remove"
+              onClick={this.removeLanguage}
+              disabled={this.state.languages.length === 0}
+            >
+              Remove
+            </button>
+          </div>
+          <div className="form_divider" />
+          <FormField
+            id={'lead'}
+            formdata={this.state.formdata.lead}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'full'}
+            formdata={this.state.formdata.full}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'whats_cool_about_it'}
+            formdata={this.state.formdata.whats_cool_about_it}
+            change={element => this.updateForm(element)}
+          />
+          <div className="form_divider" />
+          <FormField
+            id={'developer'}
+            formdata={this.state.formdata.developer}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'publisher'}
+            formdata={this.state.formdata.publisher}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'total_size'}
+            formdata={this.state.formdata.total_size}
+            change={element => this.updateForm(element)}
+          />
+          <div className="form_divider" />
+          <FormField
+            id={'background'}
+            formdata={this.state.formdata.background}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'mobile'}
+            formdata={this.state.formdata.mobile}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'logo'}
+            formdata={this.state.formdata.logo}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'card'}
+            formdata={this.state.formdata.card}
+            change={element => this.updateForm(element)}
+          />
+          <div className="form_divider" />
+          <FormField
+            id={'video_url'}
+            formdata={this.state.formdata.video_url}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'thumbnail_url'}
+            formdata={this.state.formdata.thumbnail_url}
+            change={element => this.updateForm(element)}
+          />
+          <div className="form_divider" />
+          <FormField
+            id={'system'}
+            formdata={this.state.formdata.system}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'processor'}
+            formdata={this.state.formdata.processor}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'memory'}
+            formdata={this.state.formdata.memory}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'graphics'}
+            formdata={this.state.formdata.graphics}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'directX'}
+            formdata={this.state.formdata.directX}
+            change={element => this.updateForm(element)}
+          />
+          <FormField
+            id={'storage'}
+            formdata={this.state.formdata.storage}
+            change={element => this.updateForm(element)}
+          />
+          <div className="form_divider" />
+          <div className="formBlock">
+            <div className="label_inputs">Screenshots</div>
+          </div>
+          <div className="add_game__screenshots">
+            <ScreenshotBlock data={this.handleData} />
+            {this.state.images.map((item, i) => (
+              <ScreenshotBlock key={i} data={this.handleData} />
+            ))}
+            <button
+              className="add_game__button-add"
+              onClick={this.addScreenshot}
+            >
+              Add
+            </button>
+            <button
+              className="add_game__button-remove"
+              onClick={this.removeScreenshot}
+              disabled={this.state.images.length === 0}
+            >
+              Remove
+            </button>
+          </div>
+          <div className="form_divider" />
+          {this.state.formSuccess ? (
+            <div className="form_success">Success</div>
+          ) : null}
+          {this.state.formError ? (
+            <div className="error_label">Please check your data</div>
+          ) : null}
+          <button
+            className="add_game__button-submit"
+            onClick={event => this.submitForm(event)}
+          >
+            Submit Game
+          </button>
+        </form>
+      </div>
     );
   }
 }

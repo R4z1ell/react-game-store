@@ -10,6 +10,7 @@ import {
   GET_CART_ITEMS_USER,
   REMOVE_CART_ITEM_USER,
   ADD_TO_WISHLIST_USER,
+  GET_WISHLIST_ITEMS_USER,
   REMOVE_WISHLIST_ITEM_USER
 } from './types';
 
@@ -97,6 +98,17 @@ export function addToWishlist(_id) {
 
   return {
     type: ADD_TO_WISHLIST_USER,
+    payload: request
+  };
+}
+
+export function getWishlistItems(wishlistItems) {
+  const request = axios
+    .get(`${USER_SERVER}/getWishlistItems?id=${wishlistItems}`)
+    .then(response => response.data);
+
+  return {
+    type: GET_WISHLIST_ITEMS_USER,
     payload: request
   };
 }

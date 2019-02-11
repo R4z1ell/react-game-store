@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
 import { auth } from '../store/actions/user_actions';
+import { getOverlayStatus } from '../store/actions/site_actions';
 
-export default function(ComposedClass, adminRoute = null) {
+export default function(ComposedClass, reload, adminRoute = null) {
   class AuthenticationCheck extends Component {
     state = {
       loading: true
@@ -14,8 +15,15 @@ export default function(ComposedClass, adminRoute = null) {
       this.props.dispatch(auth()).then(response => {
         let user = this.props.user.userData;
 
-        if (user.cart) {
+        if (user.cart && user.wishlist) {
           this.setState({ loading: false });
+
+          if (!user.isAuth) {
+            if (reload) {
+              this.props.history.push('/');
+              this.props.dispatch(getOverlayStatus(true, true));
+            }
+          }
         }
       });
     }

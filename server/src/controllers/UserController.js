@@ -133,6 +133,20 @@ module.exports = {
       }
     );
   },
+  getWishlistItems(req, res) {
+    let ids = req.query.id.split(',');
+    items = [];
+    items = ids.map(item => {
+      return mongoose.Types.ObjectId(item);
+    });
+
+    Game.find({ _id: { $in: items } })
+      .populate({ path: 'genres', model: 'Genre' })
+      .exec((err, docs) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).send(docs);
+      });
+  },
   removeFromWishlist(req, res) {
     User.findOneAndUpdate(
       { _id: req.user._id },

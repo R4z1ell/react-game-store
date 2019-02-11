@@ -18,6 +18,7 @@ module.exports = app => {
     auth,
     UserController.removeFromWishlist
   );
+  app.get('/api/users/getWishlistItems', UserController.getWishlistItems);
 
   app.post('/api/games/genre', auth, admin, GenresController.addGenre);
   app.get('/api/games/get_genres', GenresController.getGenres);

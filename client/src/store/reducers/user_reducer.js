@@ -7,6 +7,7 @@ import {
   GET_CART_ITEMS_USER,
   REMOVE_CART_ITEM_USER,
   ADD_TO_WISHLIST_USER,
+  GET_WISHLIST_ITEMS_USER,
   REMOVE_WISHLIST_ITEM_USER
 } from '../actions/types';
 
@@ -47,6 +48,8 @@ export default function(state = {}, action) {
           wishlist: action.payload
         }
       };
+    case GET_WISHLIST_ITEMS_USER:
+      return { ...state, wishlistDetail: action.payload };
     case REMOVE_WISHLIST_ITEM_USER:
       return {
         ...state,
