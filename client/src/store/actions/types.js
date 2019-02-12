@@ -8,6 +8,7 @@ export const GET_CART_ITEMS_USER = 'get_cart_items_user';
 export const ADD_TO_WISHLIST_USER = 'add_to_wishlist_user';
 export const GET_WISHLIST_ITEMS_USER = 'get_wishlist_items_user';
 export const REMOVE_WISHLIST_ITEM_USER = 'remove_wishlist_item_user';
+export const CLEAR_WISHLIST_DETAIL = 'clear_wishlist_detail';
 
 export const ADD_GAME = 'add_game';
 export const CLEAR_GAME = 'clear_game';

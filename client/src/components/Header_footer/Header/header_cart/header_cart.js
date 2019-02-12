@@ -47,11 +47,19 @@ class HeaderCart extends Component {
     let total = 0;
 
     cartDetail.forEach(item => {
-      total += (item.prices.basePrice * 100) / 100;
+      const discountedPrice = Number(
+        item.prices.basePrice / 100 - (item.prices.basePrice / 10000) * 33
+      );
+
+      if (item.prices.discount) {
+        total += discountedPrice;
+      } else {
+        total += item.prices.basePrice / 100;
+      }
     });
 
     this.setState({
-      total
+      total: total.toFixed(2)
     });
   };
 
@@ -183,7 +191,7 @@ class HeaderCart extends Component {
       </Link>
       {this.props.auth.isAuth ? (
         <Link
-          to="/games"
+          to="/user/wishlist"
           className="menu-cart-empty__btn menu-cart-empty__btn--wishlist"
         >
           Your Wishlist
@@ -213,7 +221,7 @@ class HeaderCart extends Component {
                 </span>
               </div>
               <div className="menu-cart__total-price">
-                <FaEuroSign size="0.75em" /> {this.state.total / 100}
+                <FaEuroSign size="0.75em" /> {this.state.total}
               </div>
               <Link to="/games" className="menu-btn--green">
                 Go to checkout

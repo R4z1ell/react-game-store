@@ -11,7 +11,8 @@ import {
   REMOVE_CART_ITEM_USER,
   ADD_TO_WISHLIST_USER,
   GET_WISHLIST_ITEMS_USER,
-  REMOVE_WISHLIST_ITEM_USER
+  REMOVE_WISHLIST_ITEM_USER,
+  CLEAR_WISHLIST_DETAIL
 } from './types';
 
 export function registerUser(dataToSubmit) {
@@ -123,3 +124,10 @@ export function removeFromWishlist(id) {
     payload: request
   };
 }
+
+export const clearWishlistDetail = () => {
+  return {
+    type: CLEAR_WISHLIST_DETAIL,
+    payload: ''
+  };
+};

@@ -8,7 +8,8 @@ import {
   REMOVE_CART_ITEM_USER,
   ADD_TO_WISHLIST_USER,
   GET_WISHLIST_ITEMS_USER,
-  REMOVE_WISHLIST_ITEM_USER
+  REMOVE_WISHLIST_ITEM_USER,
+  CLEAR_WISHLIST_DETAIL
 } from '../actions/types';
 
 export default function(state = {}, action) {
@@ -58,6 +59,8 @@ export default function(state = {}, action) {
           wishlist: action.payload
         }
       };
+    case CLEAR_WISHLIST_DETAIL:
+      return { ...state, wishlistDetail: action.payload };
     default:
       return state;
   }

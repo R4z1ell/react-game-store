@@ -8,23 +8,27 @@ import {
   getWishlistItems,
   addToCart,
   removeFromWishlist,
-  addToWishlist
+  addToWishlist,
+  clearWishlistDetail
 } from '../../../store/actions/user_actions';
 import { FaWindows, FaTimes, FaHeart } from 'react-icons/fa';
 import { getOverlayStatus } from '../../../store/actions/site_actions';
 
-//! Add 'Your wishlist is currently empty' message when the wishlist is empty
-//! Fix the bug that occur when having only one game inside the wishlist and we click on the cross button, in this
-//! case the game gets removed completely from the page and not set to 0.5 opacity
-
 class UserWishlist extends Component {
   state = {
-    gameId: []
+    gameId: [],
+    emptyMessage: false
   };
 
   componentDidMount() {
     let cartItems = [];
     let user = this.props.user;
+
+    if (user.userData.wishlist.length === 0) {
+      this.setState({ emptyMessage: true }, () =>
+        this.props.dispatch(clearWishlistDetail())
+      );
+    }
 
     if (user.userData.wishlist) {
       if (user.userData.wishlist.length > 0) {
@@ -48,8 +52,11 @@ class UserWishlist extends Component {
   sendToWishlist = id => {
     if (this.props.user.userData.isAuth) {
       this.props.dispatch(addToWishlist(id));
+      let array = [...this.state.gameId];
+      let index = this.state.gameId.indexOf(id);
+      array.splice(index, 1);
       this.setState({
-        gameId: []
+        gameId: array
       });
     }
     if (!this.props.user.userData.isAuth) {
@@ -62,7 +69,7 @@ class UserWishlist extends Component {
   };
 
   storeGameId = id => {
-    let gameId = [];
+    let gameId = [...this.state.gameId];
     gameId.push(id);
 
     this.setState({
@@ -72,15 +79,19 @@ class UserWishlist extends Component {
   };
 
   generateLinks = () =>
-    this.props.user.userData.wishlist.length !== 0 &&
     this.props.user.wishlistDetail
       ? this.props.user.wishlistDetail.map((game, i) => {
           const discountedPrice = Number(
             game.prices.basePrice / 100 - (game.prices.basePrice / 10000) * 33
           ).toFixed(2);
-          const rowLinkClass = this.state.gameId.some(elem => elem === game._id)
-            ? '0.5'
-            : '1';
+          const rowLinkClass =
+            this.state.gameId.some(elem => elem === game._id) &&
+            !this.props.user.userData.wishlist.some(
+              elem => elem.id === game._id
+            )
+              ? '0.5'
+              : '1';
+
           return (
             <div className="wishlist-row-wrapper" key={i}>
               <div className="wishlist-row">
@@ -128,7 +139,9 @@ class UserWishlist extends Component {
                   ) : null}
                 </Link>
                 <div className="wishlist-row__action">
-                  {!this.state.gameId.some(elem => elem === game._id) ? (
+                  {this.props.user.userData.wishlist.some(
+                    elem => elem.id === game._id
+                  ) ? (
                     <span
                       className="wishlist-row__btn-remove"
                       onClick={() => this.storeGameId(game._id)}
@@ -195,10 +208,30 @@ class UserWishlist extends Component {
   render() {
     return (
       <div className="wishlist__container">
-        <div className="wishlist__header">
-          Wishlisted titles ({this.props.user.userData.wishlist.length})
-        </div>
+        {!this.state.emptyMessage ? (
+          <div className="wishlist__header">
+            Wishlisted titles &nbsp;
+            {this.props.user.userData.wishlist.length !== 0
+              ? `(${this.props.user.userData.wishlist.length})`
+              : null}
+          </div>
+        ) : null}
         <div className="wishlist__products">{this.generateLinks()}</div>
+        {this.state.emptyMessage ? (
+          <div className="empty-message">
+            <div className="empty-message__big">
+              Your wishlist is currently empty
+            </div>
+            <div className="empty-message__small">
+              Explore our &nbsp;
+              <Link to={'/games'} className="un">
+                catalog of carefully selected games
+              </Link>
+              &nbsp; and we are pretty sure you will find many titles you wish
+              you had in your collection. :)
+            </div>
+          </div>
+        ) : null}
       </div>
     );
   }
