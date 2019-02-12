@@ -9,6 +9,7 @@ import GamePage from './components/Game';
 import StorePage from './components/Store';
 import UserWishlist from './components/User/user_wishlist/user_wishlist';
 import AddGame from './components/User/Admin/add_game/add_game';
+import UserAccount from './components/User/user_account/user_account';
 
 // ! Add logic and error handling for the 'SignupModal' Component
 // ! Add logic and error handling for the 'ResetpassModal' Component
@@ -24,6 +25,11 @@ const Routes = () => {
           path="/user/wishlist"
           exact
           component={Auth(UserWishlist, true)}
+        />
+        <Route
+          path="/user/settings/account"
+          exact
+          component={Auth(UserAccount, true)}
         />
         <Route
           path="/admin/add_product"

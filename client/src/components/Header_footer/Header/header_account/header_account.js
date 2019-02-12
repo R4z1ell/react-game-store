@@ -20,7 +20,7 @@ const HeaderAccount = props => {
         </div>
       </div>
       <div className="menu-submenu-item">
-        <Link to="/user/dashboard" className="menu-submenu-link">
+        <Link to="/user/settings/account" className="menu-submenu-link">
           Your profile
         </Link>
       </div>
@@ -33,6 +33,11 @@ const HeaderAccount = props => {
       <div className="menu-submenu-item">
         <Link to="/user/wishlist" className="menu-submenu-link">
           Wishlist
+          {user.wishlist.length > 0 ? (
+            <span className="menu-submenu-item__label">
+              {user.wishlist.length}
+            </span>
+          ) : null}
         </Link>
       </div>
       <div className="menu-submenu-separator" />

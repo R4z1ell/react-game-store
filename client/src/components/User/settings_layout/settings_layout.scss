@@ -1,0 +1,55 @@
+.settings-layout {
+  width: 1100px;
+  margin: 127px auto 0 auto;
+  height: 68.4vh;
+  white-space: nowrap;
+
+  &__content {
+    width: 69.81%;
+    padding-left: 40px;
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+  }
+
+  &__navigation {
+    width: 30.18%;
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+  }
+}
+
+.settings__nav {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+  font-size: 13.5px;
+  text-transform: uppercase;
+  color: #262626;
+  background: #dedede;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+
+  &-icon {
+    font-size: 15px;
+    margin-right: 15px;
+  }
+
+  &-link {
+    display: block;
+    height: 56px;
+    padding: 0 10px;
+    font-weight: 600;
+    line-height: 56px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+}
+
+.settings-content {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #262626;
+}
