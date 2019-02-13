@@ -224,12 +224,6 @@
   margin-left: 10px;
 }
 
-.store-search__tabs-wrapper--row {
-  position: absolute;
-  top: 225px;
-  right: 35%;
-}
-
 .store-search__filters-sorting {
   display: flex;
   justify-content: space-between;
@@ -238,20 +232,6 @@
   margin-top: -2px;
   position: relative;
   border-bottom: 1px solid #bfbfbf;
-}
-
-.tabs-row-option {
-  display: inline-block;
-  height: 36px;
-  margin-right: 30px;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
-
-  &--selected {
-    border-bottom: 3px solid $color-violet;
-    color: $color-violet;
-  }
 }
 
 .view-switch-btn {

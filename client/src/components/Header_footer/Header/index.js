@@ -109,6 +109,12 @@ class Header extends Component {
     });
   };
 
+  closeHeaderAccount = () => {
+    this.setState({
+      active: false
+    });
+  };
+
   render() {
     const active = this.state.active ? 'block' : 'none';
     const triangleClass = this.state.active
@@ -120,9 +126,7 @@ class Header extends Component {
         <div className="header__container">
           <div className="header__menu">
             <div className="header__item header__store">
-              <Link to="/games">
-                STORE <FontAwesomeIcon icon={faAngleDown} />
-              </Link>
+              <Link to="/games">STORE</Link>
             </div>
             <div
               className="header__item header__signIn"
@@ -160,6 +164,7 @@ class Header extends Component {
               ) : null}
               {this.state.active && this.props.user.userData.isAuth ? (
                 <HeaderAccount
+                  closeHeaderAccount={this.closeHeaderAccount}
                   userData={this.props.user.userData}
                   logoutUser={this.logoutHandler}
                 />

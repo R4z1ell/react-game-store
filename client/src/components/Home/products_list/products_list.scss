@@ -1,7 +1,7 @@
 @import '../../../Resources/scss/variables';
 
 .products-list {
-  margin-bottom: 140px;
+  margin: 80px 0 130px 0;
 
   &__button {
     position: absolute;
@@ -40,30 +40,6 @@
     max-width: 1100px;
     margin: 0px auto;
     transform: translateX(-1%);
-  }
-
-  &__tabs {
-    width: 1100px;
-    margin: 90px auto 21px auto;
-
-    &-wrapper {
-      display: flex;
-      width: 722px;
-      padding-bottom: 21px;
-      border-bottom: 1px solid $color-gray;
-
-      &__new {
-        border-bottom: 3px solid #707070;
-        margin-bottom: -24px;
-      }
-
-      div {
-        margin-right: 40px;
-        color: $color-dark;
-        font-size: 17px;
-        font-weight: 700;
-      }
-    }
   }
 
   &__wrapper {

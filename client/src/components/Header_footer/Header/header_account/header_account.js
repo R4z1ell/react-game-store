@@ -19,18 +19,18 @@ const HeaderAccount = props => {
           <span className="menu-account__user-name">{user.username}</span>
         </div>
       </div>
-      <div className="menu-submenu-item">
+      <div className="menu-submenu-item" onClick={props.closeHeaderAccount}>
         <Link to="/user/settings/account" className="menu-submenu-link">
           Your profile
         </Link>
       </div>
       <div className="menu-submenu-separator" />
-      <div className="menu-submenu-item">
-        <Link to="/user/games" className="menu-submenu-link">
-          Games
+      <div className="menu-submenu-item" onClick={props.closeHeaderAccount}>
+        <Link to="/user/orders" className="menu-submenu-link">
+          Orders History
         </Link>
       </div>
-      <div className="menu-submenu-item">
+      <div className="menu-submenu-item" onClick={props.closeHeaderAccount}>
         <Link to="/user/wishlist" className="menu-submenu-link">
           Wishlist
           {user.wishlist.length > 0 ? (
@@ -40,19 +40,13 @@ const HeaderAccount = props => {
           ) : null}
         </Link>
       </div>
-      <div className="menu-submenu-separator" />
-      <div className="menu-submenu-item">
-        <Link to="/user/orders" className="menu-submenu-link">
-          Orders History
-        </Link>
-      </div>
-      <div className="menu-submenu-item">
+      <div className="menu-submenu-item" onClick={props.closeHeaderAccount}>
         <Link to="/user/settings" className="menu-submenu-link">
           Settings
         </Link>
       </div>
       <div className="menu-submenu-separator" />
-      <div className="menu-submenu-item">
+      <div className="menu-submenu-item" onClick={props.closeHeaderAccount}>
         <div className="menu-submenu-link" onClick={props.logoutUser}>
           Sign out
         </div>

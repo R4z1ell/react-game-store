@@ -10,6 +10,7 @@ import StorePage from './components/Store';
 import UserWishlist from './components/User/user_wishlist/user_wishlist';
 import AddGame from './components/User/Admin/add_game/add_game';
 import UserAccount from './components/User/user_account/user_account';
+import UserSecurity from './components/User/user_security/user_security';
 
 // ! Add logic and error handling for the 'SignupModal' Component
 // ! Add logic and error handling for the 'ResetpassModal' Component
@@ -30,6 +31,11 @@ const Routes = () => {
           path="/user/settings/account"
           exact
           component={Auth(UserAccount, true)}
+        />
+        <Route
+          path="/user/settings/security"
+          exact
+          component={Auth(UserSecurity, true)}
         />
         <Route
           path="/admin/add_product"

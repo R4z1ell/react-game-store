@@ -1,9 +1,6 @@
 @import '../../../../Resources/scss/variables';
 
 .add_game {
-  margin-top: 46px;
-  padding-left: 50px;
-
   &__button-add,
   &__button-remove,
   &__button-submit {
@@ -26,16 +23,13 @@
     margin-left: 5px;
   }
 
-  &__title {
-    font-size: 22px;
-    font-family: 'Black Ops One';
-    margin-bottom: 40px;
-    color: $color-dark;
-  }
-
   &__price input {
     width: 24% !important;
   }
+}
+
+.add_game form > div:first-of-type .label_inputs {
+  margin-top: 0px;
 }
 
 .add_game__languages .add_game__button-add {

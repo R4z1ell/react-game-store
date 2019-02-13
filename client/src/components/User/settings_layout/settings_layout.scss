@@ -1,7 +1,7 @@
 .settings-layout {
   width: 1100px;
-  margin: 127px auto 0 auto;
-  height: 68.4vh;
+  margin: 127px auto 127px auto;
+  min-height: 56.5vh;
   white-space: nowrap;
 
   &__content {
@@ -45,7 +45,15 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+    &:hover {
+      background: #e5e5e5;
+    }
   }
+}
+
+.settings__nav-link.is-active {
+  background: #e5e5e5;
 }
 
 .settings-content {

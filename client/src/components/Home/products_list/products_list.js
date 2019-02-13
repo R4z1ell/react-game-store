@@ -97,15 +97,6 @@ class ProductsList extends Component {
   render() {
     return (
       <div className="products-list">
-        <div className="products-list__tabs">
-          <div className="products-list__tabs-wrapper">
-            <div className="products-list__tabs-wrapper__popular">Popular</div>
-            <div className="products-list__tabs-wrapper__new">New</div>
-            <div className="products-list__tabs-wrapper__upcoming">
-              Upcoming
-            </div>
-          </div>
-        </div>
         <div className="products-list__container">
           <div>{this.renderCards(this.props.list)}</div>
           <div>

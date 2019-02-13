@@ -21,9 +21,6 @@ class StoreSearch extends Component {
     switchBtnGrid: true,
     switchBtnList: false,
     slideSidebar: true,
-    everything: false,
-    upcoming: false,
-    onSale: false,
     collapsedPrice: false,
     collapsedLanguage: false,
     priceSelected: false,
@@ -164,30 +161,6 @@ class StoreSearch extends Component {
     );
   };
 
-  everything = () => {
-    this.setState({
-      everything: true,
-      upcoming: false,
-      onSale: false
-    });
-  };
-
-  upcoming = () => {
-    this.setState({
-      everything: false,
-      upcoming: true,
-      onSale: false
-    });
-  };
-
-  onSale = () => {
-    this.setState({
-      everything: false,
-      upcoming: false,
-      onSale: true
-    });
-  };
-
   togglePrice = () => {
     this.setState({
       collapsedPrice: !this.state.collapsedPrice
@@ -267,9 +240,6 @@ class StoreSearch extends Component {
       : null;
 
   render() {
-    let everything = this.state.everything ? '--selected' : '';
-    let upcoming = this.state.upcoming ? '--selected' : '';
-    let onSale = this.state.onSale ? '--selected' : '';
     let switchBtnGridStatus = this.state.switchBtnGrid ? '--active' : '';
     let switchBtnListStatus = this.state.switchBtnList ? '--active' : '';
 
@@ -378,26 +348,6 @@ class StoreSearch extends Component {
                 />
               </div>
             ) : null}
-          </div>
-        </div>
-        <div className="store-search__tabs-wrapper--row">
-          <div
-            className={`tabs-row-option tabs-row-option${everything}`}
-            onClick={() => this.everything()}
-          >
-            Everything
-          </div>
-          <div
-            className={`tabs-row-option tabs-row-option${upcoming}`}
-            onClick={() => this.upcoming()}
-          >
-            Upcoming
-          </div>
-          <div
-            className={`tabs-row-option tabs-row-option${onSale}`}
-            onClick={() => this.onSale()}
-          >
-            On sale
           </div>
         </div>
         <div className="store-search__filters-sorting">
