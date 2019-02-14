@@ -19,6 +19,7 @@ module.exports = app => {
     UserController.removeFromWishlist
   );
   app.get('/api/users/getWishlistItems', UserController.getWishlistItems);
+  app.post('/api/users/update_profile', auth, UserController.updateUserData);
 
   app.post('/api/games/genre', auth, admin, GenresController.addGenre);
   app.get('/api/games/get_genres', GenresController.getGenres);

@@ -12,7 +12,8 @@ import {
   ADD_TO_WISHLIST_USER,
   GET_WISHLIST_ITEMS_USER,
   REMOVE_WISHLIST_ITEM_USER,
-  CLEAR_WISHLIST_DETAIL
+  CLEAR_WISHLIST_DETAIL,
+  UPDATE_DATA_USER
 } from './types';
 
 export function registerUser(dataToSubmit) {
@@ -131,3 +132,14 @@ export const clearWishlistDetail = () => {
     payload: ''
   };
 };
+
+export function updateUserData(dataToSubmit) {
+  const request = axios
+    .post(`${USER_SERVER}/update_profile`, dataToSubmit)
+    .then(response => response.data);
+
+  return {
+    type: UPDATE_DATA_USER,
+    payload: request
+  };
+}

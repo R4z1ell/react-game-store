@@ -45,6 +45,7 @@
     }
 
     &__value {
+      width: 87%;
       white-space: nowrap;
     }
   }
@@ -64,6 +65,7 @@
   display: inline-block;
   min-width: 108px;
   height: 30px;
+  margin-top: 5px;
   line-height: 30px;
   white-space: nowrap;
   cursor: pointer;
@@ -78,9 +80,20 @@
   font-size: 13.5px;
   font-weight: 600;
   border: none;
+  user-select: none;
 
   &:hover {
     background: linear-gradient(180deg, #e6e6e6, #e1e1e1);
+  }
+
+  &__updated {
+    background: #80ab00;
+    color: #fff;
+    cursor: default;
+
+    &:hover {
+      background: #80ab00;
+    }
   }
 }
 
@@ -95,4 +108,13 @@
   font-size: 1em;
   font-weight: 600;
   color: #262626;
+}
+
+.btn--change__updated svg {
+  margin-top: 5px;
+}
+
+.field__msg.error {
+  background: linear-gradient(90deg, rgba(238, 221, 213, 0), #eeddd5 15px);
+  color: #f25100;
 }

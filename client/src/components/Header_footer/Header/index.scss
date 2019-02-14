@@ -23,9 +23,6 @@
   }
 
   &__dropdown-icon {
-    position: absolute;
-    left: 14%;
-    top: 19.5px;
     height: 14px;
     width: 8.75px !important;
     fill: $color-gray;
@@ -68,7 +65,6 @@
   }
 
   &__sign-in {
-    margin: 1px 0 0 23px;
     color: #d38ae5;
     transition: transform 0.2s, opacity 0.2s;
     transition-delay: 0.15s;
@@ -106,7 +102,7 @@
   position: absolute;
   top: auto;
   bottom: 0;
-  right: 84.3%;
+  right: 83.8%;
   left: auto;
   z-index: 3;
 }

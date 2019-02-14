@@ -115,6 +115,16 @@ class Header extends Component {
     });
   };
 
+  triangleRightStyle = () => {
+    if (this.props.user.userData) {
+      if (!this.props.user.userData.isAuth) {
+        return '87%';
+      } else {
+        return '83.8%';
+      }
+    }
+  };
+
   render() {
     const active = this.state.active ? 'block' : 'none';
     const triangleClass = this.state.active
@@ -144,18 +154,29 @@ class Header extends Component {
               ) : null}
               {this.props.user.userData ? (
                 !this.props.user.userData.isAuth ? (
-                  <p className="header__sign-in">SIGN IN</p>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <p className="header__sign-in">SIGN IN</p>
+                    <FontAwesomeIcon
+                      icon={faAngleDown}
+                      className="header__dropdown-icon"
+                    />
+                  </div>
                 ) : (
-                  <p className="header__logged-in">
-                    {this.props.user.userData.username}
-                  </p>
+                  <div style={{ display: 'inline-block' }}>
+                    <p className="header__logged-in">
+                      {this.props.user.userData.username}
+                    </p>
+                    <FontAwesomeIcon
+                      icon={faAngleDown}
+                      className="header__dropdown-icon"
+                    />
+                  </div>
                 )
               ) : null}
-              <FontAwesomeIcon
-                icon={faAngleDown}
-                className="header__dropdown-icon"
+              <p
+                className={triangleClass}
+                style={{ display: active, right: this.triangleRightStyle() }}
               />
-              <p className={triangleClass} style={{ display: active }} />
               {this.state.active && !this.props.user.userData.isAuth ? (
                 <HeaderLogin
                   showLoginModal={value => this.showLoginModal(value)}

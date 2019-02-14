@@ -9,7 +9,8 @@ import {
   ADD_TO_WISHLIST_USER,
   GET_WISHLIST_ITEMS_USER,
   REMOVE_WISHLIST_ITEM_USER,
-  CLEAR_WISHLIST_DETAIL
+  CLEAR_WISHLIST_DETAIL,
+  UPDATE_DATA_USER
 } from '../actions/types';
 
 export default function(state = {}, action) {
@@ -61,6 +62,11 @@ export default function(state = {}, action) {
       };
     case CLEAR_WISHLIST_DETAIL:
       return { ...state, wishlistDetail: action.payload };
+    case UPDATE_DATA_USER:
+      return {
+        ...state,
+        updateUser: action.payload
+      };
     default:
       return state;
   }
