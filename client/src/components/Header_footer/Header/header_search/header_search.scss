@@ -265,6 +265,10 @@
 
 .product-state__price {
   display: flex;
+
+  &::before {
+    content: '€ ';
+  }
 }
 
 .product-status__price {

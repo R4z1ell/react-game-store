@@ -12,7 +12,8 @@ class UserAccount extends Component {
     loading: false,
     showChange: true,
     username: '',
-    errorUsername: false
+    errorUsername: false,
+    errorUsernameLength: false
   };
 
   updateUsername = event => {
@@ -23,7 +24,12 @@ class UserAccount extends Component {
         errorUsername: true
       });
     }
-    if (this.state.username !== '') {
+    if (this.state.username.length > 20) {
+      this.setState({
+        errorUsernameLength: true
+      });
+    }
+    if (this.state.username !== '' && this.state.username.length <= 20) {
       const dataToSubmit = {
         username: this.state.username
       };
@@ -61,6 +67,11 @@ class UserAccount extends Component {
           errorUsername: false
         });
       }
+      if (this.state.errorUsernameLength) {
+        this.setState({
+          errorUsernameLength: false
+        });
+      }
       this.setState({
         [event.target.name]: event.target.value.trim()
       });
@@ -68,7 +79,7 @@ class UserAccount extends Component {
   };
 
   inputErrorStyle = () => {
-    if (this.state.errorUsername) {
+    if (this.state.errorUsername || this.state.errorUsernameLength) {
       return {
         background: '#eeddd5',
         borderColor: '#b8a79f'
@@ -80,6 +91,9 @@ class UserAccount extends Component {
     const btnClass = this.state.btnClicked
       ? 'btn--change btn--change__updated'
       : 'btn--change';
+
+    const errorStyleUsername = this.state.errorUsername ? '5px' : null;
+    const errorStyleLength = this.state.errorUsernameLength ? '23px' : null;
 
     return (
       <SettingsLayout>
@@ -117,7 +131,20 @@ class UserAccount extends Component {
                     style={this.inputErrorStyle()}
                   />
                   {this.state.errorUsername ? (
-                    <span className="field__msg error">Can't be empty</span>
+                    <span
+                      className="settings-item__msg error"
+                      style={{ right: errorStyleUsername }}
+                    >
+                      Can't be empty
+                    </span>
+                  ) : null}
+                  {this.state.errorUsernameLength ? (
+                    <span
+                      className="settings-item__msg error"
+                      style={{ right: errorStyleLength }}
+                    >
+                      Max 20 chars allowed
+                    </span>
                   ) : null}
                 </div>
               </strong>

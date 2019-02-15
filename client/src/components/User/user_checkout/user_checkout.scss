@@ -1,0 +1,160 @@
+.section-1 {
+  width: 56.6%;
+}
+
+.section-2 {
+  width: 43.4%;
+  padding-left: 60px;
+}
+
+.module-payment {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background: #e1e1e1;
+  color: #212121;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  padding: 14px 13px 2px 13px;
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.module-summary::before {
+  display: inline;
+  content: '\20AC\202F';
+}
+
+.order__games {
+  position: relative;
+  background: #e1e1e1;
+  color: #212121;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  font-size: 13px;
+}
+
+.product-row {
+  display: block;
+  position: relative;
+  height: 60px;
+  padding-right: 10px;
+  border-top: 1px solid #cfcfcf;
+  font-size: 13px;
+  color: #595959;
+  overflow: hidden;
+
+  &__base-price {
+    margin-left: 5px;
+
+    &::before {
+      display: inline;
+      content: '\20AC\202F';
+    }
+  }
+
+  &__discounted-price {
+    margin-left: 5px;
+
+    &::before {
+      display: inline;
+      content: '\20AC\202F';
+    }
+  }
+
+  &__empty {
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  &__img {
+    width: 100px;
+    height: 60px;
+  }
+
+  &__info {
+    line-height: 17px;
+    font-size: 0.84615em;
+    font-weight: 300;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &__link {
+    display: flex;
+  }
+
+  &__option {
+    margin-right: 25px;
+    font-weight: 400;
+    text-decoration: underline;
+    color: #595959;
+    cursor: pointer;
+  }
+
+  &__prices {
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+
+  &__title {
+    display: block;
+    font-size: 1em;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #262626;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    transition: 0.2s;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background: #e1e1e1;
+  color: #212121;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  padding: 13px;
+  margin-top: 15px;
+  font-size: 14.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  span {
+    margin-left: 10px;
+  }
+}
+
+.price-text--old {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.product-row:first-child {
+  border-top-width: 0;
+}
+
+.product-row:hover .product-row__info {
+  opacity: 1;
+}
+
+.total-price span::before {
+  display: inline;
+  content: '\20AC\202F';
+}

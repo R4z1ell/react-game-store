@@ -36,6 +36,20 @@
       color: gray;
     }
 
+    &__msg {
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      line-height: 1.3em;
+      text-align: right;
+      padding: 3px 5px 3px 30px;
+      font-size: 0.92308em;
+      font-weight: 600;
+      max-width: 60%;
+      right: 23px;
+      transform: translate(0, -50%);
+    }
+
     &__section {
       display: table-cell;
       vertical-align: middle;
@@ -114,7 +128,7 @@
   margin-top: 5px;
 }
 
-.field__msg.error {
+.settings-item__msg.error {
   background: linear-gradient(90deg, rgba(238, 221, 213, 0), #eeddd5 15px);
   color: #f25100;
 }

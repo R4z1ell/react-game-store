@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './button.scss';
@@ -59,7 +60,9 @@ class MyButton extends Component {
                       </g>
                     </g>
                   </svg>
-                  <div className="button__text">Checkout now</div>
+                  <Link to={'/user/checkout'}>
+                    <div className="button__text">Checkout now</div>
+                  </Link>
                 </div>
               ) : (
                 <div style={{ display: 'flex', alignItems: 'center' }}>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Loader from 'react-loader-spinner';
 
 import './header_cart.scss';
 
@@ -16,7 +17,9 @@ import { getOverlayStatus } from '../../../../store/actions/site_actions';
 
 class HeaderCart extends Component {
   state = {
-    total: 0
+    total: 0,
+    loading: false,
+    hide: false
   };
 
   componentDidMount() {
@@ -41,6 +44,21 @@ class HeaderCart extends Component {
     setTimeout(() => {
       this.props.closeAll(false);
     }, 500);
+  };
+
+  goToCheckout = () => {
+    this.setState({
+      loading: true,
+      hide: true
+    });
+    setTimeout(() => {
+      this.setState({
+        loading: false,
+        hide: false
+      });
+      this.props.closeAll(false);
+      this.props.history.push('/user/checkout');
+    }, 1500);
   };
 
   calculateTotal = cartDetail => {
@@ -71,8 +89,8 @@ class HeaderCart extends Component {
 
   sendToWishlist = id => {
     if (this.props.user.userData.isAuth) {
-      this.removeCartItem(id);
       this.props.dispatch(addToWishlist(id));
+      this.removeCartItem(id);
     }
     if (!this.props.user.userData.isAuth) {
       this.props.dispatch(getOverlayStatus(true, true));
@@ -201,6 +219,8 @@ class HeaderCart extends Component {
   );
 
   render() {
+    const hideElem = this.state.hide ? '0' : '1';
+
     return (
       <div className="menu-cart__submenu" onMouseLeave={this.closeAll}>
         {!this.props.auth.isAuth ? (
@@ -210,22 +230,28 @@ class HeaderCart extends Component {
         ) : (
           <React.Fragment>
             <div className="menu-header-cart">
-              <div className="menu-cart-items">
-                <span className="menu-header__label">Your shopping cart</span>
-                <span className="menu-header__items">
-                  {this.props.user.cartDetail
-                    ? this.props.user.cartDetail.length > 1
-                      ? `${this.props.user.cartDetail.length} Items added`
-                      : `${this.props.user.cartDetail.length} Item added`
-                    : null}
-                </span>
+              <div style={{ opacity: hideElem }}>
+                <div className="menu-cart-items">
+                  <span className="menu-header__label">Your shopping cart</span>
+                  <span className="menu-header__items">
+                    {this.props.user.cartDetail
+                      ? this.props.user.cartDetail.length > 1
+                        ? `${this.props.user.cartDetail.length} Items added`
+                        : `${this.props.user.cartDetail.length} Item added`
+                      : null}
+                  </span>
+                </div>
+                <div className="menu-cart__total-price">
+                  <FaEuroSign size="0.75em" /> {this.state.total}
+                </div>
               </div>
-              <div className="menu-cart__total-price">
-                <FaEuroSign size="0.75em" /> {this.state.total}
+              <div className="menu-btn--green" onClick={this.goToCheckout}>
+                {this.state.loading ? (
+                  <Loader type="Oval" color="#fff" height="20" width="20" />
+                ) : (
+                  'Go to checkout'
+                )}
               </div>
-              <Link to="/games" className="menu-btn--green">
-                Go to checkout
-              </Link>
             </div>
             <div className="menu-cart__products-list">
               <div className="menu-cart__custom-scrollbar">
@@ -252,4 +278,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(HeaderCart);
+export default connect(mapStateToProps)(withRouter(HeaderCart));

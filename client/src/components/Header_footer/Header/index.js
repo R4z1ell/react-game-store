@@ -120,7 +120,7 @@ class Header extends Component {
       if (!this.props.user.userData.isAuth) {
         return '87%';
       } else {
-        return '83.8%';
+        return '84.3%';
       }
     }
   };

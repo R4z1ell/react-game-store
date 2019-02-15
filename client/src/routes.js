@@ -11,6 +11,7 @@ import UserWishlist from './components/User/user_wishlist/user_wishlist';
 import AddGame from './components/User/Admin/add_game/add_game';
 import UserAccount from './components/User/user_account/user_account';
 import UserSecurity from './components/User/user_security/user_security';
+import UserCheckout from './components/User/user_checkout/user_checkout';
 
 // ! Add logic and error handling for the 'SignupModal' Component
 // ! Add logic and error handling for the 'ResetpassModal' Component
@@ -22,6 +23,11 @@ const Routes = () => {
   return (
     <Layout>
       <Switch>
+        <Route
+          path="/user/checkout"
+          exact
+          component={Auth(UserCheckout, true)}
+        />
         <Route
           path="/user/wishlist"
           exact
