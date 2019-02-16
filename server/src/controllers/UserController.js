@@ -1,6 +1,8 @@
 const { User } = require('../models/user');
 const { Game } = require('../models/game');
+const { Payment } = require('../models/payment');
 const mongoose = require('mongoose');
+const SHA1 = require('crypto-js/sha1');
 
 module.exports = {
   register(req, res) {
@@ -168,6 +170,56 @@ module.exports = {
       (err, doc) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).send({ success: true });
+      }
+    );
+  },
+  onSuccessBuy(req, res) {
+    let history = [];
+    let transactionData = {};
+    const date = new Date();
+    const po = `PO-${date.getSeconds()}${date.getMilliseconds()}-${SHA1(
+      req.user._id
+    )
+      .toString()
+      .substring(0, 8)}`;
+
+    req.body.cartDetail.forEach(item => {
+      history.push({
+        porder: po,
+        dateOfPurchase: Date.now(),
+        title: item.title,
+        images: item.images,
+        id: item._id,
+        prices: item.prices,
+        paymentId: req.body.paymentData.paymentID
+      });
+    });
+
+    transactionData.user = {
+      id: req.user._id,
+      username: req.user.username,
+      email: req.user.email
+    };
+    transactionData.data = { ...req.body.paymentData, porder: po };
+    transactionData.product = history;
+
+    User.findOneAndUpdate(
+      { _id: req.user._id },
+      { $push: { history: history }, $set: { cart: [] } },
+      { new: true },
+      (err, user) => {
+        if (err) return res.json({ success: false, err });
+
+        const payment = new Payment(transactionData);
+
+        payment.save((err, doc) => {
+          if (err) return res.json({ success: false, err });
+          res.status(200).json({
+            success: true,
+            cart: user.cart,
+            cartDetail: []
+          });
+        });
       }
     );
   }

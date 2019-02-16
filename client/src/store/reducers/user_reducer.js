@@ -10,7 +10,8 @@ import {
   GET_WISHLIST_ITEMS_USER,
   REMOVE_WISHLIST_ITEM_USER,
   CLEAR_WISHLIST_DETAIL,
-  UPDATE_DATA_USER
+  UPDATE_DATA_USER,
+  ON_SUCCESS_BUY_USER
 } from '../actions/types';
 
 export default function(state = {}, action) {
@@ -66,6 +67,16 @@ export default function(state = {}, action) {
       return {
         ...state,
         updateUser: action.payload
+      };
+    case ON_SUCCESS_BUY_USER:
+      return {
+        ...state,
+        successBuy: action.payload.success,
+        userData: {
+          ...state.userData,
+          cart: action.payload.cart
+        },
+        cartDetail: action.payload.cartDetail
       };
     default:
       return state;

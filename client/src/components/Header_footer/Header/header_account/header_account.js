@@ -26,7 +26,7 @@ const HeaderAccount = props => {
       </div>
       <div className="menu-submenu-separator" />
       <div className="menu-submenu-item" onClick={props.closeHeaderAccount}>
-        <Link to="/user/orders" className="menu-submenu-link">
+        <Link to="/user/settings/orders" className="menu-submenu-link">
           Orders History
         </Link>
       </div>

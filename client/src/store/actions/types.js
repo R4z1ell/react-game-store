@@ -10,6 +10,7 @@ export const GET_WISHLIST_ITEMS_USER = 'get_wishlist_items_user';
 export const REMOVE_WISHLIST_ITEM_USER = 'remove_wishlist_item_user';
 export const CLEAR_WISHLIST_DETAIL = 'clear_wishlist_detail';
 export const UPDATE_DATA_USER = 'update_data_user';
+export const ON_SUCCESS_BUY_USER = 'on_success_buy_user';
 
 export const ADD_GAME = 'add_game';
 export const CLEAR_GAME = 'clear_game';

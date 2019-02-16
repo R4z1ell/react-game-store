@@ -3,7 +3,7 @@
 .product-images {
   &__container {
     width: 340px;
-    height: 874px;
+    height: 883px;
     background: $color-white-dark;
     transform: translateX(12%);
     box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
@@ -56,13 +56,17 @@
   }
 
   &__screenshots-container {
-    margin: 5px 15px 0 15px;
+    margin: 15px 15px 0 15px;
 
     img {
       width: 308px;
       height: 176px;
       margin-top: 5px;
       box-shadow: 0 1px 4px 0 rgba($color-black, 0.15);
+
+      &:first-of-type {
+        margin-top: 0;
+      }
     }
   }
 }

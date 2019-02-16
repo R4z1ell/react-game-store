@@ -18,6 +18,10 @@
   font-size: 22px;
   font-weight: 600;
   text-transform: uppercase;
+
+  div {
+    z-index: 0;
+  }
 }
 
 .module-summary::before {

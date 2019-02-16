@@ -13,7 +13,8 @@ import {
   GET_WISHLIST_ITEMS_USER,
   REMOVE_WISHLIST_ITEM_USER,
   CLEAR_WISHLIST_DETAIL,
-  UPDATE_DATA_USER
+  UPDATE_DATA_USER,
+  ON_SUCCESS_BUY_USER
 } from './types';
 
 export function registerUser(dataToSubmit) {
@@ -140,6 +141,17 @@ export function updateUserData(dataToSubmit) {
 
   return {
     type: UPDATE_DATA_USER,
+    payload: request
+  };
+}
+
+export function onSuccessBuy(data) {
+  const request = axios
+    .post(`${USER_SERVER}/successBuy`, data)
+    .then(response => response.data);
+
+  return {
+    type: ON_SUCCESS_BUY_USER,
     payload: request
   };
 }
