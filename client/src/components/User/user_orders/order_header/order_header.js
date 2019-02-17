@@ -48,7 +48,7 @@ class OrderHeader extends Component {
           </div>
           <div className="order-header-info order-header-info--last">
             <span className="order-header-info--total-price">
-              {this.state.total}
+              € {this.state.total}
             </span>
           </div>
         </header>

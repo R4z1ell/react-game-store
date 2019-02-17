@@ -5,12 +5,63 @@
 
   &__top,
   &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 58px;
     background: $footer-primary;
   }
 
+  &__bottom {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.43);
+  }
+
+  &__icon {
+    fill: rgba(255, 255, 255, 0.43);
+    margin-right: 10px;
+  }
+
   &__middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     height: 94px;
     background: $footer-secondary;
   }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.43);
+  }
+
+  &__socials {
+    svg {
+      fill: rgba(255, 255, 255, 0.43);
+    }
+
+    &--facebook:hover {
+      fill: #3e4e70;
+    }
+
+    &--twitter:hover {
+      fill: #2d6d96;
+    }
+
+    &--twitch:hover {
+      fill: #6441a4;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+  }
+}
+
+.footer__top svg {
+  cursor: pointer;
+  margin-right: 17px;
 }
