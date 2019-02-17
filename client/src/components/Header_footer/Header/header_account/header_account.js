@@ -40,11 +40,6 @@ const HeaderAccount = props => {
           ) : null}
         </Link>
       </div>
-      <div className="menu-submenu-item" onClick={props.closeHeaderAccount}>
-        <Link to="/user/settings" className="menu-submenu-link">
-          Settings
-        </Link>
-      </div>
       <div className="menu-submenu-separator" />
       <div className="menu-submenu-item" onClick={props.closeHeaderAccount}>
         <div className="menu-submenu-link" onClick={props.logoutUser}>

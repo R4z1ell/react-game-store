@@ -10,9 +10,6 @@ import {
 import Paypal from '../../utils/paypal';
 import { getOverlayStatus } from '../../../store/actions/site_actions';
 
-// ! change the 'discountedPrice' in ALL the components to have the 'game.prices.discount' instead of the 33
-// !
-
 class UserCheckout extends Component {
   state = {
     total: 0

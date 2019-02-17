@@ -82,7 +82,8 @@ class UserWishlist extends Component {
     this.props.user.wishlistDetail
       ? this.props.user.wishlistDetail.map((game, i) => {
           const discountedPrice = Number(
-            game.prices.basePrice / 100 - (game.prices.basePrice / 10000) * 33
+            game.prices.basePrice / 100 -
+              (game.prices.basePrice / 10000) * game.prices.discount
           ).toFixed(2);
           const rowLinkClass =
             this.state.gameId.some(elem => elem === game._id) &&

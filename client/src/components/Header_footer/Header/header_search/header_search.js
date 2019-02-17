@@ -36,7 +36,8 @@ class HeaderSearch extends Component {
     this.props.searchResult
       ? this.props.searchResult.map((game, i) => {
           const discountedPrice = Number(
-            game.prices.basePrice / 100 - (game.prices.basePrice / 10000) * 33
+            game.prices.basePrice / 100 -
+              (game.prices.basePrice / 10000) * game.prices.discount
           ).toFixed(2);
           return (
             <div key={i} className="menu-product menu-search__result">

@@ -1,0 +1,40 @@
+.order-item {
+  background: #d8d8d8;
+  position: relative;
+  color: #212121;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 20px 10px 10px;
+    background: #e1e1e1;
+  }
+}
+
+.order-header-info {
+  &__date {
+    font-size: 11px;
+    color: gray;
+    margin-top: 5px;
+    text-transform: none;
+  }
+
+  &--last {
+    margin-top: 11px;
+  }
+
+  &__porder {
+    font-size: 13.5px;
+    font-weight: 600;
+    padding-top: 10px;
+  }
+
+  &--total-price {
+    font-size: 15px;
+    font-weight: 600;
+  }
+}

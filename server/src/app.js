@@ -7,10 +7,7 @@ require('dotenv').config();
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(
-  process.env.DATABASE,
-  { useNewUrlParser: true }
-);
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
 
 app.use(bodyParser.urlencoded({ extended: true }));

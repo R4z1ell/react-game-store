@@ -62,8 +62,16 @@
     margin-bottom: 10px;
     text-transform: uppercase;
 
+    &--browse:hover {
+      background: #f3f3f3;
+    }
+
     &--wishlist {
       background: #f5e6c0;
+
+      &:hover {
+        background: #f8efd6;
+      }
     }
   }
 

@@ -66,7 +66,8 @@ class HeaderCart extends Component {
 
     cartDetail.forEach(item => {
       const discountedPrice = Number(
-        item.prices.basePrice / 100 - (item.prices.basePrice / 10000) * 33
+        item.prices.basePrice / 100 -
+          (item.prices.basePrice / 10000) * item.prices.discount
       );
 
       if (item.prices.discount) {
@@ -101,7 +102,8 @@ class HeaderCart extends Component {
     this.props.auth.cart.length !== 0 && this.props.user.cartDetail
       ? this.props.user.cartDetail.map((game, i) => {
           const discountedPrice = Number(
-            game.prices.basePrice / 100 - (game.prices.basePrice / 10000) * 33
+            game.prices.basePrice / 100 -
+              (game.prices.basePrice / 10000) * game.prices.discount
           ).toFixed(2);
           return (
             <div className="menu-product menu-cart-item" key={i}>
@@ -202,7 +204,7 @@ class HeaderCart extends Component {
       </div>
       <Link
         to="/games"
-        className="menu-cart-empty__btn"
+        className="menu-cart-empty__btn menu-cart-empty__btn--browse"
         onClick={this.closeAll}
       >
         Browse games

@@ -80,7 +80,8 @@ const HomeCarousel = props => {
     props.games
       ? props.games.map((game, i) => {
           const discountedPrice = Number(
-            game.prices.basePrice / 100 - (game.prices.basePrice / 10000) * 33
+            game.prices.basePrice / 100 -
+              (game.prices.basePrice / 10000) * game.prices.discount
           ).toFixed(2);
           const myButtonClass = game.prices.discount ? '23.8%' : '23%';
           const titleClass = game.title.length >= 35 ? '29px' : '32px';

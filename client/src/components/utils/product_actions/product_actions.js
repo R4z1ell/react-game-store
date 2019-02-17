@@ -29,7 +29,8 @@ class ProductActions extends Component {
   render() {
     const game = this.props.gameInfo.gameDetail;
     const discountedPrice = Number(
-      game.prices.basePrice / 100 - (game.prices.basePrice / 10000) * 33
+      game.prices.basePrice / 100 -
+        (game.prices.basePrice / 10000) * game.prices.discount
     ).toFixed(2);
 
     const productClass = game.prices.discount ? '192px' : '170px';

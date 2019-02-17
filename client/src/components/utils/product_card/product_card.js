@@ -30,7 +30,7 @@ class ProductCard extends Component {
 
     const discountedPrice = Number(
       this.props.prices.basePrice / 100 -
-        (this.props.prices.basePrice / 10000) * 33
+        (this.props.prices.basePrice / 10000) * this.props.prices.discount
     ).toFixed(2);
 
     return (
