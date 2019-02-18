@@ -58,10 +58,6 @@
     text-transform: uppercase;
     font-size: 14px;
     color: $color-gray;
-
-    &:hover {
-      color: $color-white;
-    }
   }
 
   &__sign-in {
@@ -73,6 +69,10 @@
       color: rgb(249, 178, 255);
     }
   }
+}
+
+.header__signIn:hover .header__logged-in {
+  color: $color-white;
 }
 
 .logo {

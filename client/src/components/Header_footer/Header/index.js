@@ -140,6 +140,7 @@ class Header extends Component {
             </div>
             <div
               className="header__item header__signIn"
+              style={{ paddingRight: '0px' }}
               onMouseEnter={this.showSignIn}
               onMouseLeave={this.hideSignIn}
             >

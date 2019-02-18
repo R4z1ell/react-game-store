@@ -18,8 +18,6 @@ import UserOrders from './components/User/user_orders/user_orders';
 // ! Add logic and error handling for the 'ResetpassModal' Component
 // ! Add countdown in 'HomeSliders' Component for the special deals
 // ! Create a 404 page
-// ! Username should remain white when we hover over the 'HeaderAccount' Component
-// ! Cart Icon(in navbar) should remain white when we hover over the 'HeaderCart' Component
 // ! Reactivate ALL the Carousels animation
 // ! Game in 'ProductsList' Component(the one in the Home) should remain white when we hover the 'ProductImages'
 // ! Remove the 'Overall user reviews' in the 'ProductImages' Component

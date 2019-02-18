@@ -1,0 +1,32 @@
+.success-message {
+  max-width: 390px;
+  background: #dedede;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.15);
+  position: relative;
+
+  &__content-wrapper {
+    width: 100%;
+    max-width: 390px;
+    min-width: 200px;
+    background: #dedede;
+    font-size: 13px;
+    line-height: 1.5em;
+    text-align: center;
+    color: #595959;
+    padding: 25px 30px 30px;
+  }
+
+  &__description {
+    margin: 13px 0;
+  }
+
+  &__title {
+    font-size: 2.46em;
+    font-family: 'Open Sans';
+    position: relative;
+    margin: 0 0 27px;
+    font-weight: 300;
+    line-height: 1.1em;
+    text-transform: uppercase;
+  }
+}

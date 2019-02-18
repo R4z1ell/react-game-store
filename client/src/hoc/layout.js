@@ -8,6 +8,7 @@ import Footer from '../components/Header_footer/Footer';
 import LoginModal from '../components/utils/login_modal/login_modal';
 import SignupModal from '../components/utils/signup_modal/signup_modal';
 import ResetpassModal from '../components/utils/resetpass_modal/resetpass_modal';
+import SuccessMessage from '../components/utils/success_message/success_message';
 
 import { getOverlayStatus } from '../store/actions/site_actions';
 
@@ -16,6 +17,7 @@ class Layout extends Component {
     loginModal: false,
     signupModal: false,
     resetPassModal: false,
+    successMessage: false,
     switchToSignUp: false
   };
 
@@ -23,7 +25,8 @@ class Layout extends Component {
     this.setState({
       loginModal: value,
       signupModal: false,
-      resetPassModal: false
+      resetPassModal: false,
+      successMessage: false
     });
     this.props.dispatch(getOverlayStatus(value));
   };
@@ -33,6 +36,7 @@ class Layout extends Component {
       signupModal: value,
       loginModal: false,
       resetPassModal: false,
+      successMessage: false,
       switchToSignUp: true
     });
     this.props.dispatch(getOverlayStatus(value));
@@ -60,12 +64,14 @@ class Layout extends Component {
         this.state.signupModal ||
         this.state.loginModal ||
         this.state.resetPassModal ||
-        this.state.switchToSignUp
+        this.state.switchToSignUp ||
+        this.state.successMessage
       ) {
         this.setState({
           signupModal: false,
           loginModal: false,
           resetPassModal: false,
+          successMessage: false,
           switchToSignUp: false
         });
       }
@@ -124,6 +130,22 @@ class Layout extends Component {
     this.props.dispatch(getOverlayStatus(value));
   };
 
+  showSuccessMessage = value => {
+    this.setState({
+      successMessage: value,
+      resetPassModal: false,
+      loginModal: false,
+      signupModal: false
+    });
+  };
+
+  closeSuccessMessage = value => {
+    this.setState({
+      successMessage: value
+    });
+    this.props.dispatch(getOverlayStatus(value));
+  };
+
   render() {
     const overlayStyle =
       this.props.site.overlay && this.props.site.overlay.value
@@ -156,7 +178,12 @@ class Layout extends Component {
               <ResetpassModal
                 switchToSignUp={this.switchToSignUp}
                 switchToLogIn={this.switchToLogIn}
+                closeLoginModal={this.closeLogin}
+                showSuccessMessage={this.showSuccessMessage}
               />
+            ) : null}
+            {this.state.successMessage ? (
+              <SuccessMessage closeSuccessMessage={this.closeSuccessMessage} />
             ) : null}
           </div>
         </div>

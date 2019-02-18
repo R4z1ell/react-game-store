@@ -18,6 +18,7 @@ class LoginModal extends Component {
     blurEmail: false,
     blurPassword: false,
     validEmail: false,
+    notEmail: false,
     logInBtnClicked: false,
     loading: false
   };
@@ -25,14 +26,29 @@ class LoginModal extends Component {
   submitForm = event => {
     event.preventDefault();
 
-    if (
-      this.state.email === '' &&
-      this.state.password === '' &&
-      !this.state.errorEmail
-    ) {
+    if (this.state.email === '' && this.state.password === '') {
       this.setState({
         errorEmail: true,
         blurPassword: true
+      });
+    }
+    if (/\S+@\S+\.\S+/.test(this.state.email) && this.state.password === '') {
+      this.setState({
+        errorPassword: true
+      });
+    }
+    if (
+      /\S+@\S+\.\S+/.test(this.state.email) === false &&
+      this.state.password === ''
+    ) {
+      this.setState({
+        notEmail: true,
+        errorPassword: true
+      });
+    }
+    if (this.state.email === '' && this.state.password.length > 0) {
+      this.setState({
+        errorEmail: true
       });
     }
     if (
@@ -61,6 +77,7 @@ class LoginModal extends Component {
         } else {
           if (res.payload.message.length > 14) {
             this.setState({
+              errorEmail: true,
               blurEmail: true
             });
           }
@@ -80,7 +97,8 @@ class LoginModal extends Component {
       this.setState({
         [event.target.name]: event.target.value,
         errorEmail: false,
-        blurEmail: false
+        blurEmail: false,
+        notEmail: false
       });
       if (/\S+@\S+\.\S+/.test(event.target.value)) {
         this.setState({
@@ -118,7 +136,12 @@ class LoginModal extends Component {
       event.target.value.length > 0
     ) {
       this.setState({
-        blurEmail: true
+        notEmail: true
+      });
+    }
+    if (/\S+@\S+\.\S+/.test(event.target.value)) {
+      this.setState({
+        notEmail: false
       });
     }
     if (event.target.name === 'password' && event.target.value.length < 5) {
@@ -139,7 +162,7 @@ class LoginModal extends Component {
 
   render() {
     const fieldEmail =
-      this.state.errorEmail || this.state.blurEmail
+      this.state.errorEmail || this.state.blurEmail || this.state.notEmail
         ? 'form__field field field--error'
         : 'form__field field';
 
@@ -170,13 +193,16 @@ class LoginModal extends Component {
                     onChange={this.handleChange}
                     onBlur={this.handleBlur}
                   />
+                  {this.state.notEmail ? (
+                    <span className="field__msg is-hidden">
+                      Incorrect email
+                    </span>
+                  ) : null}
                   {this.state.errorEmail ? (
                     <span className="field__msg is-hidden">Email required</span>
                   ) : null}
                   {this.state.blurEmail ? (
-                    <span className="field__msg is-hidden">
-                      Incorrect email
-                    </span>
+                    <span className="field__msg is-hidden">USER NOT FOUND</span>
                   ) : null}
                 </li>
                 <li className={fieldPassword}>
@@ -191,7 +217,7 @@ class LoginModal extends Component {
                   />
                   {this.state.errorPassword ? (
                     <span className="field__msg is-hidden">
-                      This field is required
+                      Password required
                     </span>
                   ) : null}
                   {this.state.password === '' && this.state.blurPassword ? (

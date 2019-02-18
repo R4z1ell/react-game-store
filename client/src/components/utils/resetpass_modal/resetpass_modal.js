@@ -10,12 +10,90 @@ class ResetpassModal extends Component {
     email: '',
     errorEmail: false,
     blurEmail: false,
+    notEmail: false,
     loading: false
+  };
+
+  submitForm = event => {
+    event.preventDefault();
+
+    if (this.state.email === '') {
+      this.setState({
+        errorEmail: true
+      });
+    }
+    if (/\S+@\S+\.\S+/.test(this.state.email) === false) {
+      this.setState({
+        notEmail: true
+      });
+    }
+    if (
+      /\S+@\S+\.\S+/.test(this.state.email) &&
+      this.state.email !== '' &&
+      this.state.validEmail
+    ) {
+      this.setState({
+        loading: true
+      });
+      setTimeout(() => {
+        this.setState({
+          loading: false
+        });
+        this.props.showSuccessMessage(true);
+      }, 1000);
+    }
+  };
+
+  closeLogin = () => {
+    this.props.closeLoginModal(false);
+  };
+
+  handleChange = event => {
+    if (event.target.name === 'email') {
+      this.setState({
+        [event.target.name]: event.target.value,
+        errorEmail: false,
+        blurEmail: false,
+        notEmail: false
+      });
+      if (/\S+@\S+\.\S+/.test(event.target.value)) {
+        this.setState({
+          validEmail: true
+        });
+      }
+      if (/\S+@\S+\.\S+/.test(event.target.value) === false) {
+        this.setState({
+          validEmail: false
+        });
+      }
+    }
+  };
+
+  handleBlur = event => {
+    if (event.target.name === 'email' && event.target.value === '') {
+      this.setState({
+        errorEmail: true
+      });
+    }
+    if (
+      event.target.name === 'email' &&
+      /\S+@\S+\.\S+/.test(event.target.value) === false &&
+      event.target.value.length > 0
+    ) {
+      this.setState({
+        notEmail: true
+      });
+    }
+    if (/\S+@\S+\.\S+/.test(event.target.value)) {
+      this.setState({
+        notEmail: false
+      });
+    }
   };
 
   render() {
     const fieldEmail =
-      this.state.errorEmail || this.state.blurEmail
+      this.state.errorEmail || this.state.blurEmail || this.state.notEmail
         ? 'form__field field field--error'
         : 'form__field field';
 
@@ -34,17 +112,21 @@ class ResetpassModal extends Component {
                     placeholder="Email"
                     className="field__input"
                     name="email"
-                    //value={this.state.email}
-                    //onChange={this.handleChange}
-                    //onBlur={this.handleBlur}
+                    autoComplete="off"
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                    onBlur={this.handleBlur}
                   />
-                  {this.state.errorEmail ? (
-                    <span className="field__msg is-hidden">USER NOT FOUND</span>
-                  ) : null}
-                  {this.state.blurEmail ? (
+                  {this.state.notEmail ? (
                     <span className="field__msg is-hidden">
                       Incorrect email
                     </span>
+                  ) : null}
+                  {this.state.errorEmail ? (
+                    <span className="field__msg is-hidden">Email required</span>
+                  ) : null}
+                  {this.state.blurEmail ? (
+                    <span className="field__msg is-hidden">USER NOT FOUND</span>
                   ) : null}
                 </li>
               </ol>

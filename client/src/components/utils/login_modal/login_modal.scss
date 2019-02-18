@@ -14,8 +14,8 @@
 
   &__btn-close {
     position: absolute;
-    top: 12%;
-    right: 34%;
+    top: 0%;
+    right: 0%;
     padding: 10px;
     line-height: 10px;
     border: none;
@@ -23,6 +23,10 @@
     user-select: none;
     outline: none;
     cursor: pointer;
+  }
+
+  &__content-item {
+    position: relative;
   }
 
   &__footer {

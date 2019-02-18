@@ -198,7 +198,11 @@
 }
 
 .header__item-cart {
-  cursor: default;
+  cursor: pointer;
+}
+
+.header__item-cart:hover .menu-icon-svg {
+  fill: $color-white;
 }
 
 // svg
@@ -210,11 +214,6 @@
   fill: #ccc;
   vertical-align: middle;
   transform-origin: top center;
-  cursor: pointer;
-
-  &:hover {
-    fill: $color-white;
-  }
 }
 
 .menu-icon-svg:hover ~ .header__item-count {
