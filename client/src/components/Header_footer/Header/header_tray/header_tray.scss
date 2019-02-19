@@ -205,6 +205,11 @@
   fill: $color-white;
 }
 
+.header__item-cart:hover .header__item-count {
+  color: $color-white;
+  opacity: 1;
+}
+
 // svg
 .menu-icon-svg {
   display: inline-block;
@@ -214,11 +219,6 @@
   fill: #ccc;
   vertical-align: middle;
   transform-origin: top center;
-}
-
-.menu-icon-svg:hover ~ .header__item-count {
-  color: $color-white;
-  opacity: 1;
 }
 
 .animated-svg {

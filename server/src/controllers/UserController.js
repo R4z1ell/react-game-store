@@ -1,7 +1,9 @@
 const { User } = require('../models/user');
 const { Game } = require('../models/game');
 const { Payment } = require('../models/payment');
+const { sendEmail } = require('../../utils/mail/index');
 const mongoose = require('mongoose');
+const moment = require('moment');
 const SHA1 = require('crypto-js/sha1');
 
 module.exports = {
@@ -41,6 +43,72 @@ module.exports = {
         });
       });
     });
+  },
+  findUserByResetToken(req, res) {
+    User.findOne(
+      {
+        resetToken: req.params.token
+      },
+      (err, user) => {
+        if (!user)
+          return res.json({
+            success: false,
+            message: 'Sorry, your token is expired'
+          });
+        else {
+          return res.status(200).send({
+            username: user.username,
+            email: user.email
+          });
+        }
+      }
+    );
+  },
+  resetUser(req, res) {
+    User.findOne({ email: req.body.email }, (err, user) => {
+      if (!user) return res.json({ success: false, err });
+      user.generateResetToken((err, user) => {
+        if (err) return res.json({ success: false, err });
+        sendEmail(user.email, user.username, null, 'reset_password', user);
+        return res.json({ success: true });
+      });
+    });
+  },
+  resetPassword(req, res) {
+    var today = moment()
+      .startOf('day')
+      .valueOf();
+
+    User.findOne(
+      {
+        resetToken: req.params.token,
+        resetTokenExp: {
+          $gte: today
+        }
+      },
+      (err, user) => {
+        if (!user)
+          return res.json({
+            success: false,
+            message: 'Sorry, bad token. Generate a new one'
+          });
+        else {
+          return res.status(200).send({
+            user
+          });
+        }
+        // user.password = req.body.password;
+        // user.resetToken = '';
+        // user.resetTokenExp = '';
+
+        // user.save((err, doc) => {
+        //   if (err) return res.json({ success: false, err });
+        //   return res.status(200).json({
+        //     success: true
+        //   });
+        // });
+      }
+    );
   },
   authentication(req, res) {
     res.status(200).json({

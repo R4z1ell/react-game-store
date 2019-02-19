@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const moment = require('moment');
 const SALT_I = 10;
 require('dotenv').config();
 
@@ -71,6 +73,28 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
     if (err) return callback(err);
 
     callback(null, isMatch);
+  });
+};
+
+userSchema.methods.generateResetToken = function(callback) {
+  var user = this;
+
+  crypto.randomBytes(20, function(err, buffer) {
+    var token = buffer.toString('hex');
+    var today = moment()
+      .startOf('day')
+      .valueOf();
+    var tomorrow = moment(today)
+      .endOf('day')
+      .valueOf();
+
+    user.resetToken = token;
+    user.resetTokenExp = tomorrow;
+
+    user.save(function(err, user) {
+      if (err) return callback(err);
+      callback(null, user);
+    });
   });
 };
 

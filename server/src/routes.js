@@ -21,6 +21,12 @@ module.exports = app => {
   app.get('/api/users/getWishlistItems', UserController.getWishlistItems);
   app.post('/api/users/update_profile', auth, UserController.updateUserData);
   app.post('/api/users/successBuy', auth, UserController.onSuccessBuy);
+  app.post('/api/users/reset_user', UserController.resetUser);
+  app.post('/api/users/reset_password', UserController.resetPassword);
+  app.get(
+    '/api/users/findUserByResetToken/:token',
+    UserController.findUserByResetToken
+  );
 
   app.post('/api/games/genre', auth, admin, GenresController.addGenre);
   app.get('/api/games/get_genres', GenresController.getGenres);

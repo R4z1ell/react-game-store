@@ -3,6 +3,7 @@ import React from 'react';
 import './success_message.scss';
 
 import { MdClose } from 'react-icons/md';
+import { FaUser } from 'react-icons/fa';
 
 const SuccessMessage = props => {
   const closeSuccessMessage = () => {
@@ -16,7 +17,10 @@ const SuccessMessage = props => {
       </button>
       <div className="success-message__content-wrapper">
         <div className="success-message__content-item">
-          <h2 className="success-message__title">Account</h2>
+          <h2 className="success-message__title">
+            <FaUser fill="#595959" size="0.65em" />
+            Account
+          </h2>
           <p className="success-message__description">
             An email with password reset instructions was sent to your address.
             Click the link in the email to complete the process and setup a new

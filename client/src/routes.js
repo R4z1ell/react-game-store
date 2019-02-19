@@ -15,7 +15,7 @@ import UserCheckout from './components/User/user_checkout/user_checkout';
 import UserOrders from './components/User/user_orders/user_orders';
 
 // ! Add logic and error handling for the 'SignupModal' Component
-// ! Add logic and error handling for the 'ResetpassModal' Component
+// ! Add logic and error handling for the 'RequestpassModal' Component
 // ! Add countdown in 'HomeSliders' Component for the special deals
 // ! Create a 404 page
 // ! Reactivate ALL the Carousels animation
@@ -26,6 +26,7 @@ import UserOrders from './components/User/user_orders/user_orders';
 // ! Complete the 'email' and 'password' in the 'UserSecurity' Component
 // ! Remove the price and 'buy' button from the 'featured' Carousel section in the Home page
 // ! Load random and different games for the Home page
+// ! 'sign in' in the navigation(home page) should remain active while hovering over the menu
 
 const Routes = () => {
   return (
@@ -60,6 +61,11 @@ const Routes = () => {
           path="/admin/add_product"
           exact
           component={Auth(AddGame, true)}
+        />
+        <Route
+          path="/reset_password/:token"
+          exact
+          component={Auth(Home, false)}
         />
         <Route path="/games" exact component={Auth(StorePage, false)} />
         <Route

@@ -64,11 +64,11 @@
     color: #d38ae5;
     transition: transform 0.2s, opacity 0.2s;
     transition-delay: 0.15s;
-
-    &:hover {
-      color: rgb(249, 178, 255);
-    }
   }
+}
+
+.header__signIn:hover .header__sign-in {
+  color: rgb(249, 178, 255);
 }
 
 .header__signIn:hover .header__logged-in {

@@ -6,11 +6,15 @@ import HomeSliders from './home_sliders/home_sliders';
 import CardBlock from '../utils/card_block';
 import ProductsList from './products_list/products_list';
 import { getGames } from '../../store/actions/games_actions';
+import { getOverlayStatus } from '../../store/actions/site_actions';
 
 class Home extends Component {
   componentDidMount() {
     this.props.dispatch(getGames(9));
     window.scrollTo(0, 0);
+    if (this.props.match.path === '/reset_password/:token') {
+      this.props.dispatch(getOverlayStatus(true, null, true));
+    }
   }
 
   render() {

@@ -7,7 +7,8 @@ import Header from '../components/Header_footer/Header';
 import Footer from '../components/Header_footer/Footer';
 import LoginModal from '../components/utils/login_modal/login_modal';
 import SignupModal from '../components/utils/signup_modal/signup_modal';
-import ResetpassModal from '../components/utils/resetpass_modal/resetpass_modal';
+import RequestPassModal from '../components/utils/requestpass_modal/requestpass_modal';
+import ResetPassModal from '../components/utils/resetpass_modal/resetpass_modal';
 import SuccessMessage from '../components/utils/success_message/success_message';
 
 import { getOverlayStatus } from '../store/actions/site_actions';
@@ -16,6 +17,7 @@ class Layout extends Component {
   state = {
     loginModal: false,
     signupModal: false,
+    requestPassModal: false,
     resetPassModal: false,
     successMessage: false,
     switchToSignUp: false
@@ -25,7 +27,18 @@ class Layout extends Component {
     this.setState({
       loginModal: value,
       signupModal: false,
-      resetPassModal: false,
+      requestPassModal: false,
+      successMessage: false
+    });
+    this.props.dispatch(getOverlayStatus(value));
+  };
+
+  showResetPassModal = value => {
+    this.setState({
+      loginModal: false,
+      signupModal: false,
+      requestPassModal: false,
+      resetPassModal: value,
       successMessage: false
     });
     this.props.dispatch(getOverlayStatus(value));
@@ -35,7 +48,7 @@ class Layout extends Component {
     this.setState({
       signupModal: value,
       loginModal: false,
-      resetPassModal: false,
+      requestPassModal: false,
       successMessage: false,
       switchToSignUp: true
     });
@@ -55,6 +68,9 @@ class Layout extends Component {
       if (this.props.site.overlay.showLogIn) {
         this.showLoginModal(true);
       }
+      if (this.props.site.overlay.showResetPass) {
+        this.showResetPassModal(true);
+      }
     }
   }
 
@@ -63,14 +79,14 @@ class Layout extends Component {
       if (
         this.state.signupModal ||
         this.state.loginModal ||
-        this.state.resetPassModal ||
+        this.state.requestPassModal ||
         this.state.switchToSignUp ||
         this.state.successMessage
       ) {
         this.setState({
           signupModal: false,
           loginModal: false,
-          resetPassModal: false,
+          requestPassModal: false,
           successMessage: false,
           switchToSignUp: false
         });
@@ -91,7 +107,7 @@ class Layout extends Component {
       switchToSignUp: value,
       signupModal: value,
       loginModal: false,
-      resetPassModal: false
+      requestPassModal: false
     });
   };
 
@@ -99,14 +115,14 @@ class Layout extends Component {
     this.setState({
       switchToSignUp: false,
       signupModal: false,
-      resetPassModal: false,
+      requestPassModal: false,
       loginModal: value
     });
   };
 
-  switchToResetPass = value => {
+  switchToRequestPass = value => {
     this.setState({
-      resetPassModal: value,
+      requestPassModal: value,
       loginModal: false,
       signupModal: false
     });
@@ -133,7 +149,7 @@ class Layout extends Component {
   showSuccessMessage = value => {
     this.setState({
       successMessage: value,
-      resetPassModal: false,
+      requestPassModal: false,
       loginModal: false,
       signupModal: false
     });
@@ -163,7 +179,7 @@ class Layout extends Component {
             {this.state.loginModal && !this.state.switchToSignUp ? (
               <LoginModal
                 switchToSignUp={this.switchToSignUp}
-                switchToResetPass={this.switchToResetPass}
+                switchToRequestPass={this.switchToRequestPass}
                 closeOverlay={this.closeOverlay}
                 closeLoginModal={this.closeLogin}
               />
@@ -174,14 +190,15 @@ class Layout extends Component {
                 closeSignUpModal={this.closeSignUp}
               />
             ) : null}
-            {this.state.resetPassModal ? (
-              <ResetpassModal
+            {this.state.requestPassModal ? (
+              <RequestPassModal
                 switchToSignUp={this.switchToSignUp}
                 switchToLogIn={this.switchToLogIn}
                 closeLoginModal={this.closeLogin}
                 showSuccessMessage={this.showSuccessMessage}
               />
             ) : null}
+            {this.state.resetPassModal ? <ResetPassModal /> : null}
             {this.state.successMessage ? (
               <SuccessMessage closeSuccessMessage={this.closeSuccessMessage} />
             ) : null}
