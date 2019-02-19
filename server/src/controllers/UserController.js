@@ -57,6 +57,7 @@ module.exports = {
           });
         else {
           return res.status(200).send({
+            success: true,
             username: user.username,
             email: user.email
           });
@@ -81,7 +82,7 @@ module.exports = {
 
     User.findOne(
       {
-        resetToken: req.params.token,
+        resetToken: req.body.resetToken,
         resetTokenExp: {
           $gte: today
         }
@@ -92,21 +93,21 @@ module.exports = {
             success: false,
             message: 'Sorry, bad token. Generate a new one'
           });
-        else {
-          return res.status(200).send({
-            user
-          });
-        }
-        // user.password = req.body.password;
-        // user.resetToken = '';
-        // user.resetTokenExp = '';
-
-        // user.save((err, doc) => {
-        //   if (err) return res.json({ success: false, err });
-        //   return res.status(200).json({
-        //     success: true
+        // else {
+        //   return res.status(200).send({
+        //     user
         //   });
-        // });
+        // }
+        user.password = req.body.password;
+        user.resetToken = '';
+        user.resetTokenExp = '';
+
+        user.save((err, doc) => {
+          if (err) return res.json({ success: false, err });
+          return res.status(200).json({
+            success: true
+          });
+        });
       }
     );
   },

@@ -80,6 +80,7 @@ class Layout extends Component {
         this.state.signupModal ||
         this.state.loginModal ||
         this.state.requestPassModal ||
+        this.state.resetPassModal ||
         this.state.switchToSignUp ||
         this.state.successMessage
       ) {
@@ -87,6 +88,7 @@ class Layout extends Component {
           signupModal: false,
           loginModal: false,
           requestPassModal: false,
+          resetPassModal: false,
           successMessage: false,
           switchToSignUp: false
         });
@@ -135,6 +137,13 @@ class Layout extends Component {
   closeLogin = value => {
     this.setState({
       loginModal: value
+    });
+    this.props.dispatch(getOverlayStatus(value));
+  };
+
+  closeResetPass = value => {
+    this.setState({
+      resetPassModal: value
     });
     this.props.dispatch(getOverlayStatus(value));
   };
@@ -198,7 +207,9 @@ class Layout extends Component {
                 showSuccessMessage={this.showSuccessMessage}
               />
             ) : null}
-            {this.state.resetPassModal ? <ResetPassModal /> : null}
+            {this.state.resetPassModal ? (
+              <ResetPassModal closeResetPassModal={this.closeResetPass} />
+            ) : null}
             {this.state.successMessage ? (
               <SuccessMessage closeSuccessMessage={this.closeSuccessMessage} />
             ) : null}
