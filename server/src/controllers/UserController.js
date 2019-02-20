@@ -93,11 +93,7 @@ module.exports = {
             success: false,
             message: 'Sorry, bad token. Generate a new one'
           });
-        // else {
-        //   return res.status(200).send({
-        //     user
-        //   });
-        // }
+
         user.password = req.body.password;
         user.resetToken = '';
         user.resetTokenExp = '';

@@ -180,6 +180,12 @@ class StoreSearch extends Component {
     });
   };
 
+  hideDropdown = () => {
+    this.setState({
+      dropdown: false
+    });
+  };
+
   renderGenreTitle = () =>
     filter(this.state).length > 0
       ? filter(this.state).map((genre, i) =>
@@ -272,7 +278,10 @@ class StoreSearch extends Component {
               </div>
             </span>
             <div className="dropdown__layer">
-              <div className="search-dropdown-content">
+              <div
+                className="search-dropdown-content"
+                onMouseLeave={this.hideDropdown}
+              >
                 <label className="search-dropdown-item">
                   {this.state['All-games'] ? (
                     <svg

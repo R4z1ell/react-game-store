@@ -20,20 +20,14 @@ const Footer = () => {
       </div>
       <div className="footer__middle">
         <div className="footer__row">
-          <div
-            className="footer__wrapper"
-            style={{ transform: 'translateX(-43%)' }}
-          >
+          <div className="footer__wrapper">
             <MdExplore size="2em" className="footer__icon" />
             <div>
               <span style={{ display: 'block' }}>Address</span>
               <span>82 River Street</span>
             </div>
           </div>
-          <div
-            className="footer__wrapper"
-            style={{ transform: 'translateX(21%)' }}
-          >
+          <div className="footer__wrapper">
             <MdPhone size="2em" className="footer__icon" />
             <div>
               <span style={{ display: 'block' }}>Phone</span>
@@ -42,20 +36,14 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer__row">
-          <div
-            className="footer__wrapper"
-            style={{ transform: 'translateX(-18%)' }}
-          >
+          <div className="footer__wrapper">
             <MdAccessTime size="2em" className="footer__icon" />
             <div>
               <span style={{ display: 'block' }}>Working hours</span>
               <span>Mon-Sun/9am-7pm</span>
             </div>
           </div>
-          <div
-            className="footer__wrapper"
-            style={{ transform: 'translateX(17%)' }}
-          >
+          <div className="footer__wrapper">
             <MdEmail size="2em" className="footer__icon" />
             <div>
               <span style={{ display: 'block' }}>Email</span>
@@ -65,7 +53,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer__bottom">
-        <span style={{ transform: 'translateX(-5%)' }}>
+        <span>
           &#x24B8; 2019{' '}
           <span
             style={{

@@ -16,6 +16,7 @@ class ResetPassModal extends Component {
     username: '',
     email: '',
     resetToken: '',
+    errorPass: false,
     loading: false
   };
 
@@ -41,8 +42,14 @@ class ResetPassModal extends Component {
   submitForm = event => {
     event.preventDefault();
 
-    if (this.state.newPassword !== this.state.repeatPassword) {
-      console.log('passwords must be the same');
+    if (
+      this.state.newPassword !== this.state.repeatPassword ||
+      this.state.newPassword === '' ||
+      this.state.repeatPassword === ''
+    ) {
+      this.setState({
+        errorPass: true
+      });
     }
     if (this.state.newPassword === this.state.repeatPassword) {
       const dataToSubmit = {
@@ -85,6 +92,10 @@ class ResetPassModal extends Component {
   };
 
   render() {
+    const fieldPass = this.state.errorPass
+      ? 'form__field field field--error'
+      : 'form__field field';
+
     return (
       <div className="modal__box">
         <div className="modal__content-wrapper">
@@ -110,7 +121,7 @@ class ResetPassModal extends Component {
                     onChange={this.handleChange}
                   />
                 </li>
-                <li className="form__field field">
+                <li className={fieldPass}>
                   <input
                     type="password"
                     placeholder="Repeat password"
@@ -119,6 +130,11 @@ class ResetPassModal extends Component {
                     value={this.state.repeatPassword}
                     onChange={this.handleChange}
                   />
+                  {this.state.errorPass ? (
+                    <span className="field__msg is-hidden">
+                      Passwords don't match
+                    </span>
+                  ) : null}
                 </li>
               </ol>
               <ol className="form__fieldset">

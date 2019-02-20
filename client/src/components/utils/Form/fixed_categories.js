@@ -109,3 +109,60 @@ export const price = [
     array: []
   }
 ];
+
+export const reviews = [
+  {
+    _id: 0,
+    gameTitle: 'Darksiders II: Deathinitive Edition',
+    rating: 'Extremely positive',
+    reviewCount: '12320'
+  },
+  {
+    _id: 1,
+    gameTitle: 'Project Hospital',
+    rating: 'Positive',
+    reviewCount: '6172'
+  },
+  {
+    _id: 2,
+    gameTitle: 'Graveyard Keeper',
+    rating: 'Positive',
+    reviewCount: '5834'
+  },
+  {
+    _id: 3,
+    gameTitle: 'Fallout: New Vegas Ultimate Edition',
+    rating: 'Very positive',
+    reviewCount: '9356'
+  },
+  {
+    _id: 4,
+    gameTitle: 'Frostpunk',
+    rating: 'Extremely positive',
+    reviewCount: '15772'
+  },
+  {
+    _id: 5,
+    gameTitle: 'Emperor: Rise of the Middle Kingdom',
+    rating: 'Extremely positive',
+    reviewCount: '14121'
+  },
+  {
+    _id: 6,
+    gameTitle: 'Anno 1404: Gold Edition',
+    rating: 'Positive',
+    reviewCount: '4183'
+  },
+  {
+    _id: 7,
+    gameTitle: 'Grim Dawn - Ashes of Malmouth',
+    rating: 'Very positive',
+    reviewCount: '8169'
+  },
+  {
+    _id: 8,
+    gameTitle: 'Dragon Age: Origins - Ultimate Edition',
+    rating: 'Extremely positive',
+    reviewCount: '13447'
+  }
+];

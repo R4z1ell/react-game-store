@@ -108,6 +108,7 @@ class ProductsList extends Component {
               images={
                 this.state.gameImages !== null ? this.state.gameImages : ''
               }
+              games={this.props.games.allGames}
             />
           </div>
         </div>
@@ -118,7 +119,8 @@ class ProductsList extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    games: state.games
   };
 };
 

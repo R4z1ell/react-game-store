@@ -13,20 +13,16 @@ import UserAccount from './components/User/user_account/user_account';
 import UserSecurity from './components/User/user_security/user_security';
 import UserCheckout from './components/User/user_checkout/user_checkout';
 import UserOrders from './components/User/user_orders/user_orders';
+import PageNotFound from './components/utils/page_not_found';
 
 // ! Add logic and error handling for the 'SignupModal' Component
-// ! Add logic and error handling for the 'RequestpassModal' Component
-// ! Add countdown in 'HomeSliders' Component for the special deals
-// ! Create a 404 page
-// ! Reactivate ALL the Carousels animation
-// ! Game in 'ProductsList' Component(the one in the Home) should remain white when we hover the 'ProductImages'
-// ! Remove the 'Overall user reviews' in the 'ProductImages' Component
 // ! Add logic for when we click on the 'discounted' option inside the Store filter
-// ! Implement the 'onMouseLeave' inside the 'StoreSearch' Component when we leave the dropdown
-// ! Complete the 'email' and 'password' in the 'UserSecurity' Component
-// ! Remove the price and 'buy' button from the 'featured' Carousel section in the Home page
 // ! Load random and different games for the Home page
-// ! 'sign in' in the navigation(home page) should remain active while hovering over the menu
+// Complete the 'email' and 'password' in the 'UserSecurity' Component
+// Add only 4-5 discounted games in the 'Special Deals' section(in the Home)
+// ? Add 'No results found' text in the shop when no game is found(after filtering through language/price)
+// ? Reactivate ALL the Carousels animation
+// ? Add lots of games through the 'add_game' Admin section
 
 const Routes = () => {
   return (
@@ -74,6 +70,7 @@ const Routes = () => {
           component={Auth(withRouter(GamePage, false))}
         />
         <Route path="/" exact component={Auth(Home, false)} />
+        <Route component={Auth(PageNotFound)} />
       </Switch>
     </Layout>
   );
