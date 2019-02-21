@@ -92,6 +92,9 @@ module.exports = {
     req.query.price === 'a25'
       ? (findArgs['prices.basePrice'] = { $gte: 2500, $lte: 1500000 })
       : null;
+    req.query.price === 'discounted'
+      ? (findArgs['prices.discount'] = { $ne: null })
+      : null;
 
     req.query.language
       ? (findArgs['languages.language_name'] = {

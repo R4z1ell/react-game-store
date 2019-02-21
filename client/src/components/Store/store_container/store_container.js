@@ -44,6 +44,7 @@ class StoreContainer extends Component {
       if (item.styleName === 'under15') price = 'u15';
       if (item.styleName === 'under25') price = 'u25';
       if (item.styleName === 'above25') price = 'a25';
+      if (item.styleName === 'discounted') price = 'discounted';
 
       this.setState({ price }, () =>
         this.props.dispatch(getGamesToStore(price, languages, genres, search))
@@ -183,6 +184,11 @@ class StoreContainer extends Component {
                 listView={this.state.switchBtnList}
               />
             )}
+            {this.props.games.toStore ? (
+              this.props.games.toStore.length === 0 ? (
+                <div className="catalog__no-results">No results found</div>
+              ) : null
+            ) : null}
           </div>
         </div>
       </div>

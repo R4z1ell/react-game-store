@@ -80,6 +80,7 @@ class StoreSearch extends Component {
         {
           'All-games': 'All games',
           dropdown: false,
+          genreId: null,
           ...newState
         },
         () => this.sendToParent(null, this.state.inputDefault)

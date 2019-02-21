@@ -16,13 +16,10 @@ import UserOrders from './components/User/user_orders/user_orders';
 import PageNotFound from './components/utils/page_not_found';
 
 // ! Add logic and error handling for the 'SignupModal' Component
-// ! Add logic for when we click on the 'discounted' option inside the Store filter
 // ! Load random and different games for the Home page
 // Complete the 'email' and 'password' in the 'UserSecurity' Component
 // Add only 4-5 discounted games in the 'Special Deals' section(in the Home)
-// ? Add 'No results found' text in the shop when no game is found(after filtering through language/price)
 // ? Reactivate ALL the Carousels animation
-// ? Add lots of games through the 'add_game' Admin section
 
 const Routes = () => {
   return (

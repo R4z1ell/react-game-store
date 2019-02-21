@@ -25,6 +25,8 @@ import LanguageBlock from '../../../utils/Form/language_block/language_block';
 import SettingsLayout from '../../../User/settings_layout/settings_layout';
 
 class AddGame extends Component {
+  _isMounted = false;
+
   state = {
     images: [],
     languages: [],
@@ -455,7 +457,7 @@ class AddGame extends Component {
           this.props.dispatch(clearGame());
         }
       );
-    }, 3000);
+    }, 1000);
   };
 
   submitForm = event => {
@@ -560,16 +562,23 @@ class AddGame extends Component {
   };
 
   componentDidMount() {
+    this._isMounted = true;
     const formdata = this.state.formdata;
 
     this.props.dispatch(getGenres()).then(response => {
-      const newFormData = populateOptionFields(
-        formdata,
-        this.props.games.genres,
-        'genres'
-      );
-      this.updateFields(newFormData);
+      if (this._isMounted) {
+        const newFormData = populateOptionFields(
+          formdata,
+          this.props.games.genres,
+          'genres'
+        );
+        this.updateFields(newFormData);
+      }
     });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
@@ -590,6 +599,7 @@ class AddGame extends Component {
               selected={this.state.formdata.release_date}
               onChange={this.handleChange}
               showMonthDropdown
+              showYearDropdown
             />
             <div className="add_game__price">
               <FormField

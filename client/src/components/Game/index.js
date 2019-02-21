@@ -72,7 +72,10 @@ class GamePage extends Component {
     )
   };
 
+  _isMounted = false;
+
   componentDidMount() {
+    this._isMounted = true;
     window.scrollTo(0, 0);
 
     const gameTitle = this.props.match.params.title;
@@ -86,15 +89,17 @@ class GamePage extends Component {
             src: item.formatted_images[1].image_url
           });
         });
-
-        this.setState({
-          lightboxImages
-        });
+        if (this._isMounted) {
+          this.setState({
+            lightboxImages
+          });
+        }
       }, 2000);
     }
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
     this.props.dispatch(clearGameDetail());
   }
 

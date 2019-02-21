@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './user_security.scss';
 
@@ -22,7 +23,7 @@ const UserSecurity = props => {
             >
               <input
                 type="text"
-                placeholder="francis@gmail.com"
+                placeholder={props.user.userData.email}
                 className="user-security__input"
               />
             </strong>
@@ -54,4 +55,10 @@ const UserSecurity = props => {
   );
 };
 
-export default UserSecurity;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(UserSecurity);

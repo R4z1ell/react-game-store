@@ -12,6 +12,8 @@ class CountDown extends Component {
     seconds: '0'
   };
 
+  intervalID = 0;
+
   getTimeUntil(deadline) {
     const time = Date.parse(deadline) - Date.parse(new Date());
 
@@ -33,7 +35,14 @@ class CountDown extends Component {
   }
 
   componentDidMount() {
-    setInterval(() => this.getTimeUntil(this.state.deadline), 1000);
+    this.intervalID = setInterval(
+      () => this.getTimeUntil(this.state.deadline),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
   }
 
   render() {
