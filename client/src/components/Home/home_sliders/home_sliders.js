@@ -160,8 +160,8 @@ const HomeSliders = props => {
       : null;
 
   const generateDealsSlides = () =>
-    props.games
-      ? props.games.map((game, i) => {
+    props.discounted
+      ? props.discounted.map((game, i) => {
           const discountedPrice = Number(
             game.prices.basePrice / 100 -
               (game.prices.basePrice / 10000) * game.prices.discount

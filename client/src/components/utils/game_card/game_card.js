@@ -37,7 +37,6 @@ class GameCard extends Component {
       : '83.2%';
 
     const gameCardBtnClass = this.props.prices.discount ? '0px' : '-9px';
-    const gameCardLabelsClass = this.props.prices.discount ? '-3px' : '-7px';
 
     const discountedPrice = Number(
       this.props.prices.basePrice / 100 -
@@ -50,10 +49,7 @@ class GameCard extends Component {
           <div className="game-card">
             <div className="game-card__cover">
               <img src={this.props.images.card} alt="cover" />
-              <div
-                className="game-card__labels"
-                style={{ bottom: gameCardLabelsClass }}
-              >
+              <div className="game-card__labels" style={{ bottom: '-7px' }}>
                 {this.props.user.userData.cart.some(
                   game => game.id === this.props._id
                 ) ? (

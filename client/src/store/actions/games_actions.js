@@ -3,6 +3,7 @@ import axios from 'axios';
 import { GAMES_SERVER } from '../../components/utils/misc';
 import {
   GET_GAMES,
+  GET_DISCOUNTED_GAMES,
   GET_GAME_DETAIL,
   GET_GAMES_TO_STORE,
   ADD_GAME,
@@ -21,6 +22,17 @@ export const getGames = (limit = '') => {
 
   return {
     type: GET_GAMES,
+    payload: request
+  };
+};
+
+export const getDiscountedGames = () => {
+  const request = axios
+    .get(`${GAMES_SERVER}/get_discounted_games`)
+    .then(res => res.data);
+
+  return {
+    type: GET_DISCOUNTED_GAMES,
     payload: request
   };
 };

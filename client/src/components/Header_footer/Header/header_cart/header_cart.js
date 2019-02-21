@@ -22,7 +22,10 @@ class HeaderCart extends Component {
     hide: false
   };
 
+  _isMounted = false;
+
   componentDidMount() {
+    this._isMounted = true;
     let cartItems = [];
     let user = this.props.user;
 
@@ -32,12 +35,16 @@ class HeaderCart extends Component {
           cartItems.push(item.id);
         });
         this.props.dispatch(getCartItems(cartItems)).then(() => {
-          if (this.props.user.cartDetail.length > 0) {
+          if (this.props.user.cartDetail.length > 0 && this._isMounted) {
             this.calculateTotal(this.props.user.cartDetail);
           }
         });
       }
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   closeAll = () => {

@@ -18,7 +18,6 @@ import PageNotFound from './components/utils/page_not_found';
 // ! Add logic and error handling for the 'SignupModal' Component
 // ! Load random and different games for the Home page
 // Complete the 'email' and 'password' in the 'UserSecurity' Component
-// Add only 4-5 discounted games in the 'Special Deals' section(in the Home)
 // ? Reactivate ALL the Carousels animation
 
 const Routes = () => {
