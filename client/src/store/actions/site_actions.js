@@ -1,6 +1,11 @@
 import { OVERLAY_STATUS } from './types';
 
-export function getOverlayStatus(value, showLogIn, showResetPass) {
+export function getOverlayStatus(
+  value,
+  showLogIn,
+  showResetPass,
+  showSuccessMessage
+) {
   let request;
   if (!showLogIn) {
     request = { value };
@@ -10,6 +15,9 @@ export function getOverlayStatus(value, showLogIn, showResetPass) {
   }
   if (showResetPass === true) {
     request = { value, showResetPass };
+  }
+  if (showSuccessMessage === true) {
+    request = { value, showSuccessMessage };
   }
 
   return {

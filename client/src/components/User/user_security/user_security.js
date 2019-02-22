@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
+import axios from 'axios';
 
 import './user_security.scss';
 
 import SettingsLayout from '../settings_layout/settings_layout';
 import { updateUserData } from '../../../store/actions/user_actions';
+
+import { MdLens } from 'react-icons/md';
+import { getOverlayStatus } from '../../../store/actions/site_actions';
 
 class UserSecurity extends Component {
   state = {
@@ -79,6 +83,17 @@ class UserSecurity extends Component {
     }
   };
 
+  sendResetPassEmail = () => {
+    const dataToSubmit = { email: this.props.user.userData.email };
+    axios.post('/api/users/reset_user', dataToSubmit).then(response => {
+      if (response.data.success) {
+        this.props.dispatch(getOverlayStatus(true, null, null, true));
+      } else {
+        console.log('error');
+      }
+    });
+  };
+
   render() {
     const btnClass = this.state.btnClicked
       ? 'btn--change btn--change__updated'
@@ -143,14 +158,17 @@ class UserSecurity extends Component {
                 className="settings-item__value settings-item__section"
                 style={{ width: '72%' }}
               >
-                <input
-                  type="text"
-                  placeholder="******"
-                  className="user-security__input"
-                />
+                <MdLens size="0.7em" style={{ marginRight: '4px' }} />
+                <MdLens size="0.7em" style={{ marginRight: '4px' }} />
+                <MdLens size="0.7em" style={{ marginRight: '4px' }} />
+                <MdLens size="0.7em" style={{ marginRight: '4px' }} />
+                <MdLens size="0.7em" style={{ marginRight: '4px' }} />
+                <MdLens size="0.7em" />
               </strong>
               <span className="settings-item__action settings-item__section">
-                <span className="btn--change">Change</span>
+                <span className="btn--change" onClick={this.sendResetPassEmail}>
+                  Change
+                </span>
               </span>
             </li>
           </ul>

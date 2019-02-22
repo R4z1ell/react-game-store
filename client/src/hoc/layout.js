@@ -71,6 +71,9 @@ class Layout extends Component {
       if (this.props.site.overlay.showResetPass) {
         this.showResetPassModal(true);
       }
+      if (this.props.site.overlay.showSuccessMessage) {
+        this.showSuccessMessage(true);
+      }
     }
   }
 
@@ -162,6 +165,7 @@ class Layout extends Component {
       loginModal: false,
       signupModal: false
     });
+    this.props.dispatch(getOverlayStatus(value));
   };
 
   closeSuccessMessage = value => {
