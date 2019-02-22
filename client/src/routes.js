@@ -16,9 +16,7 @@ import UserOrders from './components/User/user_orders/user_orders';
 import PageNotFound from './components/utils/page_not_found';
 
 // ! Add logic and error handling for the 'SignupModal' Component
-// ! Load random and different games for the Home page
 // Complete the 'email' and 'password' in the 'UserSecurity' Component
-// ? Reactivate ALL the Carousels animation
 
 const Routes = () => {
   return (

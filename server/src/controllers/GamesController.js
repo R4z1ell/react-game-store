@@ -25,10 +25,12 @@ module.exports = {
           res.send(games);
         });
     } else {
-      Game.find({}, (err, games) => {
-        if (err) return res.status(400).send(err);
-        res.status(200).send(games);
-      });
+      Game.find()
+        .populate({ path: 'genres', model: 'Genre' })
+        .exec((err, games) => {
+          if (err) return res.status(400).send(err);
+          res.send(games);
+        });
     }
   },
   getDiscountedGames(req, res) {

@@ -60,7 +60,7 @@ const HomeCarousel = props => {
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 3000,
     customPaging: i => (
       <div

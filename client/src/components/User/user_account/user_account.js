@@ -129,6 +129,7 @@ class UserAccount extends Component {
                     onChange={this.handleChange}
                     className="user-account__input"
                     style={this.inputErrorStyle()}
+                    autoComplete="off"
                   />
                   {this.state.errorUsername ? (
                     <span

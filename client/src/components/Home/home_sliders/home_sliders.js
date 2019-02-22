@@ -58,15 +58,15 @@ function SampleNextArrow(props) {
 
 const HomeSliders = props => {
   const settingOne = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    autoplay: false,
-    autoplaySpeed: 3000,
+    autoplay: true,
+    autoplaySpeed: 5000,
     appendDots: dots => (
       <div
         style={{
@@ -79,14 +79,14 @@ const HomeSliders = props => {
   };
 
   const settingTwo = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: false,
-    autoplaySpeed: 3000,
+    autoplay: true,
+    autoplaySpeed: 7000,
     appendDots: dots => (
       <div
         style={{

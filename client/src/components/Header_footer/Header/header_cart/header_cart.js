@@ -91,7 +91,9 @@ class HeaderCart extends Component {
 
   removeCartItem = id => {
     this.props.dispatch(removeCartItem(id)).then(() => {
-      this.calculateTotal(this.props.user.cartDetail);
+      if (this._isMounted) {
+        this.calculateTotal(this.props.user.cartDetail);
+      }
     });
   };
 

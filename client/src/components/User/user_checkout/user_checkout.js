@@ -187,7 +187,7 @@ class UserCheckout extends Component {
           display: 'flex',
           maxWidth: '1100px',
           minHeight: '71.9vh',
-          margin: '90px auto 0 auto'
+          margin: '90px auto 24px auto'
         }}
       >
         <div className="section-1">
