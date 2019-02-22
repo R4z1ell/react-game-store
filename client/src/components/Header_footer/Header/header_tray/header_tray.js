@@ -193,13 +193,13 @@ class HeaderTray extends Component {
           </svg>
           <span className={cartClass}>{this.state.cartItems}</span>
           <p className={triangleClass} style={{ display: active }} />
-          {this.state.headerCartStatus ? (
-            <HeaderCart
-              closeAll={value => this.closeAll(value)}
-              auth={this.props.auth}
-            />
-          ) : null}
         </div>
+        {this.state.headerCartStatus ? (
+          <HeaderCart
+            closeAll={value => this.closeAll(value)}
+            auth={this.props.auth}
+          />
+        ) : null}
         <div className="header__item header__search">
           <div className="header-link header-link--last header-link--search header-link--icon">
             {this.state.searchBar ? (

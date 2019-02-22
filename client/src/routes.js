@@ -16,7 +16,8 @@ import UserOrders from './components/User/user_orders/user_orders';
 import PageNotFound from './components/utils/page_not_found';
 
 // ! Add logic and error handling for the 'SignupModal' Component
-// Complete the 'email' and 'password' in the 'UserSecurity' Component
+// Before going to production change the 'role' property from 1 to 0(with Robo3T inside the 'user' Schema)
+// And also change the email to 'francis@gmail.com' and pass to 'test123'
 
 const Routes = () => {
   return (
