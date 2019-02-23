@@ -8,14 +8,32 @@ const SHA1 = require('crypto-js/sha1');
 
 module.exports = {
   register(req, res) {
-    const user = new User(req.body);
+    User.findOne(
+      { $or: [{ username: req.body.username }, { email: req.body.email }] },
+      (err, user) => {
+        if (!user) {
+          const user = new User(req.body);
 
-    user.save((err, doc) => {
-      if (err) return res.json({ success: false, err });
-      return res.status(200).json({
-        success: true
-      });
-    });
+          user.save((err, doc) => {
+            if (err) return res.json({ success: false, err });
+            return res.status(200).json({
+              success: true
+            });
+          });
+        } else {
+          if (user.username === req.body.username) {
+            return res.json({
+              userTaken: true
+            });
+          }
+          if (user.email === req.body.email) {
+            return res.json({
+              emailTaken: true
+            });
+          }
+        }
+      }
+    );
   },
   login(req, res) {
     User.findOne({ email: req.body.email }, (err, user) => {

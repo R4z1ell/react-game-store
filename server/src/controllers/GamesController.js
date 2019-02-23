@@ -44,17 +44,6 @@ module.exports = {
         res.status(200).send(games);
       });
   },
-  // getGameById(req, res) {
-  //   Game.find({ _id: { $in: req.query.id } })
-  //     .populate({
-  //       path: 'genres',
-  //       model: 'Genre'
-  //     })
-  //     .exec((err, game) => {
-  //       if (err) return res.status(400).send(err);
-  //       res.status(200).send(game);
-  //     });
-  // },
   getGameByTitle(req, res) {
     let gameTitle = req.params.title;
 
