@@ -147,6 +147,63 @@
     margin-right: 4%;
   }
 
+  &__play-btn {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+    margin-left: -21px;
+    margin-top: -21px;
+    width: 34px;
+    height: 34px;
+    border: 4px solid $color-white;
+    border-radius: 50%;
+    cursor: pointer;
+    filter: drop-shadow(0 0 2px rgba($color-black, 0.75));
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 10px solid $color-white;
+    }
+  }
+
+  &__play-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -52px;
+    margin-top: -52px;
+    width: 104px;
+    height: 104px;
+    border: 10px solid $color-white;
+    border-radius: 50%;
+    z-index: 10;
+    cursor: pointer;
+    filter: drop-shadow(0 0 2px rgba($color-black, 0.75));
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 30px;
+      width: 0;
+      height: 0;
+      border-top: 24px solid transparent;
+      border-bottom: 24px solid transparent;
+      border-left: 32px solid $color-white;
+    }
+  }
+
   &__title {
     position: relative;
     font-size: 32px;
@@ -222,6 +279,13 @@
     border-bottom: 1px solid #bfbfbf;
   }
 
+  &__thumbnail-img {
+    width: 271px !important;
+    height: 152px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
   &__underline-text {
     position: relative;
     padding: 16px 0;
@@ -235,6 +299,10 @@
     display: flex;
     align-items: center;
   }
+}
+
+.game-page__layout .slick-slide > div:first-of-type {
+  position: relative;
 }
 
 .flex {

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Lightbox from 'react-images';
 import Slider from 'react-slick';
-import Iframe from 'react-iframe';
 import moment from 'moment';
+import ModalVideo from 'react-modal-video';
 
 import './index.scss';
 
@@ -48,7 +48,8 @@ class GamePage extends Component {
     lightboxIsOpen: false,
     imagePos: 0,
     lightboxImages: [],
-    showLanguages: false
+    showLanguages: false,
+    isOpen: false
   };
 
   settingOne = {
@@ -103,6 +104,10 @@ class GamePage extends Component {
     this.props.dispatch(clearGameDetail());
   }
 
+  openModal = () => {
+    this.setState({ isOpen: true });
+  };
+
   handleLightBox = pos => {
     if (this.state.lightboxImages.length > 0) {
       this.setState({
@@ -150,6 +155,12 @@ class GamePage extends Component {
 
     return game ? (
       <React.Fragment>
+        <ModalVideo
+          channel="youtube"
+          isOpen={this.state.isOpen}
+          videoId={game.videos[0].video_url.split('?')[0].split('embed/')[1]}
+          onClose={() => this.setState({ isOpen: false })}
+        />
         <div
           className="game-page"
           style={{
@@ -165,9 +176,14 @@ class GamePage extends Component {
                 className="game-page__logo"
               />
             ) : null}
+            {game.videos[0].video_url !== '' ? (
+              <span
+                className="game-page__play-button"
+                onClick={this.openModal}
+              />
+            ) : null}
           </div>
         </div>
-
         <div className="game-page__layout">
           <div
             className="game-page__background"
@@ -189,13 +205,16 @@ class GamePage extends Component {
             <ProductActions {...this.props} />
           </div>
           <Slider {...this.settingOne} className="game-page__slider-container">
-            {game.videos[0].video_url ? (
-              <Iframe
-                url={game.videos[0].video_url}
-                width="271px"
-                height="152px"
-                allowFullScreen
-              />
+            {game.videos[0].thumbnail_url !== '' ? (
+              <React.Fragment>
+                <div className="game-page__play-btn" onClick={this.openModal} />
+                <img
+                  src={game.videos[0].thumbnail_url}
+                  alt="trailer-img"
+                  className="game-page__thumbnail-img"
+                  onClick={this.openModal}
+                />
+              </React.Fragment>
             ) : null}
             {this.generateImagesSlides()}
           </Slider>

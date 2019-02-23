@@ -8,6 +8,7 @@ import './resetpass_modal.scss';
 
 import { MdClose } from 'react-icons/md';
 import { getOverlayStatus } from '../../../store/actions/site_actions';
+import { logoutUser } from '../../../store/actions/user_actions';
 
 class ResetPassModal extends Component {
   state = {
@@ -65,6 +66,7 @@ class ResetPassModal extends Component {
             this.setState({
               loading: true
             });
+            this.props.dispatch(logoutUser());
             setTimeout(() => {
               this.setState({
                 loading: false
