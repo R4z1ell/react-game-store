@@ -15,9 +15,6 @@ import UserCheckout from './components/User/user_checkout/user_checkout';
 import UserOrders from './components/User/user_orders/user_orders';
 import PageNotFound from './components/utils/page_not_found';
 
-// Before going to production change the 'role' property from 1 to 0(with Robo3T inside the 'user' Schema)
-// And also change the email to 'francis@gmail.com' and pass to 'test123'
-
 const Routes = () => {
   return (
     <Layout>
