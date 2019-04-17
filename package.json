@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node src/app.js",
-    "server": "nodemon src/app.js",
-    "client": "cd ../client && npm run start",
+    "start": "node server/src/app.js",
+    "server": "nodemon server/src/app.js",
+    "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "engines": {
