@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { reviews } from '../../utils/Form/fixed_categories';
+import { reviews, reviewsProd } from '../../utils/Form/fixed_categories';
 
 import './product_images.scss';
 
@@ -29,20 +29,44 @@ const ProductImages = props => {
       : null;
 
   const renderGameRating = () => {
-    if (props.title) {
-      const result = reviews.filter(elem => elem.gameTitle === props.title);
-      return result[0].rating;
-    } else {
-      return 'Extremely positive';
+    if (window.location.href === 'http://localhost:3000/') {
+      if (props.title) {
+        const result = reviews.filter(elem => elem.gameTitle === props.title);
+        return result[0].rating;
+      } else {
+        return 'Extremely positive';
+      }
+    }
+    if (window.location.href === 'https://jetdeals-store.herokuapp.com/') {
+      if (props.title) {
+        const result = reviewsProd.filter(
+          elem => elem.gameTitle === props.title
+        );
+        return result[0].rating;
+      } else {
+        return 'Extremely positive';
+      }
     }
   };
 
   const renderGameReviewCount = () => {
-    if (props.title) {
-      const result = reviews.filter(elem => elem.gameTitle === props.title);
-      return result[0].reviewCount;
-    } else {
-      return '12320';
+    if (window.location.href === 'http://localhost:3000/') {
+      if (props.title) {
+        const result = reviews.filter(elem => elem.gameTitle === props.title);
+        return result[0].reviewCount;
+      } else {
+        return '12320';
+      }
+    }
+    if (window.location.href === 'https://jetdeals-store.herokuapp.com/') {
+      if (props.title) {
+        const result = reviewsProd.filter(
+          elem => elem.gameTitle === props.title
+        );
+        return result[0].reviewCount;
+      } else {
+        return '12320';
+      }
     }
   };
 

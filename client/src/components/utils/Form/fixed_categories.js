@@ -166,3 +166,60 @@ export const reviews = [
     reviewCount: '13447'
   }
 ];
+
+export const reviewsProd = [
+  {
+    _id: 0,
+    gameTitle: 'Project Hospital',
+    rating: 'Positive',
+    reviewCount: '6172'
+  },
+  {
+    _id: 1,
+    gameTitle: 'Fallout: New Vegas Ultimate Edition',
+    rating: 'Very positive',
+    reviewCount: '9356'
+  },
+  {
+    _id: 2,
+    gameTitle: 'Emperor: Rise of the Middle Kingdom',
+    rating: 'Extremely positive',
+    reviewCount: '14121'
+  },
+  {
+    _id: 3,
+    gameTitle: 'Anno 1404: Gold Edition',
+    rating: 'Positive',
+    reviewCount: '4183'
+  },
+  {
+    _id: 4,
+    gameTitle: 'Dragon Age: Origins - Ultimate Edition',
+    rating: 'Extremely positive',
+    reviewCount: '13447'
+  },
+  {
+    _id: 5,
+    gameTitle: 'Battle Brothers',
+    rating: 'Very positive',
+    reviewCount: '11587'
+  },
+  {
+    _id: 6,
+    gameTitle: 'Mutant Football League: Dynasty Edition',
+    rating: 'Positive',
+    reviewCount: '7122'
+  },
+  {
+    _id: 7,
+    gameTitle: 'STAR WARS™ Episode I: Racer',
+    rating: 'Positive',
+    reviewCount: '3659'
+  },
+  {
+    _id: 8,
+    gameTitle: 'Darkest Dungeon',
+    rating: 'Extremely positive',
+    reviewCount: '18523'
+  }
+];
