@@ -219,6 +219,43 @@ class UserCheckout extends Component {
           this.props.user.cartDetail.length !== 0 ? (
             <div className="section-2">
               <header className="module-header" style={{ fontSize: '14px' }}>
+                Info
+              </header>
+              <div
+                className="module-payment"
+                style={{ padding: '20px 15px', textTransform: 'none' }}
+              >
+                <div>
+                  <p className="info-checkout__text">
+                    If you want to test PayPal's payment workflow click on the
+                    button below and use the following credentials
+                  </p>
+                  <div className="info-checkout__wrapper">
+                    <span
+                      className="info-checkout__span"
+                      style={{ padding: '10px 22.6px' }}
+                    >
+                      Email
+                    </span>
+                    <p className="info-checkout__email">
+                      gokutra4-buyer@gmail.com
+                    </p>
+                  </div>
+                  <div
+                    className="info-checkout__wrapper"
+                    style={{ margin: '0px' }}
+                  >
+                    <span
+                      className="info-checkout__span"
+                      style={{ padding: '10px' }}
+                    >
+                      Password
+                    </span>
+                    <p className="info-checkout__password">test1234</p>
+                  </div>
+                </div>
+              </div>
+              <header className="module-header" style={{ fontSize: '14px' }}>
                 Your payment
               </header>
               <div className="module-payment">
