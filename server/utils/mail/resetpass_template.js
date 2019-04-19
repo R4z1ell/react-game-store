@@ -43,7 +43,7 @@ const resetPass = data => {
             Hi ${data.username}, do you want to reset your password?
           </h2>
           <p
-            style="font-size: 14px; font-family: Roboto, sans-serif; color: #333; margin-bottom: 18px;"
+            style="font-size: 13px; font-family: Roboto, sans-serif; color: #333; margin-bottom: 18px;"
           >
             Someone requested to reset your <b>jetDeals.com</b> account
             password. If it wasn't you, please ignore this e-mail and no changes
@@ -61,7 +61,7 @@ const resetPass = data => {
       <tr>
         <td style="background-color: #999592; margin: 0 auto;">
           <p
-            style="box-sizing: border-box; color: white; font-family: Roboto, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding: 15px 25px; text-align: center; font-size:13px"
+            style="box-sizing: border-box; color: white; font-family: Roboto, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding: 15px 25px; text-align: center; font-size:9px"
           >
             This is an automatically generated e-mail, please do not reply to
             it. Copyright © 2019 JetDeals. All rights reserved.

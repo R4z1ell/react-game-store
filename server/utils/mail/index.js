@@ -1,44 +1,51 @@
-const mailer = require('nodemailer');
-const { resetPass } = require('./resetpass_template');
+var helper = require('sendgrid').mail;
+const async = require('async');
 require('dotenv').config();
 
-const getEmailData = (to, username, token, type, actionData) => {
-  let data = null;
-
-  switch (type) {
-    case 'reset_password':
-      data = {
-        from: 'JetDeals <gokutra4@gmail.com>',
-        to,
-        subject: 'Password Reset Link',
-        html: resetPass(actionData)
-      };
-      break;
-    default:
-      data;
-  }
-
-  return data;
-};
-
-const sendEmail = (to, username, token, type, actionData = null) => {
-  const smtpTransport = mailer.createTransport({
-    service: 'Gmail',
-    auth: {
-      user: 'gokutra4@gmail.com',
-      pass: process.env.EMAIL_PASS
+const sendEmail = (
+  parentCallback,
+  fromEmail,
+  toEmails,
+  subject,
+  textContent,
+  htmlContent
+) => {
+  const errorEmails = [];
+  const successfulEmails = [];
+  const sg = require('sendgrid')(process.env.SEND_GRID_KEY);
+  async.parallel(
+    [
+      callback => {
+        for (let i = 0; i < toEmails.length; i += 1) {
+          const senderEmail = new helper.Email(fromEmail);
+          const toEmail = new helper.Email(toEmails[i]);
+          const content = new helper.Content('text/html', htmlContent);
+          const mail = new helper.Mail(senderEmail, subject, toEmail, content);
+          var request = sg.emptyRequest({
+            method: 'POST',
+            path: '/v3/mail/send',
+            body: mail.toJSON()
+          });
+          sg.API(request, (error, response) => {
+            console.log('SendGrid');
+            if (error) {
+              console.log('Error response received');
+            }
+            console.log(response.statusCode);
+            console.log(response.body);
+            console.log(response.headers);
+          });
+        }
+        callback(null, true);
+      }
+    ],
+    (err, results) => {
+      console.log('Done');
     }
-  });
-
-  const mail = getEmailData(to, username, token, type, actionData);
-
-  smtpTransport.sendMail(mail, (error, response) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('email sent');
-    }
-    smtpTransport.close();
+  );
+  parentCallback(null, {
+    successfulEmails: successfulEmails,
+    errorEmails: errorEmails
   });
 };
 

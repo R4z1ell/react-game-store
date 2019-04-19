@@ -2,9 +2,11 @@ const { User } = require('../models/user');
 const { Game } = require('../models/game');
 const { Payment } = require('../models/payment');
 const { sendEmail } = require('../../utils/mail/index');
+const { resetPass } = require('../../utils/mail/resetpass_template');
 const mongoose = require('mongoose');
 const moment = require('moment');
 const SHA1 = require('crypto-js/sha1');
+const async = require('async');
 
 module.exports = {
   register(req, res) {
@@ -84,14 +86,34 @@ module.exports = {
     );
   },
   resetUser(req, res) {
-    User.findOne({ email: req.body.email }, (err, user) => {
-      if (!user) return res.json({ success: false, err });
-      user.generateResetToken((err, user) => {
-        if (err) return res.json({ success: false, err });
-        sendEmail(user.email, user.username, null, 'reset_password', user);
-        return res.json({ success: true });
-      });
-    });
+    async.parallel(
+      [
+        function(callback) {
+          User.findOne({ email: req.body.email }, (err, user) => {
+            if (!user) return res.json({ success: false, err });
+            user.generateResetToken((err, user) => {
+              if (err) return res.json({ success: false, err });
+              sendEmail(
+                callback,
+                'jetDeals@info.com',
+                [req.body.email],
+                'Password Reset Link',
+                'Text Content',
+                resetPass(user)
+              );
+            });
+          });
+        }
+      ],
+      function(err, results) {
+        res.send({
+          success: true,
+          message: 'Emails sent',
+          successfulEmails: results[0].successfulEmails,
+          errorEmails: results[0].errorEmails
+        });
+      }
+    );
   },
   resetPassword(req, res) {
     var today = moment()
